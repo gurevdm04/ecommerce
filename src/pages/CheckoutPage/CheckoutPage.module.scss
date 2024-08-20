@@ -1,0 +1,39 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  margin: 50px 0 10px 0;
+}
+
+.address {
+  grid-area: 1 / 1 / 2 / 7;
+  button {
+    width: 100%;
+  }
+}
+.detail {
+  grid-area: 1 / 7 / 2 / 13;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 12px;
+  grid-row-gap: 12px;
+  >a img {
+    height: 250px;
+  }
+}
+.title {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 139.9999976158142%;
+  letter-spacing: 0%;
+  margin-bottom: 15px;
+}
+.form {
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

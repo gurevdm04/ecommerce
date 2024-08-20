@@ -1,0 +1,22 @@
+.wrap {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  margin: 50px 0;
+}
+.images {
+  grid-area: 1 / 1 / 2 / 8;
+}
+.detail {
+  grid-area: 1 / 8 / 2 / 13;
+}
+.title {
+}
+.price {
+}
+.stars {
+}
+.text {
+}

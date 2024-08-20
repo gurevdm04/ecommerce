@@ -1,0 +1,48 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  > div {
+    border: 1px solid #000;
+    padding: 40px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.total {
+  grid-area: 1 / 11 / 2 / 13;
+}
+.quantity {
+  grid-area: 1 / 9 / 2 / 11;
+}
+.price {
+  grid-area: 1 / 7 / 2 / 9;
+}
+.product {
+  grid-area: 1 / 1 / 2 / 7;
+  display: flex;
+  gap: 30px;
+
+  p {
+    max-width: 300px;
+  }
+  img {
+    width: 90px;
+    height: 90px;
+  }
+}
+.closeBtn {
+  cursor: pointer;
+}
+.shipping {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 900px;
+  margin: 40px auto;
+}

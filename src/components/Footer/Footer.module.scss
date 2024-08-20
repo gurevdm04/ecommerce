@@ -1,0 +1,20 @@
+.wrap {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;text-align: center;
+
+  h2 {
+    font-weight: 700;
+  }
+
+  & > div {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    border: 1px solid #000;
+    padding: 30px;
+  }
+}
