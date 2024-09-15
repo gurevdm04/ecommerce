@@ -5,25 +5,26 @@ import style from "./ShopPage.module.scss";
 
 export const ShopPage = () => {
   return (
-    <div className={style.grid}>
-      <div className={style.sidebar}>
+    <>
+      {/* <div className={style.grid}> */}
+      {/* <div className={style.sidebar}>
         <div>
-          <h2>Price Range</h2>
-          <ul>
-            <li>check 1</li>
-            <li>check 2</li>
-            <li>check 3</li>
-          </ul>
+        <h2>Price Range</h2>
+        <ul>
+        <li>check 1</li>
+        <li>check 2</li>
+        <li>check 3</li>
+        </ul>
         </div>
         <div>
-          <h2>Price Range</h2>
-          <ul>
-            <li>check 1</li>
-            <li>check 2</li>
-            <li>check 3</li>
-          </ul>
+        <h2>Price Range</h2>
+        <ul>
+        <li>check 1</li>
+        <li>check 2</li>
+        <li>check 3</li>
+        </ul>
         </div>
-      </div>
+        </div> */}
       <div className={style.content}>
         <h2 className={style.title}>Our Collection Of Products</h2>
         <InputSearchItem text="" />
@@ -33,9 +34,10 @@ export const ShopPage = () => {
           <ProductCard />
           <ProductCard />
         </div>
-
-        <Pagination />
+        {/* todo : Доделать пагинацию */}
+        {/* <Pagination /> */}
       </div>
-    </div>
+      {/* </div> */}
+    </>
   );
 };
