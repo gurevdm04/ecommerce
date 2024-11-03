@@ -1,0 +1,38 @@
+.wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: calc(1286px + 20px);
+  margin: 0 auto;
+  padding: 0 10px;
+  height: 100px;
+  gap: 10px;
+}
+.logo {
+  img {
+    display: block;
+  }
+}
+.nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    gap: 75px;
+    a {
+      font-weight: 500;
+      font-size: 16px;
+      color: #000;
+      transition: color ease 0.3s;
+      &:hover {
+        color: #afafaf;
+      }
+    }
+  }
+}
+.icons {
+  display: flex;
+  gap: 45px;
+  font-size: 20px;
+}
