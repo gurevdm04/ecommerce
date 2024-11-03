@@ -1,0 +1,64 @@
+.wrap {
+  max-width: calc(1286px + 20px);
+  margin: 0 auto;
+  padding: 0 10px;
+}
+.main {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 50px;
+}
+.address {
+  max-width: 300px;
+}
+.logo {
+  font-weight: 700;
+  font-size: 24px;
+  color: #000;
+}
+.text {
+  margin-top: 50px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #9f9f9f;
+}
+.newsletter {
+  margin-left: 70px;
+  max-width: 300px;
+  div {
+    margin-top: 50px;
+  }
+}
+.title {
+  font-weight: 500;
+  font-size: 16px;
+  color: #9f9f9f;
+}
+.input {
+  font-weight: 400;
+  font-size: 14px;
+  color: #9f9f9f;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #000;
+  padding: 10px 20px 10px 3px;
+}
+.btn {
+  margin-left: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #000;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #000;
+  padding: 10px 3px;
+}
+.footer {
+  border-top: 1px solid #d9d9d9;
+  width: 1240px;
+  height: 0px;
+  padding: 40px 0;
+  font-weight: 400;
+  font-size: 16px;
+  color: #000;
+}
