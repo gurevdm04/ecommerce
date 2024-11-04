@@ -1,0 +1,39 @@
+.wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-image: url("/src/assets/images/Banner-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+}
+.block {
+  transform: translateX(50%);
+  max-width: 650px;
+  border-radius: 10px;
+  background: #fff3e3;
+  padding: 60px 40px 40px 40px;
+  margin: 150px 0;
+}
+.subtitle {
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.19em;
+  color: #333;
+  margin: 0;
+}
+.title {
+  font-weight: 700;
+  font-size: 52px;
+  line-height: 125%;
+  color: #b88e2f;
+  margin: 4px 0 0 0;
+}
+.text {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 133%;
+  color: #333;
+  margin: 20px 0 50px 0;
+}
