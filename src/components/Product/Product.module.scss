@@ -1,0 +1,85 @@
+.wrap {
+  background: #f4f5f7;
+  position: relative;
+}
+.img {
+  display: block;
+}
+.block {
+  padding: 16px;
+}
+.title {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 120%;
+  color: #3a3a3a;
+  margin: 0 0 8px 0;
+}
+.subtitle {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: #898989;
+  margin: 8px 0;
+}
+.price {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+.currentPrice {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 150%;
+  color: #3a3a3a;
+}
+.oldPrice {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  text-decoration: line-through;
+  color: #b0b0b0;
+}
+.control {
+  background-color: rgba(58, 58, 58, 0.75);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 24px;
+  opacity: 0;
+  transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  &:hover {
+    opacity: 1;
+  }
+}
+.options {
+  display: flex;
+  gap: 10px;
+  color: #fff;
+  a {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    p {
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 150%;
+      color: #fff;
+    }
+  }
+}
+.btn {
+  padding: 12px 60px;
+  border: none;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  color: #b88e2f;
+  cursor: pointer;
+}
