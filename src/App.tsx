@@ -6,6 +6,7 @@ import { Header } from "./components/Header/Header";
 import { Inspirations } from "./components/Inspirations/Inspirations";
 import { OurProducts } from "./components/OurProducts/OurProducts";
 import { PhotoGrid } from "./components/PhotoGrid/PhotoGrid";
+import { ProductFilterBar } from "./components/ProductFilterBar/ProductFilterBar";
 import { ServiceBenefits } from "./components/ServiceBenefits/ServiceBenefits";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <Inspirations />
       <PhotoGrid /> */}
       <BreadcrumbHeader />
+      <ProductFilterBar />
       <ServiceBenefits />
       <Footer />
     </>
