@@ -4,9 +4,9 @@ import { BreadcrumbHeader } from "./components/BreadcrumbHeader/BreadcrumbHeader
 import { Footer } from "./components/Footer/Footer";
 import { Header } from "./components/Header/Header";
 import { Inspirations } from "./components/Inspirations/Inspirations";
-import { OurProducts } from "./components/OurProducts/OurProducts";
 import { PhotoGrid } from "./components/PhotoGrid/PhotoGrid";
 import { ProductFilterBar } from "./components/ProductFilterBar/ProductFilterBar";
+import { Products } from "./components/Products/Products";
 import { ServiceBenefits } from "./components/ServiceBenefits/ServiceBenefits";
 
 function App() {
@@ -20,6 +20,7 @@ function App() {
       <PhotoGrid /> */}
       <BreadcrumbHeader />
       <ProductFilterBar />
+      <Products />
       <ServiceBenefits />
       <Footer />
     </>
