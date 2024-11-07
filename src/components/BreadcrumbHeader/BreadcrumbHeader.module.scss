@@ -1,0 +1,32 @@
+.wrap {
+  text-align: center;
+  background-image: url(./../../assets/images/BreadcrumbBanner.png);
+  padding: 60px 0 90px 0;
+}
+.img {
+  display: block;
+  margin: 0 auto;
+}
+.title {
+  font-weight: 500;
+  font-size: 48px;
+  color: #000;
+  text-align: center;
+  margin: 0;
+}
+.breadcrumb {
+  display: flex;
+  margin: 10px 0 0 0;
+  font-size: 16px;
+  color: #000;
+  justify-content: center;
+  gap: 10px;
+}
+.root {
+  font-weight: 500;
+}
+.icon {
+}
+.page {
+  font-weight: 300;
+}
