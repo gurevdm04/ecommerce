@@ -1,5 +1,6 @@
 import style from "./OurProducts.module.scss";
 import { Product } from "../Product/Product";
+import { Button } from "../Button/Button";
 
 export const OurProducts = () => {
   return (
@@ -15,6 +16,10 @@ export const OurProducts = () => {
         <Product />
         <Product />
       </div>
+      <Button
+        label="Show more"
+        style={{ display: "block", margin: "20px auto 0 auto" }}
+      />
     </div>
   );
 };
