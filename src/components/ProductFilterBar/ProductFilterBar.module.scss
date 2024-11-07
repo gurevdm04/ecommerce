@@ -1,0 +1,34 @@
+.wrap {
+  background: #f9f1e7;
+  margin-bottom: 50px;
+}
+.container {
+  max-width: calc(1242px + 20px);
+  margin: 0 auto;
+  padding: 22px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.setting {
+  display: flex;
+  font-weight: 400;
+  font-size: 20px;
+  color: #000;
+  gap: 10px;
+  align-items: center;
+}
+.filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  input {
+    width: 55px;
+    height: 55px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+}
