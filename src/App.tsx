@@ -6,6 +6,7 @@ import { Header } from "./components/Header/Header";
 import { Inspirations } from "./components/Inspirations/Inspirations";
 import { OurProducts } from "./components/OurProducts/OurProducts";
 import { PhotoGrid } from "./components/PhotoGrid/PhotoGrid";
+import { ServiceBenefits } from "./components/ServiceBenefits/ServiceBenefits";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Inspirations />
       <PhotoGrid /> */}
       <BreadcrumbHeader />
+      <ServiceBenefits />
       <Footer />
     </>
   );
