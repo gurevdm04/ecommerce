@@ -7,6 +7,7 @@ import { Header } from "./components/Header/Header";
 import { Inspirations } from "./components/Inspirations/Inspirations";
 import { Pagination } from "./components/Pagination/Pagination";
 import { PhotoGrid } from "./components/PhotoGrid/PhotoGrid";
+import { ProductDetails } from "./components/ProductDetails/ProductDetails";
 import { ProductFilterBar } from "./components/ProductFilterBar/ProductFilterBar";
 import { Products } from "./components/Products/Products";
 import { ServiceBenefits } from "./components/ServiceBenefits/ServiceBenefits";
@@ -22,12 +23,13 @@ function App() {
       <Inspirations />
       <PhotoGrid /> */}
       <Breadcrumbs />
-      <BreadcrumbHeader />
+      <ProductDetails />
+      {/* <BreadcrumbHeader />
       <ProductFilterBar />
       <Tabs />
       <Products />
       <Pagination />
-      <ServiceBenefits />
+      <ServiceBenefits /> */}
       <Footer />
     </>
   );
