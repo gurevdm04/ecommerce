@@ -9,6 +9,7 @@ import { PhotoGrid } from "./components/PhotoGrid/PhotoGrid";
 import { ProductFilterBar } from "./components/ProductFilterBar/ProductFilterBar";
 import { Products } from "./components/Products/Products";
 import { ServiceBenefits } from "./components/ServiceBenefits/ServiceBenefits";
+import { Tabs } from "./components/Tabs/Tabs";
 
 function App() {
   return (
@@ -21,8 +22,9 @@ function App() {
       <PhotoGrid /> */}
       <BreadcrumbHeader />
       <ProductFilterBar />
+      <Tabs />
       <Products />
-      <Pagination/>
+      <Pagination />
       <ServiceBenefits />
       <Footer />
     </>
