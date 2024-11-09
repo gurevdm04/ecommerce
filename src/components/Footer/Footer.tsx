@@ -1,5 +1,6 @@
 import { Divider } from "../Divider/Divider";
 import { FooterList } from "../FooterList/FooterList";
+import { Wrapper } from "../Wrapper/Wrapper";
 import style from "./Footer.module.scss";
 
 export const Footer = () => {
@@ -42,7 +43,7 @@ export const Footer = () => {
   return (
     <>
       <Divider />
-      <div className={style.wrap}>
+      <Wrapper>
         <div className={style.main}>
           <div className={style.address}>
             <p className={style.logo}>Funiro.</p>
@@ -65,7 +66,7 @@ export const Footer = () => {
           </div>
         </div>
         <div className={style.footer}>2023 furino. All rights reverved</div>
-      </div>
+      </Wrapper>
     </>
   );
 };

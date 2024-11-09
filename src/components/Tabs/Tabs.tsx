@@ -1,8 +1,9 @@
+import { Wrapper } from "../Wrapper/Wrapper";
 import style from "./Tabs.module.scss";
 
 export const Tabs = () => {
   return (
-    <div className={style.wrap}>
+    <Wrapper>
       <div className={style.header}>
         <p className={style.active}>Description</p>
         <p>Additional Information</p>
@@ -25,6 +26,6 @@ export const Tabs = () => {
           travel.
         </p>
       </div>
-    </div>
+    </Wrapper>
   );
 };

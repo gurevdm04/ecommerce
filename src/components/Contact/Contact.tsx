@@ -3,10 +3,11 @@ import { FaLocationDot } from "react-icons/fa6";
 import { FaPhone } from "react-icons/fa6";
 import { MdAccessTimeFilled } from "react-icons/md";
 import { Button } from "../Button/Button";
+import { Wrapper } from "../Wrapper/Wrapper";
 
 export const Contact = () => {
   return (
-    <div className={style.wrap}>
+    <Wrapper>
       <h2 className={style.title}>Get In Touch With Us</h2>
       <p className={style.subtitle}>
         For More Information About Our Product & Services. Please Feel Free To
@@ -58,6 +59,6 @@ export const Contact = () => {
           <Button label="Submit" />
         </div>
       </div>
-    </div>
+    </Wrapper>
   );
 };

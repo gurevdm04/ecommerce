@@ -6,32 +6,35 @@ import { MdOutlineLocalShipping } from "react-icons/md";
 import { AiOutlineFileProtect } from "react-icons/ai";
 
 import { IconType } from "react-icons";
+import { Wrapper } from "../Wrapper/Wrapper";
 
 export const ServiceBenefits = () => {
   return (
     <div className={style.wrap}>
-      <div className={style.container}>
-        <Item
-          Icon={GiTrophyCup}
-          title="High Quality"
-          subtitle="crafted from top materials"
-        />
-        <Item
-          Icon={AiOutlineFileProtect}
-          title="Warranty Protection"
-          subtitle="Over 2 years"
-        />
-        <Item
-          Icon={MdOutlineLocalShipping}
-          title="Free Shipping"
-          subtitle="Order over 150 $"
-        />
-        <Item
-          Icon={BiSupport}
-          title="24 / 7 Support"
-          subtitle="Dedicated support"
-        />
-      </div>
+      <Wrapper>
+        <div className={style.container}>
+          <Item
+            Icon={GiTrophyCup}
+            title="High Quality"
+            subtitle="crafted from top materials"
+          />
+          <Item
+            Icon={AiOutlineFileProtect}
+            title="Warranty Protection"
+            subtitle="Over 2 years"
+          />
+          <Item
+            Icon={MdOutlineLocalShipping}
+            title="Free Shipping"
+            subtitle="Order over 150 $"
+          />
+          <Item
+            Icon={BiSupport}
+            title="24 / 7 Support"
+            subtitle="Dedicated support"
+          />
+        </div>
+      </Wrapper>
     </div>
   );
 };

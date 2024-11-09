@@ -1,10 +1,11 @@
 import style from "./Assortment.module.scss";
 
 import img from "./../../assets/images/assortment.jpg";
+import { Wrapper } from "../Wrapper/Wrapper";
 
 export const Assortment = () => {
   return (
-    <div className={style.wrap}>
+    <Wrapper>
       <h2 className={style.title}>Browse The Range</h2>
       <p className={style.subtitle}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -14,7 +15,7 @@ export const Assortment = () => {
         <Item />
         <Item />
       </div>
-    </div>
+    </Wrapper>
   );
 };
 

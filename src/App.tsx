@@ -21,23 +21,22 @@ function App() {
   return (
     <>
       <Header />
-      {/* <Banner />
       <Assortment />
-      <OurProducts />
+      <Banner />
+      <BreadcrumbHeader />
+      <Breadcrumbs />
+      <Cart />
+      <Checkout />
+      <Contact />
       <Inspirations />
-      <PhotoGrid /> */}
-      {/* <Contact /> */}
-      <Profile />
-      {/* <Checkout /> */}
-      {/* <Cart /> */}
-      {/* <Breadcrumbs />
-      <ProductDetails /> */}
-      {/* <BreadcrumbHeader />
-      <ProductFilterBar />
-      <Tabs />
-      <Products />
       <Pagination />
-      <ServiceBenefits /> */}
+      <PhotoGrid />
+      <ProductDetails />
+      <ProductFilterBar />
+      <Products />
+      <Profile />
+      <ServiceBenefits />
+      <Tabs />
       <Footer />
     </>
   );
