@@ -1,7 +1,6 @@
 import style from "./Pagination.module.scss";
 
 export const Pagination = () => {
-  console.log(style);
 
   return (
     <div className={style.wrap}>

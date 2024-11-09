@@ -11,8 +11,6 @@ interface FooterListProps {
 }
 
 export const FooterList: React.FC<FooterListProps> = ({ title, items }) => {
-  console.log(items);
-
   return (
     <div className={style.wrap}>
       <h2 className={style.title}>{title}</h2>

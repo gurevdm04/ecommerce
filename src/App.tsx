@@ -3,6 +3,7 @@ import { Banner } from "./components/Banner/Banner";
 import { BreadcrumbHeader } from "./components/BreadcrumbHeader/BreadcrumbHeader";
 import { Breadcrumbs } from "./components/Breadcrumbs/Breadcrumbs";
 import { Cart } from "./components/Cart/Cart";
+import { Checkout } from "./components/Checkout/Checkout";
 import { Footer } from "./components/Footer/Footer";
 import { Header } from "./components/Header/Header";
 import { Inspirations } from "./components/Inspirations/Inspirations";
@@ -23,7 +24,8 @@ function App() {
       <OurProducts />
       <Inspirations />
       <PhotoGrid /> */}
-      <Cart />
+      <Checkout />
+      {/* <Cart /> */}
       {/* <Breadcrumbs />
       <ProductDetails /> */}
       {/* <BreadcrumbHeader />
