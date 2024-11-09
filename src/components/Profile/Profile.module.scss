@@ -1,0 +1,22 @@
+.wrap {
+  max-width: calc(1290px + 20px);
+  margin: 0 auto;
+  padding: 0 10px;
+  display: flex;
+  gap: 30px;
+}
+.list {
+  max-width: 300px;
+  width: 100%;
+}
+.item {
+  width: 100%;
+  display: flex;
+  padding: 20px 30px;
+  gap: 10px;
+  align-items: center;
+  color: #000;
+  &.active {
+    background-color: #faf3ea;
+  }
+}

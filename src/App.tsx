@@ -13,6 +13,7 @@ import { PhotoGrid } from "./components/PhotoGrid/PhotoGrid";
 import { ProductDetails } from "./components/ProductDetails/ProductDetails";
 import { ProductFilterBar } from "./components/ProductFilterBar/ProductFilterBar";
 import { Products } from "./components/Products/Products";
+import { Profile } from "./components/Profile/Profile";
 import { ServiceBenefits } from "./components/ServiceBenefits/ServiceBenefits";
 import { Tabs } from "./components/Tabs/Tabs";
 
@@ -25,7 +26,8 @@ function App() {
       <OurProducts />
       <Inspirations />
       <PhotoGrid /> */}
-      <Contact />
+      {/* <Contact /> */}
+      <Profile />
       {/* <Checkout /> */}
       {/* <Cart /> */}
       {/* <Breadcrumbs />
