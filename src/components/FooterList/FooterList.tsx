@@ -16,7 +16,7 @@ export const FooterList: React.FC<FooterListProps> = ({ title, items }) => {
       <h2 className={style.title}>{title}</h2>
       <ul className={style.list}>
         {items.map(({ text, path }) => (
-          <Item text={text} path={path} />
+          <Item key={path} text={text} path={path} />
         ))}
       </ul>
     </div>
