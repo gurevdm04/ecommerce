@@ -1,27 +1,28 @@
-import { Assortment } from "./components/Assortment/Assortment";
-import { Banner } from "./components/Banner/Banner";
-import { BreadcrumbHeader } from "./components/BreadcrumbHeader/BreadcrumbHeader";
-import { Breadcrumbs } from "./components/Breadcrumbs/Breadcrumbs";
-import { Cart } from "./components/Cart/Cart";
-import { Checkout } from "./components/Checkout/Checkout";
-import { Contact } from "./components/Contact/Contact";
+import { Route, Routes } from "react-router-dom";
 import { Footer } from "./components/Footer/Footer";
 import { Header } from "./components/Header/Header";
-import { Inspirations } from "./components/Inspirations/Inspirations";
-import { Pagination } from "./components/Pagination/Pagination";
-import { PhotoGrid } from "./components/PhotoGrid/PhotoGrid";
-import { ProductDetails } from "./components/ProductDetails/ProductDetails";
-import { ProductFilterBar } from "./components/ProductFilterBar/ProductFilterBar";
-import { Products } from "./components/Products/Products";
-import { Profile } from "./components/Profile/Profile";
-import { ServiceBenefits } from "./components/ServiceBenefits/ServiceBenefits";
-import { Tabs } from "./components/Tabs/Tabs";
+import { HomePage } from "./pages/HomePage";
+import { CartPage } from "./pages/CartPage";
+import { CheckoutPage } from "./pages/CheckoutPage";
+import { ContactPage } from "./pages/ContactPage";
+import { ProfilePage } from "./pages/ProfilePage";
+import { ShopPage } from "./pages/ShopPage";
+import { SingleProductPage } from "./pages/SingleProductPage";
+import { ROUTES } from "./constants/routes";
 
 function App() {
   return (
     <>
       <Header />
-
+      <Routes>
+        <Route path={ROUTES.HOME} element={<HomePage />} />
+        <Route path={ROUTES.SHOP} element={<ShopPage />} />
+        <Route path={`${ROUTES.SHOP}/:id`} element={<SingleProductPage />} />
+        <Route path={ROUTES.CART} element={<CartPage />} />
+        <Route path={ROUTES.CHECKOUT} element={<CheckoutPage />} />
+        <Route path={ROUTES.CONTACT} element={<ContactPage />} />
+        <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
+      </Routes>
       <Footer />
     </>
   );
