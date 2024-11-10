@@ -21,22 +21,7 @@ function App() {
   return (
     <>
       <Header />
-      <Assortment />
-      <Banner />
-      <BreadcrumbHeader />
-      <Breadcrumbs />
-      <Cart />
-      <Checkout />
-      <Contact />
-      <Inspirations />
-      <Pagination />
-      <PhotoGrid />
-      <ProductDetails />
-      <ProductFilterBar />
-      <Products />
-      <Profile />
-      <ServiceBenefits />
-      <Tabs />
+
       <Footer />
     </>
   );
