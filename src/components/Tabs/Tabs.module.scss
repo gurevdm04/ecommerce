@@ -3,23 +3,32 @@
   padding: 0 10px;
   margin: 0 auto;
 }
-.header {
-  display: flex;
-  justify-content: center;
-  gap: 50px;
-  font-weight: 400;
-  font-size: 24px;
-  color: #9f9f9f;
-  .active {
-    font-weight: 500;
-    color: #000;
-  }
-}
-
 .main {
   font-weight: 400;
   font-size: 16px;
   text-align: justify;
   color: #9f9f9f;
   margin: 0 0 66px 0;
+}
+.list {
+  padding: 0;
+  display: flex;
+  list-style-type: none;
+  justify-content: center;
+  gap: 50px;
+  font-weight: 400;
+  font-size: 24px;
+  color: #9f9f9f;
+  outline: none;
+  li {
+    cursor: pointer;
+  }
+}
+.active {
+  font-weight: 500;
+  color: #000;
+  border: none;
+  &:focus-visible {
+    outline: none;
+  }
 }
