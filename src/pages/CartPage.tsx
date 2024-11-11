@@ -1,5 +1,13 @@
-import React from "react";
+import { BreadcrumbHeader } from "../components/BreadcrumbHeader/BreadcrumbHeader";
+import { Cart } from "../components/Cart/Cart";
+import { ServiceBenefits } from "../components/ServiceBenefits/ServiceBenefits";
 
 export const CartPage = () => {
-  return <div>CartPage</div>;
+  return (
+    <>
+      <BreadcrumbHeader />
+      <Cart />
+      <ServiceBenefits />
+    </>
+  );
 };

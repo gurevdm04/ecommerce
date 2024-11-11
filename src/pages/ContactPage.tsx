@@ -1,5 +1,13 @@
-import React from "react";
+import { BreadcrumbHeader } from "../components/BreadcrumbHeader/BreadcrumbHeader";
+import { Contact } from "../components/Contact/Contact";
+import { ServiceBenefits } from "../components/ServiceBenefits/ServiceBenefits";
 
 export const ContactPage = () => {
-  return <div>ContactPage</div>;
+  return (
+    <>
+      <BreadcrumbHeader />
+      <Contact />
+      <ServiceBenefits />
+    </>
+  );
 };

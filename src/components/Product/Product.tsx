@@ -5,10 +5,12 @@ import { Button } from "../Button/Button";
 import { CiHeart } from "react-icons/ci";
 import { MdOutlineCompareArrows } from "react-icons/md";
 import { FaShareAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { ROUTES } from "../../constants/routes";
 
 export const Product = () => {
   return (
-    <div className={style.wrap}>
+    <Link to={ROUTES.SHOP_ITEM('123')} className={style.wrap}>
       <img className={style.img} src={product} alt="" />
       <div className={style.block}>
         <h3 className={style.title}>Syltherine</h3>
@@ -35,6 +37,6 @@ export const Product = () => {
           </a>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };

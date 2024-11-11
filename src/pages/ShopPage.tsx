@@ -1,7 +1,15 @@
-import React from 'react'
+import { BreadcrumbHeader } from "../components/BreadcrumbHeader/BreadcrumbHeader";
+import { ProductFilterBar } from "../components/ProductFilterBar/ProductFilterBar";
+import { ShopProductsContainer } from "../containers/ShopProductsContainer";
+import { ServiceBenefits } from "../components/ServiceBenefits/ServiceBenefits";
 
 export const ShopPage = () => {
   return (
-    <div>ShopPage</div>
-  )
-}
+    <>
+      <BreadcrumbHeader />
+      <ProductFilterBar />
+      <ShopProductsContainer />
+      <ServiceBenefits />
+    </>
+  );
+};

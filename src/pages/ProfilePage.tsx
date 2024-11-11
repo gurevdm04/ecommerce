@@ -1,5 +1,11 @@
-import React from "react";
+import { BreadcrumbHeader } from "../components/BreadcrumbHeader/BreadcrumbHeader";
+import { Profile } from "../components/Profile/Profile";
 
 export const ProfilePage = () => {
-  return <div>ProfilePage</div>;
+  return (
+    <>
+      {/* <BreadcrumbHeader /> */}
+      <Profile />
+    </>
+  );
 };
