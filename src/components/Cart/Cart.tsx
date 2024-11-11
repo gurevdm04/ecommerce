@@ -3,6 +3,7 @@ import { MdDelete } from "react-icons/md";
 
 import img from "./../../assets/images/product.png";
 import { Wrapper } from "../Wrapper/Wrapper";
+import { Link } from "react-router-dom";
 
 export const Cart = () => {
   return (
@@ -38,7 +39,9 @@ export const Cart = () => {
             <p>Total</p>
             <span>Rs. 250,000.00</span>
           </div>
-          <button className={style.btn}>Check Out</button>
+          <Link to="/checkout" className={style.btn}>
+            Check Out
+          </Link>
         </div>
       </div>
     </Wrapper>

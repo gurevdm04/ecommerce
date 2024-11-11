@@ -1,3 +1,4 @@
+import { ROUTES } from "../../constants/routes";
 import { Divider } from "../Divider/Divider";
 import { FooterList } from "../FooterList/FooterList";
 import { Wrapper } from "../Wrapper/Wrapper";
@@ -11,33 +12,29 @@ export const Footer = () => {
   const listLinks: items = [
     {
       text: "Home",
-      path: "home",
+      path: ROUTES.HOME,
     },
     {
       text: "Shop",
-      path: "shop",
-    },
-    {
-      text: "About",
-      path: "about",
+      path: ROUTES.SHOP,
     },
     {
       text: "Contact",
-      path: "contact",
+      path: ROUTES.CONTACT,
     },
   ];
   const listHelp: items = [
     {
       text: "Payment Options",
-      path: "PaymentOptions",
+      path: "#",
     },
     {
       text: "Returns",
-      path: "Returns",
+      path: "#",
     },
     {
       text: "Privacy Policies",
-      path: "PrivacyPolicies",
+      path: "#",
     },
   ];
   return (

@@ -14,9 +14,9 @@ export const Header = () => {
   return (
     <Wrapper>
       <div className={style.wrap}>
-        <div className={style.logo}>
+        <Link to={ROUTES.HOME} className={style.logo}>
           <img src={logoImg} alt="logo" />
-        </div>
+        </Link>
         <nav className={style.nav}>
           <ul>
             <LinkItem label="Home" to={ROUTES.HOME} />
@@ -25,10 +25,12 @@ export const Header = () => {
           </ul>
         </nav>
         <div className={style.icons}>
-          <FaRegUser />
-          <FiSearch />
-          <FaRegHeart />
-          <MdOutlineShoppingCart />
+          <Link to={ROUTES.PROFILE}>
+            <FaRegUser />
+          </Link>
+          <Link to={ROUTES.CART}>
+            <MdOutlineShoppingCart />
+          </Link>
         </div>
       </div>
     </Wrapper>
