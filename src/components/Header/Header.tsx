@@ -7,33 +7,51 @@ import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { Wrapper } from "../Wrapper/Wrapper";
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import { ROUTES } from "../../constants/routes";
+import { RegistrationModal } from "../RegistrationModal/RegistrationModal";
 
 export const Header = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
-    <Wrapper>
-      <div className={style.wrap}>
-        <Link to={ROUTES.HOME} className={style.logo}>
-          <img src={logoImg} alt="logo" />
-        </Link>
-        <nav className={style.nav}>
-          <ul>
-            <LinkItem label="Home" to={ROUTES.HOME} />
-            <LinkItem label="Shop" to={ROUTES.SHOP} />
-            <LinkItem label="Contact" to={ROUTES.CONTACT} />
-          </ul>
-        </nav>
-        <div className={style.icons}>
-          <Link to={ROUTES.PROFILE}>
-            <FaRegUser />
+    <>
+      <Wrapper>
+        <div className={style.wrap}>
+          <Link to={ROUTES.HOME} className={style.logo}>
+            <img src={logoImg} alt="logo" />
           </Link>
-          <Link to={ROUTES.CART}>
-            <MdOutlineShoppingCart />
-          </Link>
+          <nav className={style.nav}>
+            <ul>
+              <LinkItem label="Home" to={ROUTES.HOME} />
+              <LinkItem label="Shop" to={ROUTES.SHOP} />
+              <LinkItem label="Contact" to={ROUTES.CONTACT} />
+            </ul>
+          </nav>
+          <div className={style.icons}>
+            <span onClick={openModal}>
+              <FaRegUser />
+            </span>
+            {/* <Link to={ROUTES.PROFILE}>
+              <FaRegUser />
+            </Link> */}
+            <Link to={ROUTES.CART}>
+              <MdOutlineShoppingCart />
+            </Link>
+          </div>
         </div>
-      </div>
-    </Wrapper>
+      </Wrapper>
+      {isModalOpen && (
+        <RegistrationModal openModal={openModal} closeModal={closeModal} />
+      )}
+    </>
   );
 };
 
