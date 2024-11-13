@@ -5,26 +5,43 @@ import { IoMdCloseCircle } from "react-icons/io";
 import { FaGoogle } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaApple } from "react-icons/fa";
+import { useState } from "react";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../../config/firebaseConfig";
 
 interface RegistrationModalProps {
-  openModal: () => void;
   closeModal: () => void;
 }
 
 export const RegistrationModal: React.FC<RegistrationModalProps> = ({
   closeModal,
-  openModal,
 }) => {
+  const [isLogin, setIsLogin] = useState(true);
+  console.log(auth);
+
   return (
     <div className={style.wrap}>
       <div className={style.modal}>
         <span onClick={closeModal} className={style.closeBtn}>
           <IoMdCloseCircle />
         </span>
-        <h2 className={style.title}>Login here</h2>
-        <p className={style.subtitle}>Welcome back!</p>
-        <LoginForm />
-        <button className={style.btnWhite}>Create new account</button>
+        <h2 className={style.title}>
+          {isLogin ? "Login here" : "Register here"}
+        </h2>
+        <p className={style.subtitle}>
+          {isLogin ? "Welcome back!" : "New User!"}
+        </p>
+        {isLogin ? <SignIn /> : <SignUp />}
+
+        <button
+          onClick={() => setIsLogin((prev) => !prev)}
+          className={style.btnWhite}
+        >
+          {isLogin ? "Create new account" : "Login here"}
+        </button>
         <p className={style.text}>or continue wuth</p>
         <div className={style.another}>
           <a href="#">
@@ -42,20 +59,107 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
   );
 };
 
-const LoginForm = () => (
-  <>
-    <input placeholder="Email" type="text" />
-    <input placeholder="Password" type="text" />
-    <button className={style.btn}>Sign in</button>
-    <a href="#"></a>
-  </>
-);
+const SignUp = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-const RegisterForm = () => (
-  <>
-    <input type="text" />
-    <input type="text" />
-    <button className={style.btn}>Sign up</button>
-    <a href="#"></a>
-  </>
-);
+  const handleSignUp = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert("Пароли не совпадают");
+      return;
+    }
+
+    try {
+      await createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+
+          console.log("createUser DATA:", user);
+          alert("Регистрация прошла успешно");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log("createUser ERROR:", errorCode, errorMessage);
+        });
+    } catch (error) {
+      console.log("catch ERROR", error);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSignUp}>
+      <input
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email"
+        type="text"
+        required
+      />
+      <input
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+        type="text"
+        required
+      />
+      <input
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+        placeholder="Confirm Password"
+        type="text"
+        required
+      />
+      <button className={style.btn}>Sign up</button>
+    </form>
+  );
+};
+
+const SignIn = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSignIn = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+
+          console.log("signIn DATA:", user);
+          alert("Вы вошли");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log("createUser ERROR:", errorCode, errorMessage);
+        });
+    } catch (error) {
+      console.log("catch ERROR", error);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSignIn}>
+      <input
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email"
+        type="text"
+        required
+      />
+      <input
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+        type="text"
+        required
+      />
+      <button className={style.btn}>Sign in</button>
+    </form>
+  );
+};

@@ -9,8 +9,21 @@ import { ProfilePage } from "./pages/ProfilePage";
 import { ShopPage } from "./pages/ShopPage";
 import { SingleProductPage } from "./pages/SingleProductPage";
 import { ROUTES } from "./constants/routes";
+import { useEffect, useState } from "react";
+import { onAuthStateChanged, User } from "firebase/auth";
+import { auth } from "./config/firebaseConfig";
 
 function App() {
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      console.log("Обработка состояния пользователя", currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
+
   return (
     <>
       <Header />
