@@ -1,3 +1,4 @@
+import { listHelp, listLinks } from "../../constants/footerLinks";
 import { ROUTES } from "../../constants/routes";
 import { Divider } from "../Divider/Divider";
 import { FooterList } from "../FooterList/FooterList";
@@ -5,38 +6,6 @@ import { Wrapper } from "../Wrapper/Wrapper";
 import style from "./Footer.module.scss";
 
 export const Footer = () => {
-  type items = {
-    text: string;
-    path: string;
-  }[];
-  const listLinks: items = [
-    {
-      text: "Home",
-      path: ROUTES.HOME,
-    },
-    {
-      text: "Shop",
-      path: ROUTES.SHOP,
-    },
-    {
-      text: "Contact",
-      path: ROUTES.CONTACT,
-    },
-  ];
-  const listHelp: items = [
-    {
-      text: "Payment Options",
-      path: "#",
-    },
-    {
-      text: "Returns",
-      path: "#",
-    },
-    {
-      text: "Privacy Policies",
-      path: "#",
-    },
-  ];
   return (
     <>
       <Divider />
