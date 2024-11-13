@@ -12,17 +12,23 @@ import { ROUTES } from "./constants/routes";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "./config/firebaseConfig";
+import { useAppDispatch } from "./store/hooks";
+import { clearUser, setUser } from "./store/slices/authSlice";
 
 function App() {
-  const [user, setUser] = useState<User | null>(null);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      console.log("Обработка состояния пользователя", currentUser);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { email, uid } = user;
+        dispatch(setUser({ email, uid }));
+      } else {
+        dispatch(clearUser());
+      }
     });
     return () => unsubscribe();
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

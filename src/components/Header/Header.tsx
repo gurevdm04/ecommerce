@@ -10,8 +10,14 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { ROUTES } from "../../constants/routes";
 import { RegistrationModal } from "../RegistrationModal/RegistrationModal";
+import { useAppSelector } from "../../store/hooks";
+import { RootState } from "../../store/store";
 
 export const Header = () => {
+  const isAuthenticated = useAppSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -36,21 +42,23 @@ export const Header = () => {
             </ul>
           </nav>
           <div className={style.icons}>
-            <span onClick={openModal}>
-              <FaRegUser />
-            </span>
-            {/* <Link to={ROUTES.PROFILE}>
-              <FaRegUser />
-            </Link> */}
+            {isAuthenticated ? (
+              <Link to={ROUTES.PROFILE}>
+                <FaRegUser />
+              </Link>
+            ) : (
+              <span onClick={openModal}>
+                <FaRegUser />
+              </span>
+            )}
+
             <Link to={ROUTES.CART}>
               <MdOutlineShoppingCart />
             </Link>
           </div>
         </div>
       </Wrapper>
-      {isModalOpen && (
-        <RegistrationModal openModal={openModal} closeModal={closeModal} />
-      )}
+      {isModalOpen && <RegistrationModal closeModal={closeModal} />}
     </>
   );
 };

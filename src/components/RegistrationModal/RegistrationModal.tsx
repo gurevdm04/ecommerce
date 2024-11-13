@@ -11,6 +11,8 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../../config/firebaseConfig";
+import { useAppSelector } from "../../store/hooks";
+import { RootState } from "../../store/store";
 
 interface RegistrationModalProps {
   closeModal: () => void;
@@ -20,7 +22,6 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
   closeModal,
 }) => {
   const [isLogin, setIsLogin] = useState(true);
-  console.log(auth);
 
   return (
     <div className={style.wrap}>

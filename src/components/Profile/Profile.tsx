@@ -5,8 +5,24 @@ import { MdOutlineLockClock } from "react-icons/md";
 import { CiUser } from "react-icons/ci";
 import { IoMdExit } from "react-icons/io";
 import { Wrapper } from "../Wrapper/Wrapper";
+import { useAppDispatch } from "../../store/hooks";
+import { signOut } from "firebase/auth";
+import { auth } from "../../config/firebaseConfig";
+import { clearUser } from "../../store/slices/authSlice";
 
 export const Profile = () => {
+  const dispatch = useAppDispatch();
+
+  const handleLogout = async () => {
+    if (confirm("Вы уверенны что хотите выйти?")) {
+      try {
+        await signOut(auth);
+        dispatch(clearUser());
+      } catch (error) {
+        console.error("Ошибка при выходе:", error);
+      }
+    }
+  };
   return (
     <Wrapper>
       <div className={style.wrap}>
@@ -14,7 +30,7 @@ export const Profile = () => {
           <Item Icon={MdOutlineLockClock} label="История заказов" isActive />
           <Item Icon={MdFavoriteBorder} label="Избранные товары" />
           <Item Icon={CiUser} label="Личные данные" />
-          <Item Icon={IoMdExit} label="Выйти" />
+          <Item Icon={IoMdExit} label="Выйти" click={handleLogout} />
         </div>
         <div>
           <h2>История заказов</h2>
@@ -28,10 +44,11 @@ interface ItemProps {
   Icon: IconType;
   label: string;
   isActive?: boolean;
+  click?: () => void;
 }
 
-const Item: React.FC<ItemProps> = ({ Icon, label, isActive }) => (
-  <div className={`${style.item} ${isActive && style.active}`}>
+const Item: React.FC<ItemProps> = ({ Icon, label, isActive, click }) => (
+  <div onClick={click} className={`${style.item} ${isActive && style.active}`}>
     <Icon fontSize={30} />
     {label}
   </div>
