@@ -31,11 +31,13 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
 
   useEffect(() => {
     if (closeBtnRef.current) {
-      if (!isAuthenticated) {
+      console.log(isAuthenticated);
+
+      if (isAuthenticated) {
         closeBtnRef.current.click();
       }
     }
-  }, []);
+  }, [isAuthenticated]);
 
   return (
     <div className={style.wrap}>
