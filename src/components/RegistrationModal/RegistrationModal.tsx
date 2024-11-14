@@ -31,8 +31,6 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
 
   useEffect(() => {
     if (closeBtnRef.current) {
-      console.log(isAuthenticated);
-
       if (isAuthenticated) {
         closeBtnRef.current.click();
       }
