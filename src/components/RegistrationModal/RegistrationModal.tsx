@@ -5,7 +5,7 @@ import { IoMdCloseCircle } from "react-icons/io";
 import { FaGoogle } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaApple } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -23,10 +23,24 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
 }) => {
   const [isLogin, setIsLogin] = useState(true);
 
+  const isAuthenticated = useAppSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
+
+  const closeBtnRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (closeBtnRef.current) {
+      if (!isAuthenticated) {
+        closeBtnRef.current.click();
+      }
+    }
+  }, []);
+
   return (
     <div className={style.wrap}>
       <div className={style.modal}>
-        <span onClick={closeModal} className={style.closeBtn}>
+        <span ref={closeBtnRef} onClick={closeModal} className={style.closeBtn}>
           <IoMdCloseCircle />
         </span>
         <h2 className={style.title}>
