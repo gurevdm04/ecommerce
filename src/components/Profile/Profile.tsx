@@ -5,13 +5,16 @@ import { MdOutlineLockClock } from "react-icons/md";
 import { CiUser } from "react-icons/ci";
 import { IoMdExit } from "react-icons/io";
 import { Wrapper } from "../Wrapper/Wrapper";
-import { useAppDispatch } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebaseConfig";
 import { clearUser } from "../../store/slices/authSlice";
+import { RootState } from "../../store/store";
+import { Navigate } from "react-router-dom";
 
 export const Profile = () => {
   const dispatch = useAppDispatch();
+  const { user, isLoading } = useAppSelector((state: RootState) => state.auth);
 
   const handleLogout = async () => {
     if (confirm("Вы уверенны что хотите выйти?")) {
@@ -23,6 +26,15 @@ export const Profile = () => {
       }
     }
   };
+
+  if (isLoading) {
+    return "loading";
+  }
+
+  if (!user) {
+    return <Navigate to="/" />;
+  }
+
   return (
     <Wrapper>
       <div className={style.wrap}>
@@ -34,6 +46,8 @@ export const Profile = () => {
         </div>
         <div>
           <h2>История заказов</h2>
+          <p>{user?.email}</p>
+          <p>{user?.uid}</p>
         </div>
       </div>
     </Wrapper>

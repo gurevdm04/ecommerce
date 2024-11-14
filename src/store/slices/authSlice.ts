@@ -8,11 +8,13 @@ interface UserProps {
 interface AuthState {
   user: UserProps | null;
   isAuthenticated: boolean;
+  isLoading: boolean;
 }
 
 const initialState: AuthState = {
   user: null,
   isAuthenticated: false,
+  isLoading: true,
 };
 
 export const authSlice = createSlice({
@@ -21,11 +23,11 @@ export const authSlice = createSlice({
   reducers: {
     setUser(state, action: PayloadAction<UserProps>) {
       state.user = action.payload;
-      state.isAuthenticated = true;
+      state.isLoading = false;
     },
     clearUser(state) {
       state.user = null;
-      state.isAuthenticated = false;
+      state.isLoading = false;
     },
   },
 });

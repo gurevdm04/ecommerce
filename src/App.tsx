@@ -12,14 +12,17 @@ import { ROUTES } from "./constants/routes";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "./config/firebaseConfig";
-import { useAppDispatch } from "./store/hooks";
+import { useAppDispatch, useAppSelector } from "./store/hooks";
 import { clearUser, setUser } from "./store/slices/authSlice";
+import { RootState } from "./store/store";
 
 function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
+      console.log(user);
+
       if (user) {
         const { email, uid } = user;
         dispatch(setUser({ email, uid }));
