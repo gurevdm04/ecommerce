@@ -6,8 +6,45 @@ import { FaSquareXTwitter } from "react-icons/fa6";
 
 import img from "./../../assets/images/detail.jpg";
 import { Wrapper } from "../Wrapper/Wrapper";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../config/firebaseConfig";
 
-export const ProductDetails = () => {
+interface ProductDetail {
+  title: string;
+  shortDesc: string;
+  description: string;
+  currentPrice: number;
+  oldPrice: number;
+  images: string[];
+  size: string;
+  color: string;
+  specs: Record<string, string>;
+}
+
+export const ProductDetails: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const [product, setProduct] = useState<ProductDetail | null>(null);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      if (!id) return;
+      const docRef = doc(db, "products", id);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setProduct(docSnap.data() as ProductDetail);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
+
+  if (!product) {
+    return <p>Загрузка данных...</p>;
+  }
+  console.log("DATA:---", product);
+
   return (
     <Wrapper>
       <div className={style.wrap}>
@@ -19,12 +56,15 @@ export const ProductDetails = () => {
             <img src={img} alt="" />
           </div>
           <div className={style.image}>
+            {/* <img src={product.images[0]} alt="" /> */}
             <img src={img} alt="" />
           </div>
         </div>
         <div className={style.details}>
-          <h2 className={style.title}>Asgaard sofa</h2>
-          <h3 className={style.price}>Rs. 250,000.00</h3>
+          <h2 className={style.title}>{product.title}</h2>
+          <h3 className={style.price}>
+            Rs. {product.currentPrice} <span>Rs. {product.oldPrice}</span>
+          </h3>
           <div className={style.reviews}>
             <FaStar color="#FFC700" />
             <FaStar color="#FFC700" />
@@ -32,11 +72,7 @@ export const ProductDetails = () => {
             <FaStar color="#FFC700" />
             <FaStar color="#FFC700" />| 5 Customer Review
           </div>
-          <p className={style.descr}>
-            Setting the bar as one of the loudest speakers in its class, the
-            Kilburn is a compact, stout-hearted hero with a well-balanced audio
-            which boasts a clear midrange and extended highs for a sound.
-          </p>
+          <p className={style.descr}>{product.description}</p>
           <div className={style.options}>
             <h4>Size</h4>
             <div>

@@ -30,6 +30,10 @@
   font-size: 24px;
   color: #9f9f9f;
   margin: 15px 0 0 0;
+  span {
+    text-decoration: line-through;
+    font-size: 18px;
+  }
 }
 .reviews {
   font-weight: 400;
