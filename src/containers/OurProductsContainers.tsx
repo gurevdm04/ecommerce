@@ -2,22 +2,50 @@ import React, { useEffect, useState } from "react";
 import { Products } from "../components/Products/Products";
 import { Button } from "../components/Button/Button";
 import { ProductProps } from "../components/Product/Product";
-import { collection, getDocs } from "firebase/firestore";
+import {
+  collection,
+  DocumentData,
+  getDocs,
+  limit,
+  orderBy,
+  query,
+  startAfter,
+} from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
+import { Grid } from "react-loader-spinner";
 
 export const OurProductsContainers = () => {
   const [products, setProducts] = useState<ProductProps[]>([]);
+  const [lastDoc, setLastDoc] = useState<DocumentData | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const querySnapshot = await getDocs(collection(db, "products"));
-      const productsData = querySnapshot.docs.map((doc) => ({
+  const fetchProducts = async (loadMore: boolean = false) => {
+    setLoading(true);
+    const productsRef = collection(db, "products");
+    const q = loadMore
+      ? query(productsRef, orderBy("createdAt"), startAfter(lastDoc), limit(8))
+      : query(productsRef, orderBy("createdAt"), limit(8));
+
+    const snapshot = await getDocs(q);
+    if (!snapshot.empty) {
+      const newProducts = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       })) as ProductProps[];
-      setProducts(productsData);
-    };
 
+      setProducts((prev) =>
+        loadMore ? [...prev, ...newProducts] : newProducts
+      );
+      setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
+      setHasMore(snapshot.docs.length === 8);
+    } else {
+      setHasMore(false);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
     fetchProducts();
   }, []);
 
@@ -25,7 +53,26 @@ export const OurProductsContainers = () => {
     <>
       <h2 style={titleStyle}>Our Products</h2>
       <Products products={products} />
-      <Button style={btnStyle} label="Show More" />
+
+      {hasMore && !loading && (
+        <Button
+          onClick={() => fetchProducts(true)}
+          style={btnStyle}
+          label="Show More"
+        />
+      )}
+      {loading && (
+        <Grid
+          visible={true}
+          height="80"
+          width="80"
+          color="#b88e2f"
+          ariaLabel="grid-loading"
+          radius="12.5"
+          wrapperStyle={{ justifyContent: "center", margin: "20px" }}
+          wrapperClass="grid-wrapper"
+        />
+      )}
     </>
   );
 };
