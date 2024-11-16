@@ -1,13 +1,13 @@
 import style from "./BreadcrumbHeader.module.scss";
 import img from "./../../assets/images/Breadcrumb.png";
 import { useLocation } from "react-router-dom";
+import { capitalizeFirstLetter } from "../../utils";
 
 export const BreadcrumbHeader = () => {
   const { pathname } = useLocation();
 
-  const str = pathname.split("/")[1];
-  const breadcrumbTitle = str.charAt(0).toUpperCase() + str.slice(1);
-  
+  const breadcrumbTitle = capitalizeFirstLetter(pathname.split("/")[1]);
+
   return (
     <div className={style.wrap}>
       <img className={style.img} src={img} alt="" />
