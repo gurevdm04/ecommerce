@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { auth } from "../../config/firebaseConfig";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../../config/firebaseConfig";
 import { isAdmin } from "../../utils";
 import { useAppSelector } from "../../store/hooks";
@@ -9,26 +9,20 @@ import { RootState } from "../../store/store";
 import style from "./AddProduct.module.scss";
 import { Wrapper } from "../Wrapper/Wrapper";
 
-interface ProductDetail {
-  title: string;
-  shortDesc: string;
-  description: string;
-  currentPrice: number;
-  oldPrice: number;
-  images: string[];
-  size: string;
-  color: string;
-  specs: Record<string, string>;
-}
-
 const AddProductForm = () => {
   const { user } = useAppSelector((state: RootState) => state.auth);
   const [isAdminUser, setIsAdminUser] = useState(false);
 
   const [title, setTitle] = useState("");
   const [shortDesc, setShortDesc] = useState("");
+  const [description, setDescription] = useState("");
   const [currentPrice, setCurrentPrice] = useState("");
   const [oldPrice, setOldPrice] = useState("");
+  const [images, setImages] = useState("");
+  const [size, setSize] = useState("");
+  const [color, setColor] = useState("");
+  const [specs, setSpecs] = useState("");
+  const [additionalInformation, setAdditionalInformation] = useState("");
 
   useEffect(() => {
     const user = auth.currentUser;
@@ -45,9 +39,15 @@ const AddProductForm = () => {
         await addDoc(collection(db, "products"), {
           title,
           shortDesc,
+          description,
           currentPrice,
           oldPrice,
-          createdAt: new Date(),
+          images,
+          size,
+          color,
+          specs,
+          additionalInformation,
+          createdAt: serverTimestamp(),
         });
         alert("Product added!");
       } catch (error) {
@@ -68,28 +68,35 @@ const AddProductForm = () => {
         <Wrapper>
           <h2>Добавление товаров</h2>
           <form className={style.form} onSubmit={handleSubmit}>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="Title"
-            />
-            <textarea
+            <Input value={title} setValue={setTitle} placeholder="title" />
+            <Input
               value={shortDesc}
-              onChange={(e) => setShortDesc(e.target.value)}
-              placeholder="Short Description"
+              setValue={setShortDesc}
+              placeholder="shortDesc"
             />
-            <input
-              type="text"
+            <Input
+              value={description}
+              setValue={setDescription}
+              placeholder="description"
+            />
+            <Input
               value={currentPrice}
-              onChange={(e) => setCurrentPrice(e.target.value)}
-              placeholder="Current Price"
+              setValue={setCurrentPrice}
+              placeholder="currentPrice"
             />
-            <input
-              type="text"
+            <Input
               value={oldPrice}
-              onChange={(e) => setOldPrice(e.target.value)}
-              placeholder="Old Price"
+              setValue={setOldPrice}
+              placeholder="oldPrice"
+            />
+            <Input value={images} setValue={setImages} placeholder="images" />
+            <Input value={size} setValue={setSize} placeholder="size" />
+            <Input value={color} setValue={setColor} placeholder="color" />
+            <Input value={specs} setValue={setSpecs} placeholder="specs" />
+            <Input
+              value={additionalInformation}
+              setValue={setAdditionalInformation}
+              placeholder="additionalInformation"
             />
             <button type="submit">Add Product</button>
           </form>
@@ -98,5 +105,21 @@ const AddProductForm = () => {
     </>
   );
 };
+
+interface InputProps {
+  value: any;
+  setValue: (e: string) => void;
+  placeholder: string;
+}
+
+const Input: React.FC<InputProps> = ({ value, setValue, placeholder }) => (
+  <input
+    type="text"
+    value={value}
+    onChange={(e) => setValue(e.target.value)}
+    placeholder={placeholder}
+    required
+  />
+);
 
 export default AddProductForm;
