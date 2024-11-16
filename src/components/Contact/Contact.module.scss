@@ -51,6 +51,14 @@
   width: 100%;
   max-width: 640px;
   padding: 120px 50px 60px 50px;
+
+  label {
+    display: block;
+    font-weight: 500;
+    font-size: 20px;
+    color: #000;
+    margin: 10px 0 10px 0;
+  }
   input,
   textarea {
     padding: 25px 30px;
@@ -63,4 +71,8 @@
     resize: none;
     margin-bottom: 30px;
   }
+}
+.loader {
+  justify-content: center;
+  margin: 20px 0;
 }

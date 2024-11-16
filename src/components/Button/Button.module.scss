@@ -7,4 +7,9 @@
   background: #b88e2f;
   border: none;
   cursor: pointer;
+
+  &:disabled {
+    cursor: no-drop;
+    background: #b88f2f42;
+  }
 }
