@@ -11,6 +11,11 @@ import { auth } from "../../config/firebaseConfig";
 import { clearUser } from "../../store/slices/authSlice";
 import { RootState } from "../../store/store";
 import { Navigate } from "react-router-dom";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { OrderHistory } from "./OrderHistory/OrderHistory";
+import { FeaturedProducts } from "./FeaturedProducts/FeaturedProducts";
+import { PersonalInformation } from "./PersonalInformation/PersonalInformation";
+import { LogOut } from "./LogOut/LogOut";
 
 export const Profile = () => {
   const dispatch = useAppDispatch();
@@ -37,19 +42,34 @@ export const Profile = () => {
 
   return (
     <Wrapper>
-      <div className={style.wrap}>
-        <div className={style.list}>
-          <Item Icon={MdOutlineLockClock} label="История заказов" isActive />
-          <Item Icon={MdFavoriteBorder} label="Избранные товары" />
-          <Item Icon={CiUser} label="Личные данные" />
-          <Item Icon={IoMdExit} label="Выйти" click={handleLogout} />
-        </div>
-        <div>
-          <h2>История заказов</h2>
-          <p>{user?.email}</p>
-          <p>{user?.uid}</p>
-        </div>
-      </div>
+      <Tabs className={style.wrap} selectedTabClassName={style.active} selectedTabPanelClassName={style.tabPanel}>
+        <TabList className={style.list}>
+          <Tab className={style.item}>
+            <Item Icon={MdOutlineLockClock} label="История заказов" />
+          </Tab>
+          <Tab className={style.item}>
+            <Item Icon={MdFavoriteBorder} label="Избранные товары" />
+          </Tab>
+          <Tab className={style.item}>
+            <Item Icon={CiUser} label="Личные данные" />
+          </Tab>
+          <Tab className={style.item}>
+            <Item Icon={IoMdExit} label="Выйти" />
+          </Tab>
+        </TabList>
+        <TabPanel>
+          <OrderHistory />
+        </TabPanel>
+        <TabPanel>
+          <FeaturedProducts />
+        </TabPanel>
+        <TabPanel>
+          <PersonalInformation />
+        </TabPanel>
+        <TabPanel>
+          <LogOut />
+        </TabPanel>
+      </Tabs>
     </Wrapper>
   );
 };
@@ -57,13 +77,11 @@ export const Profile = () => {
 interface ItemProps {
   Icon: IconType;
   label: string;
-  isActive?: boolean;
-  click?: () => void;
 }
 
-const Item: React.FC<ItemProps> = ({ Icon, label, isActive, click }) => (
-  <div onClick={click} className={`${style.item} ${isActive && style.active}`}>
+const Item: React.FC<ItemProps> = ({ Icon, label }) => (
+  <>
     <Icon fontSize={30} />
     {label}
-  </div>
+  </>
 );

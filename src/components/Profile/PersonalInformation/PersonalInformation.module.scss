@@ -1,0 +1,50 @@
+.form {
+  position: relative;
+  width: 100%;
+  h2 {
+    margin: 0;
+  }
+  label {
+    margin-top: 30px;
+    display: block;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #00000049;
+    }
+  }
+  button {
+    margin-top: 30px;
+    padding: 10px;
+  }
+}
+.updatingData {
+  width: 105%;
+  height: 105%;
+  position: absolute;
+  background-color: rgba(141, 141, 141, 0.199);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+}
+.updatingDataLoader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loadingWrap {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.resetForm {
+  margin-left: 20px;
+}
