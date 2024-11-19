@@ -38,23 +38,6 @@ export const Product: React.FC<ProductProps> = ({
           <p className={style.oldPrice}>Rp {oldPrice}</p>
         </div>
       </div>
-      <div className={style.control}>
-        <button className={style.btn}>Add to cart</button>
-        <div className={style.options}>
-          <button>
-            <FaShareAlt fontSize={12} />
-            <p>Share</p>
-          </button>
-          <button>
-            <MdOutlineCompareArrows fontSize={20} />
-            <p>Compare</p>
-          </button>
-          <button>
-            <CiHeart fontSize={20} />
-            <p>Like</p>
-          </button>
-        </div>
-      </div>
     </Link>
   );
 };
