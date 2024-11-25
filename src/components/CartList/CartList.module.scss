@@ -1,0 +1,54 @@
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  background: #f9f1e7;
+  padding: 15px 0;
+  margin-bottom: 55px;
+  div {
+    font-weight: 500;
+    font-size: 16px;
+    color: #000;
+  }
+}
+.cart {
+  width: 100%;
+}
+.items {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.img {
+  max-width: 100px;
+  max-height: 100px;
+  img {
+    width: 100px;
+    height: 100px;
+    display: block;
+    border-radius: 10px;
+  }
+}
+.name {
+  font-weight: 400;
+  font-size: 16px;
+  color: #9f9f9f;
+}
+.price {
+  font-weight: 400;
+  font-size: 16px;
+  color: #9f9f9f;
+}
+.quantity {
+  font-weight: 400;
+  font-size: 16px;
+  color: #000;
+}
+.subtotalPrice {
+  font-weight: 400;
+  font-size: 16px;
+  color: #000;
+}
+.delete {
+}
