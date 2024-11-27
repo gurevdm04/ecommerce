@@ -9,7 +9,9 @@ import { Wrapper } from "../Wrapper/Wrapper";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../config/firebaseConfig";
+import { auth, db } from "../../config/firebaseConfig";
+import { addToCart } from "../../utils";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 interface ProductDetail {
   title: string;
@@ -26,6 +28,7 @@ interface ProductDetail {
 export const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<ProductDetail | null>(null);
+  const [user] = useAuthState(auth);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -40,10 +43,26 @@ export const ProductDetails: React.FC = () => {
     fetchProduct();
   }, [id]);
 
+  
+
   if (!product) {
     return <p>Загрузка данных...</p>;
   }
-  console.log("DATA:---", product);
+  console.log(123);
+
+  const handleAddToCart = () => {
+    if (user) {
+      addToCart(user.uid, {
+        productId: id || "",
+        title: product.title,
+        image: "image",
+        price: 1,
+      });
+      alert("Товар добавлен в корзину");
+    } else {
+      alert("Пожалуйста, войдите в аккаунт, чтобы добавить товар в корзину.");
+    }
+  };
 
   return (
     <Wrapper>
@@ -100,7 +119,9 @@ export const ProductDetails: React.FC = () => {
           </div>
           <div className={style.add}>
             <Counter />
-            <button className={style.addToCart}>Add To Cart</button>
+            <button onClick={handleAddToCart} className={style.addToCart}>
+              Add To Cart
+            </button>
           </div>
           <hr className={style.line} />
           <div className={style.specifications}>
