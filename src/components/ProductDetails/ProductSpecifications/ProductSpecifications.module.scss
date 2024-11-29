@@ -1,0 +1,17 @@
+.specifications {
+  font-weight: 400;
+  font-size: 16px;
+  color: #9f9f9f;
+  > div + div {
+    margin-top: 12px;
+  }
+}
+.specificationsRow {
+  display: flex;
+  > span:first-child {
+    width: 90px;
+  }
+  > span:last-child {
+    margin-left: 12px;
+  }
+}

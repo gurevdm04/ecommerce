@@ -12,6 +12,8 @@ import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../../config/firebaseConfig";
 import { addToCart } from "../../utils";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { ProductSpecifications } from "./ProductSpecifications/ProductSpecifications";
+import { CiHeart } from "react-icons/ci";
 
 interface ProductDetail {
   title: string;
@@ -42,8 +44,6 @@ export const ProductDetails: React.FC = () => {
 
     fetchProduct();
   }, [id]);
-
-  
 
   if (!product) {
     return <p>Загрузка данных...</p>;
@@ -85,11 +85,7 @@ export const ProductDetails: React.FC = () => {
             Rs. {product.currentPrice} <span>Rs. {product.oldPrice}</span>
           </h3>
           <div className={style.reviews}>
-            <FaStar color="#FFC700" />
-            <FaStar color="#FFC700" />
-            <FaStar color="#FFC700" />
-            <FaStar color="#FFC700" />
-            <FaStar color="#FFC700" />| 5 Customer Review
+            <CiHeart />| add to favorites
           </div>
           <p className={style.descr}>{product.description}</p>
           <div className={style.options}>
@@ -124,35 +120,7 @@ export const ProductDetails: React.FC = () => {
             </button>
           </div>
           <hr className={style.line} />
-          <div className={style.specifications}>
-            <div className={style.specificationsRow}>
-              <span>SKU</span>
-              <span>:</span>
-              <span>SS001</span>
-            </div>
-            <div className={style.specificationsRow}>
-              <span>Category</span>
-              <span>:</span>
-              <span>Sofas</span>
-            </div>
-            <div className={style.specificationsRow}>
-              <span>Tags</span>
-              <span>:</span>
-              <span>Sofa, Chair, Home, Shop</span>
-            </div>
-            <div className={style.specificationsRow}>
-              <span>Share</span>
-              <span>:</span>
-              <span>
-                <FaFacebook color="#000" style={{ margin: "0 0 0 10px" }} />
-                <FaLinkedin color="#000" style={{ margin: "0 0 0 10px" }} />
-                <FaSquareXTwitter
-                  color="#000"
-                  style={{ margin: "0 0 0 10px" }}
-                />
-              </span>
-            </div>
-          </div>
+          <ProductSpecifications />
         </div>
       </div>
     </Wrapper>
