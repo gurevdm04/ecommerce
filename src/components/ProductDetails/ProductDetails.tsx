@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../../config/firebaseConfig";
-import { addToCart } from "../../utils";
+import { addToCart, addToFavorites, removeFromFavorites } from "../../utils";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ProductSpecifications } from "./ProductSpecifications/ProductSpecifications";
 import { CiHeart } from "react-icons/ci";
@@ -31,6 +31,7 @@ export const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<ProductDetail | null>(null);
   const [user] = useAuthState(auth);
+  console.log(user);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -48,7 +49,6 @@ export const ProductDetails: React.FC = () => {
   if (!product) {
     return <p>Загрузка данных...</p>;
   }
-  console.log(123);
 
   const handleAddToCart = () => {
     if (user) {
@@ -61,6 +61,24 @@ export const ProductDetails: React.FC = () => {
       alert("Товар добавлен в корзину");
     } else {
       alert("Пожалуйста, войдите в аккаунт, чтобы добавить товар в корзину.");
+    }
+  };
+
+  const handleFavoriteToggle = () => {
+    if (user) {
+      if (false) {
+        // removeFromFavorites(user.uid, id || "");
+      } else {
+        alert("add fov");
+        addToFavorites(user.uid, {
+          id: id || "",
+          title: product.title,
+          image: "",
+          price: 1,
+        });
+      }
+    } else {
+      alert("Пожалуйста, войдите в аккаунт, чтобы управлять избранным.");
     }
   };
 
@@ -84,7 +102,7 @@ export const ProductDetails: React.FC = () => {
           <h3 className={style.price}>
             Rs. {product.currentPrice} <span>Rs. {product.oldPrice}</span>
           </h3>
-          <div className={style.reviews}>
+          <div className={style.reviews} onClick={handleFavoriteToggle}>
             <CiHeart />| add to favorites
           </div>
           <p className={style.descr}>{product.description}</p>
