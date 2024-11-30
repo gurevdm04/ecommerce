@@ -21,7 +21,6 @@ export const addToFavorites = async (
           favorites: arrayUnion(product),
         });
       } else {
-        console.log("Товар уже в избранном");
       }
     } else {
       await setDoc(favRef, {

@@ -27,7 +27,6 @@ const AddProductForm = () => {
   useEffect(() => {
     const user = auth.currentUser;
     if (user) {
-      console.log(isAdmin(user.uid));
       isAdmin(user.uid).then(setIsAdminUser);
     }
   }, [user]);

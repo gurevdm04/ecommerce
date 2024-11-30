@@ -25,8 +25,6 @@ export const Product: React.FC<ProductProps> = ({
   shortDesc,
   id,
 }) => {
-  console.log(id);
-
   return (
     <Link to={ROUTES.SHOP_ITEM(id)} className={style.wrap}>
       <img className={style.img} src={product} alt="" />

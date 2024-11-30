@@ -7,9 +7,7 @@ export async function isAdmin(userId: string): Promise<boolean> {
 
   if (userDoc.exists()) {
     const userData = userDoc.data();
-    console.log(userData);
-    console.log(userData?.role === "admin");
-    
+
     return userData?.role === "admin";
   }
   return false;

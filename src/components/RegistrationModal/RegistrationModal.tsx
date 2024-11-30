@@ -92,16 +92,13 @@ const SignUp = () => {
         .then((userCredential) => {
           const user = userCredential.user;
 
-          console.log("createUser DATA:", user);
           alert("Регистрация прошла успешно");
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          console.log("createUser ERROR:", errorCode, errorMessage);
         });
     } catch (error) {
-      console.log("catch ERROR", error);
     }
   };
 
@@ -145,16 +142,13 @@ const SignIn = () => {
         .then((userCredential) => {
           const user = userCredential.user;
 
-          console.log("signIn DATA:", user);
           alert("Вы вошли");
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          console.log("createUser ERROR:", errorCode, errorMessage);
         });
     } catch (error) {
-      console.log("catch ERROR", error);
     }
   };
 

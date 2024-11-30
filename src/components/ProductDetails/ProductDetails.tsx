@@ -31,7 +31,6 @@ export const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<ProductDetail | null>(null);
   const [user] = useAuthState(auth);
-  console.log(user);
 
   useEffect(() => {
     const fetchProduct = async () => {
