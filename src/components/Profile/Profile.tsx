@@ -16,10 +16,15 @@ import { OrderHistory } from "./OrderHistory/OrderHistory";
 import { FeaturedProducts } from "./FeaturedProducts/FeaturedProducts";
 import { PersonalInformation } from "./PersonalInformation/PersonalInformation";
 import { LogOut } from "./LogOut/LogOut";
+import { useEffect, useState } from "react";
+import { isAdmin } from "../../utils";
+import AddProductForm from "../AddProduct/AddProduct";
+import { IoIosAddCircleOutline } from "react-icons/io";
 
 export const Profile = () => {
   const dispatch = useAppDispatch();
   const { user, isLoading } = useAppSelector((state: RootState) => state.auth);
+  const [isAdminUser, setIsAdminUser] = useState(false);
 
   const handleLogout = async () => {
     if (confirm("Вы уверенны что хотите выйти?")) {
@@ -32,6 +37,13 @@ export const Profile = () => {
     }
   };
 
+  useEffect(() => {
+    const user = auth.currentUser;
+    if (user) {
+      isAdmin(user.uid).then(setIsAdminUser);
+    }
+  }, [user]);
+
   if (isLoading) {
     return "loading";
   }
@@ -42,7 +54,11 @@ export const Profile = () => {
 
   return (
     <Wrapper>
-      <Tabs className={style.wrap} selectedTabClassName={style.active} selectedTabPanelClassName={style.tabPanel}>
+      <Tabs
+        className={style.wrap}
+        selectedTabClassName={style.active}
+        selectedTabPanelClassName={style.tabPanel}
+      >
         <TabList className={style.list}>
           <Tab className={style.item}>
             <Item Icon={MdOutlineLockClock} label="История заказов" />
@@ -53,6 +69,11 @@ export const Profile = () => {
           <Tab className={style.item}>
             <Item Icon={CiUser} label="Личные данные" />
           </Tab>
+          {isAdminUser && (
+            <Tab className={style.item}>
+              <Item Icon={IoIosAddCircleOutline} label="Добавление товара" />
+            </Tab>
+          )}
           <Tab className={style.item}>
             <Item Icon={IoMdExit} label="Выйти" />
           </Tab>
@@ -66,6 +87,11 @@ export const Profile = () => {
         <TabPanel>
           <PersonalInformation />
         </TabPanel>
+        {isAdminUser && (
+          <TabPanel>
+            <AddProductForm />
+          </TabPanel>
+        )}
         <TabPanel>
           <LogOut />
         </TabPanel>
