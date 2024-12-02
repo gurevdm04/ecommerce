@@ -5,22 +5,27 @@ import { HiMiniSquares2X2 } from "react-icons/hi2";
 import { HiOutlineQueueList } from "react-icons/hi2";
 import { Wrapper } from "../Wrapper/Wrapper";
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
-
-type SortOption = "default" | "cheap" | "expensive";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export const ProductFilterBar = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const sortOption = searchParams.get("sort") || "default";
-  const [selectedOption, setSelectedOption] = useState<any>(
-    sortOption || "default"
-  );
-  // Получение текущего значения сортировки
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedOption(event.target.value as SortOption);
-    const value = event.target.value;
-    setSearchParams({ sort: value });
+  const sortOptions = [
+    { value: "default", label: "По умолчанию" },
+    { value: "price-asc", label: "Сначала недорогие" },
+    { value: "price-desc", label: "Сначала дорогие" },
+  ];
+
+  const currentSort = searchParams.get("sort") || "default";
+
+  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedSort = event.target.value;
+
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set("sort", selectedSort);
+
+    navigate(`?${newSearchParams.toString()}`);
   };
 
   return (
@@ -32,12 +37,14 @@ export const ProductFilterBar = () => {
             <p>Short by</p>
             <select
               name="shortby"
-              value={selectedOption}
-              onChange={handleChange}
+              value={currentSort}
+              onChange={handleSortChange}
             >
-              <option value="default">По умолчанию</option>
-              <option value="cheap">Сначала недорогие</option>
-              <option value="expensive">Сначала дорогие</option>
+              {sortOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
             </select>
           </div>
         </div>

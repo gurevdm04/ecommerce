@@ -4,11 +4,11 @@ import { Products } from "../components/Products/Products";
 
 import {
   collection,
-  DocumentData,
   getDocs,
   limit,
   orderBy,
   query,
+  QueryDocumentSnapshot,
   startAfter,
 } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
@@ -16,74 +16,78 @@ import { ProductProps } from "../components/Product/Product";
 import { Button } from "../components/Button/Button";
 import { Grid } from "react-loader-spinner";
 import { useSearchParams } from "react-router-dom";
-type SortOption = "default" | "cheap" | "expensive";
 
 export const ShopProductsContainer = () => {
   const [products, setProducts] = useState<ProductProps[]>([]);
-  const [lastDoc, setLastDoc] = useState<DocumentData | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [lastDoc, setLastDoc] = useState<QueryDocumentSnapshot | null>(null);
   const [hasMore, setHasMore] = useState(true);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const sortOption = searchParams.get("sort") || "default";
+  const [loading, setLoading] = useState(false);
 
-  const fetchProducts = async (loadMore: boolean = false) => {
+  const [searchParams] = useSearchParams();
+  const sort = searchParams.get("sort") || "default";
+
+  const fetchProducts = async (isLoadMore = false) => {
+    if (loading) return;
+
     setLoading(true);
-    const productsRef = collection(db, "products");
 
-    // Выбор сортировки
-    let q;
-    if (sortOption === "cheap") {
-      q = loadMore
-        ? query(
-            productsRef,
-            orderBy("currentPrice", "asc"),
-            startAfter(lastDoc),
-            limit(8)
-          )
-        : query(productsRef, orderBy("currentPrice", "asc"), limit(8));
-    } else if (sortOption === "expensive") {
-      q = loadMore
-        ? query(
-            productsRef,
-            orderBy("currentPrice", "desc"),
-            startAfter(lastDoc),
-            limit(8)
-          )
-        : query(productsRef, orderBy("currentPrice", "desc"), limit(8));
-    } else {
-      q = loadMore
-        ? query(productsRef, orderBy("createdAt"), startAfter(lastDoc), limit(8))
-        : query(productsRef, orderBy("createdAt"), limit(8));
+    try {
+      let productsQuery;
+      const productsRef = collection(db, "products");
+
+      if (sort === "price-asc") {
+        productsQuery = query(
+          productsRef,
+          orderBy("currentPrice", "asc"),
+          limit(6),
+          ...(isLoadMore && lastDoc ? [startAfter(lastDoc)] : [])
+        );
+      } else if (sort === "price-desc") {
+        productsQuery = query(
+          productsRef,
+          orderBy("currentPrice", "desc"),
+          limit(6),
+          ...(isLoadMore && lastDoc ? [startAfter(lastDoc)] : [])
+        );
+      } else {
+        productsQuery = query(
+          productsRef,
+          limit(6),
+          ...(isLoadMore && lastDoc ? [startAfter(lastDoc)] : [])
+        );
+      }
+
+      const snapshot = await getDocs(productsQuery);
+
+      if (!snapshot.empty) {
+        const newProducts = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as ProductProps[];
+
+        setProducts((prev) =>
+          isLoadMore ? [...prev, ...newProducts] : newProducts
+        );
+        setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
+        setHasMore(snapshot.docs.length === 6); // Если меньше 6, значит больше данных нет
+      } else {
+        setHasMore(false);
+      }
+    } catch (error) {
+      console.error("Ошибка загрузки товаров:", error);
+    } finally {
+      setLoading(false);
     }
-
-    const snapshot = await getDocs(q);
-
-    if (!snapshot.empty) {
-      const newProducts = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as ProductProps[];
-
-      setProducts((prev) =>
-        loadMore ? [...prev, ...newProducts] : newProducts
-      );
-      setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
-      setHasMore(snapshot.docs.length === 8);
-    } else {
-      setHasMore(false);
-    }
-
-    setLoading(false);
   };
 
   useEffect(() => {
-    // Загружаем товары при смене параметра сортировки
-    fetchProducts(false);
-  }, [sortOption]);
+    fetchProducts();
+  }, [sort]);
 
   return (
     <>
       <Products products={products} />
+
       {hasMore && !loading && (
         <Button
           style={{ display: "block", margin: "10px auto" }}
@@ -103,6 +107,7 @@ export const ShopProductsContainer = () => {
           wrapperClass="grid-wrapper"
         />
       )}
+      <br />
     </>
   );
 };
