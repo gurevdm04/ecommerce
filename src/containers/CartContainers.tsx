@@ -5,6 +5,7 @@ import { Wrapper } from "../components/Wrapper/Wrapper";
 import { auth, db } from "../config/firebaseConfig";
 import { useEffect, useState } from "react";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { createOrder } from "../utils";
 
 interface CartItem {
   productId: string;
@@ -64,7 +65,28 @@ export const CartContainers = () => {
       <div style={styles}>
         <CartList item={cartItems} removeItem={removeItem} />
         <CartTotalPrice />
+        <CheckoutButton items={cartItems} totalAmount={1000} />
       </div>
     </Wrapper>
   );
 };
+
+const CheckoutButton: React.FC<{ items: any[]; totalAmount: number }> = ({
+  items,
+  totalAmount,
+}) => {
+  const [user] = useAuthState(auth);
+
+  const handleCheckout = () => {
+    if (user) {
+      createOrder(user.uid, items, totalAmount);
+      alert("Заказ создан");
+    } else {
+      alert("Пожалуйста, войдите в аккаунт, чтобы оформить заказ.");
+    }
+  };
+
+  return <button onClick={handleCheckout}>Оформить заказ</button>;
+};
+
+export default CheckoutButton;
