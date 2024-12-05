@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../../config/firebaseConfig";
 import { getUserOrders } from "../../../utils";
+import { Loader } from "../Loader/Loader";
 
 interface OrderItem {
   productId: string;
@@ -37,7 +38,7 @@ export const OrderHistory = () => {
     }
   }, [user]);
 
-  if (loading) return <p>Загрузка истории заказов...</p>;
+  if (loading) return <Loader />;
 
   return (
     <div>

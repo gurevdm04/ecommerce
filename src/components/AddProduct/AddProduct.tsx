@@ -10,6 +10,7 @@ import style from "./AddProduct.module.scss";
 import { Wrapper } from "../Wrapper/Wrapper";
 import { Product } from "../../types";
 import { Input } from "./Input/Input";
+import { Loader } from "../Profile/Loader/Loader";
 
 type Types = "text" | "number" | "textarea" | "multi" | "spec";
 type HandleType = (
@@ -31,6 +32,7 @@ export interface InputProps {
 export const AddProductForm = () => {
   const { user } = useAppSelector((state: RootState) => state.auth);
   const [isAdminUser, setIsAdminUser] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState<Product>({
     title: "",
     oldPrice: null,
@@ -100,7 +102,10 @@ export const AddProductForm = () => {
   useEffect(() => {
     const user = auth.currentUser;
     if (user) {
-      isAdmin(user.uid).then(setIsAdminUser);
+      isAdmin(user.uid).then((data) => {
+        setIsAdminUser(data);
+        setLoading(false);
+      });
     }
   }, [user]);
 
@@ -138,6 +143,7 @@ export const AddProductForm = () => {
     }
   };
 
+  if (loading) return <Loader />;
   if (!isAdminUser) {
     return <div>You are not authorized to add products</div>;
   }

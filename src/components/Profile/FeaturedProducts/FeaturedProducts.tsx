@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { auth, db } from "../../../config/firebaseConfig";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { doc, getDoc } from "firebase/firestore";
+import { Loader } from "../Loader/Loader";
 
 interface FavoriteItem {
   productId: string;
@@ -31,7 +32,7 @@ export const FeaturedProducts = () => {
     }
   }, [user]);
 
-  if (loading) return <p>Загрузка...</p>;
+  if (loading) return <Loader />;
 
   return (
     <div>

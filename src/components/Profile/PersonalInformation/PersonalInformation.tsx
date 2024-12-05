@@ -9,6 +9,7 @@ import {
   MagnifyingGlass,
   RotatingLines,
 } from "react-loader-spinner";
+import { Loader } from "../Loader/Loader";
 
 interface UserProfile {
   name: string;
@@ -81,21 +82,7 @@ export const PersonalInformation = () => {
     }
   };
 
-  if (loading)
-    return (
-      <div className={style.loadingWrap}>
-        <MagnifyingGlass
-          visible={true}
-          height="80"
-          width="80"
-          ariaLabel="magnifying-glass-loading"
-          wrapperStyle={{}}
-          wrapperClass="magnifying-glass-wrapper"
-          glassColor="#edff7f"
-          color="#b88e2f"
-        />
-      </div>
-    );
+  if (loading) return <Loader />;
 
   return (
     profile && (
