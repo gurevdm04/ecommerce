@@ -22,20 +22,8 @@ import { AddProductForm } from "../AddProduct/AddProduct";
 import { IoIosAddCircleOutline } from "react-icons/io";
 
 export const Profile = () => {
-  const dispatch = useAppDispatch();
   const { user, isLoading } = useAppSelector((state: RootState) => state.auth);
   const [isAdminUser, setIsAdminUser] = useState(false);
-
-  const handleLogout = async () => {
-    if (confirm("Вы уверенны что хотите выйти?")) {
-      try {
-        await signOut(auth);
-        dispatch(clearUser());
-      } catch (error) {
-        console.error("Ошибка при выходе:", error);
-      }
-    }
-  };
 
   useEffect(() => {
     const user = auth.currentUser;
