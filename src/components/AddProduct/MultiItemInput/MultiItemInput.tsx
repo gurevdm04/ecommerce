@@ -15,7 +15,6 @@ export const MultiItemInput: React.FC<InputProps> = ({
   const handleAddItem = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     if (inputValue.trim() && typeof value === "object") {
-      console.log(true);
       setInputValue("");
       handle(type, { name, value: [...value, inputValue] });
     }

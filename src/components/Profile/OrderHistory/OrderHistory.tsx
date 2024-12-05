@@ -28,8 +28,6 @@ export const OrderHistory = () => {
     if (user) {
       const fetchOrders = async () => {
         const userOrders = await getUserOrders(user.uid);
-        console.log(userOrders);
-
         setOrders(userOrders);
         setLoading(false);
       };
