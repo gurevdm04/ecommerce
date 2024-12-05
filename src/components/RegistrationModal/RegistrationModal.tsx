@@ -91,15 +91,16 @@ const SignUp = () => {
       await createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
+          console.log(user);
 
           alert("Регистрация прошла успешно");
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
+          console.error(errorCode, errorMessage);
         });
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   return (
@@ -141,15 +142,15 @@ const SignIn = () => {
       await signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
-
+          console.log(user);
           alert("Вы вошли");
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
+          console.error(errorCode, errorMessage);
         });
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   return (

@@ -1,20 +1,7 @@
 import { signOut } from "firebase/auth";
-import React from "react";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { RootState } from "../../../store/store";
+import { useAppDispatch } from "../../../store/hooks";
 import { clearUser } from "../../../store/slices/authSlice";
 import { auth } from "../../../config/firebaseConfig";
-
-interface UserProfile {
-  name: string;
-  email: string;
-  phone: string;
-  address: string;
-  preferences: {
-    currency: string;
-    language: string;
-  };
-}
 
 export const LogOut = () => {
   const dispatch = useAppDispatch();

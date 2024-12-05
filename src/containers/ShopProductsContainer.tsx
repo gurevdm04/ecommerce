@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Pagination } from "../components/Pagination/Pagination";
 import { Products } from "../components/Products/Products";
 
 import {

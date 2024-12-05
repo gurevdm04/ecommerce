@@ -1,5 +1,4 @@
 import { listHelp, listLinks } from "../../constants/footerLinks";
-import { ROUTES } from "../../constants/routes";
 import { Divider } from "../Divider/Divider";
 import { FooterList } from "../FooterList/FooterList";
 import { Wrapper } from "../Wrapper/Wrapper";

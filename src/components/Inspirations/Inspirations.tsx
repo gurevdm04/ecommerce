@@ -1,6 +1,5 @@
 import style from "./Inspirations.module.scss";
 import { Button } from "../Button/Button";
-import { FaArrowRight } from "react-icons/fa6";
 
 import { Wrapper } from "../Wrapper/Wrapper";
 import { Carousel } from "../Carousel/Carousel";

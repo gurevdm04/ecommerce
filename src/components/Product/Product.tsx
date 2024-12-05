@@ -1,10 +1,5 @@
 import style from "./Product.module.scss";
 import product from "./../../assets/images/product.png";
-import { Button } from "../Button/Button";
-
-import { CiHeart } from "react-icons/ci";
-import { MdOutlineCompareArrows } from "react-icons/md";
-import { FaShareAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../constants/routes";
 
@@ -25,6 +20,8 @@ export const Product: React.FC<ProductProps> = ({
   shortDesc,
   id,
 }) => {
+  console.log(images);
+
   return (
     <Link to={ROUTES.SHOP_ITEM(id)} className={style.wrap}>
       <img className={style.img} src={product} alt="" />

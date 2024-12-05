@@ -4,11 +4,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 
 import style from "./PersonalInformation.module.scss";
-import {
-  BallTriangle,
-  MagnifyingGlass,
-  RotatingLines,
-} from "react-loader-spinner";
+import { BallTriangle } from "react-loader-spinner";
 import { Loader } from "../Loader/Loader";
 
 interface UserProfile {

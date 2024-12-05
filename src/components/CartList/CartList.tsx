@@ -1,6 +1,4 @@
 import style from "./CartList.module.scss";
-import img from "./../../assets/images/product.png";
-import { MdDelete } from "react-icons/md";
 import { CartListItem } from "../CartListItem/CartListItem";
 
 interface CartListProps {

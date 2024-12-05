@@ -7,6 +7,7 @@ import { FaArrowRight } from "react-icons/fa";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper as SwiperType } from "swiper"; // импортируйте тип Swiper
 
 // Import Swiper styles
 import "swiper/css";
@@ -15,7 +16,9 @@ import { Pagination } from "swiper/modules";
 import { Controller } from "swiper/modules";
 import { useState } from "react";
 export const Carousel = () => {
-  const [controlledSwiper, setControlledSwiper] = useState(null);
+  const [controlledSwiper, setControlledSwiper] = useState<SwiperType | null>(
+    null
+  );
 
   return (
     <>

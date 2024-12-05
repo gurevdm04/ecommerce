@@ -1,9 +1,7 @@
 import style from "./Contact.module.scss";
 
-import { Button } from "../Button/Button";
 import { Wrapper } from "../Wrapper/Wrapper";
 
-import { Oval } from "react-loader-spinner";
 import { ContactInfo } from "../ContactInfo/ContactInfo";
 import { ContactForm } from "../ContactForm/ContactForm";
 

@@ -1,10 +1,6 @@
 import style from "./ProductFilterBar.module.scss";
 
-import { HiAdjustmentsHorizontal } from "react-icons/hi2";
-import { HiMiniSquares2X2 } from "react-icons/hi2";
-import { HiOutlineQueueList } from "react-icons/hi2";
 import { Wrapper } from "../Wrapper/Wrapper";
-import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 export const ProductFilterBar = () => {

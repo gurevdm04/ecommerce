@@ -1,8 +1,4 @@
 import style from "./ProductDetails.module.scss";
-import { FaStar } from "react-icons/fa6";
-import { FaFacebook } from "react-icons/fa6";
-import { FaLinkedin } from "react-icons/fa6";
-import { FaSquareXTwitter } from "react-icons/fa6";
 
 import img from "./../../assets/images/detail.jpg";
 import { Wrapper } from "../Wrapper/Wrapper";
@@ -10,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../../config/firebaseConfig";
-import { addToCart, addToFavorites, removeFromFavorites } from "../../utils";
+import { addToCart, addToFavorites } from "../../utils";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ProductSpecifications } from "./ProductSpecifications/ProductSpecifications";
 import { CiHeart } from "react-icons/ci";

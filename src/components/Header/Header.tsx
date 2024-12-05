@@ -2,8 +2,6 @@ import style from "./Header.module.scss";
 import logoImg from "./../../assets/images/logo.png";
 
 import { FaRegUser } from "react-icons/fa";
-import { FiSearch } from "react-icons/fi";
-import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { Wrapper } from "../Wrapper/Wrapper";
 import { Link } from "react-router-dom";

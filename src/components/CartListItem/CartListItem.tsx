@@ -1,8 +1,6 @@
 import style from "./CartListItem.module.scss";
 import img from "./../../assets/images/product.png";
 import { MdDelete } from "react-icons/md";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../../config/firebaseConfig";
 
 interface CartListItemProps {
   item: {

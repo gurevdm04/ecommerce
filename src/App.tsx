@@ -9,12 +9,11 @@ import { ProfilePage } from "./pages/ProfilePage";
 import { ShopPage } from "./pages/ShopPage";
 import { SingleProductPage } from "./pages/SingleProductPage";
 import { ROUTES } from "./constants/routes";
-import { useEffect, useState } from "react";
-import { onAuthStateChanged, User } from "firebase/auth";
+import { useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./config/firebaseConfig";
-import { useAppDispatch, useAppSelector } from "./store/hooks";
+import { useAppDispatch } from "./store/hooks";
 import { clearUser, setUser } from "./store/slices/authSlice";
-import { RootState } from "./store/store";
 
 function App() {
   const dispatch = useAppDispatch();
