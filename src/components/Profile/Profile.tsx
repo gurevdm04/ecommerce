@@ -18,7 +18,7 @@ import { PersonalInformation } from "./PersonalInformation/PersonalInformation";
 import { LogOut } from "./LogOut/LogOut";
 import { useEffect, useState } from "react";
 import { isAdmin } from "../../utils";
-import AddProductForm from "../AddProduct/AddProduct";
+import { AddProductForm } from "../AddProduct/AddProduct";
 import { IoIosAddCircleOutline } from "react-icons/io";
 
 export const Profile = () => {

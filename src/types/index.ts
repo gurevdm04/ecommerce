@@ -1,15 +1,15 @@
 export interface Product {
   title: string;
-  oldPrice: number;
-  currentPrice: number;
+  oldPrice: number | null;
+  currentPrice?: number | null;
   description: string;
   shortDesc: string;
   images: string[];
-  size: string[];
-  color: string[];
+  size?: string[];
+  color?: string[];
   specs: {
-    category: string;
+    category?: string;
     sku: string;
-    tags: string;
+    tags?: string;
   };
 }

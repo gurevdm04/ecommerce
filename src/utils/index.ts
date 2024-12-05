@@ -7,3 +7,4 @@ export * from "./addToFavorites";
 export * from "./removeFromFavorites";
 export * from "./getUserOrders";
 export * from "./createOrder";
+export * from "./validateRequiredFields";
