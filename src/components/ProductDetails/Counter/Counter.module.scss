@@ -4,26 +4,23 @@
   border: 1px solid #9f9f9f;
   border-radius: 10px;
   gap: 10px;
-  padding: 12px 20px;
+}
 
-  button {
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-radius: 100px;
-    border: none;
-    background: transparent;
-    &:hover {
-      background: #0000001c;
-    }
-  }
-  p {
-    font-weight: 500;
-    font-size: 16px;
-    color: #000;
-    margin: 0;
-  }
+.increase,
+.decrease {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: none;
+  background-color: #fff;
+}
+.value {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  border-radius: 5px;
+  border: none;
 }

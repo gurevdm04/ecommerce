@@ -13,14 +13,28 @@ import { Product } from "../../types";
 import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 import { Counter } from "./Counter/Counter";
 import { ImageGallery } from "./ImageGallery/ImageGallery";
+import { SizeOptionSelector } from "./SizeOptionSelector/SizeOptionSelector";
+import { ColorOptionSelector } from "./ColorOptionSelector/ColorOptionSelector";
 
-// [ ] Сделать карусель для вывода картинок
-// [ ] Сделать выбор размера и цвета
+// [x] Сделать карусель для вывода картинок
+// [x] Сделать выбор размера и цвета
+// [x] Сделать cчётчик
 
 export const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [user] = useAuthState(auth);
+
+  const [selectedSize, setSelectedSize] = useState<string>("L");
+  const [selectedColor, setSelectedColor] = useState<string>("#816DFA");
+  const [count, setCount] = useState<number>(1);
+
+  const sizes = [
+    { label: "L", value: "L" },
+    { label: "XL", value: "XL" },
+    { label: "XS", value: "XS" },
+  ];
+  const colors = ["#816DFA", "#000000", "#B88E2F"];
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -88,31 +102,27 @@ export const ProductDetails: React.FC = () => {
           <p className={style.descr}>{product.description}</p>
           <div className={style.options}>
             <h4>Size</h4>
-            <div>
-              <button className={`${style.size} ${style.active}`}>L</button>
-              <button className={style.size}>XL</button>
-              <button className={style.size}>XS</button>
-            </div>
+            <SizeOptionSelector
+              options={sizes}
+              selectedValue={selectedColor}
+              onSelect={(value) => setSelectedColor(value)}
+            />
           </div>
           <div className={style.options}>
             <h4>Color</h4>
-            <div>
-              <button
-                className={`${style.color} ${style.active}`}
-                style={{ background: "#816dfa" }}
-              ></button>
-              <button
-                className={style.color}
-                style={{ background: "#000" }}
-              ></button>
-              <button
-                className={style.color}
-                style={{ background: "#B88E2F" }}
-              ></button>
-            </div>
+            <ColorOptionSelector
+              options={colors}
+              selectedValue={selectedSize}
+              onSelect={(value) => setSelectedSize(value)}
+            />
           </div>
           <div className={style.add}>
-            <Counter />
+            <Counter
+              value={count}
+              min={1}
+              max={20}
+              onChange={(newValue) => setCount(newValue)}
+            />
             <button onClick={handleAddToCart} className={style.addToCart}>
               Add To Cart
             </button>
