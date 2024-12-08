@@ -129,10 +129,10 @@ export const ProductDetails: React.FC = () => {
             </button>
           </div>
           <hr className={style.line} />
-          <ProductSpecifications />
+          <ProductSpecifications specs={product.specs} />
         </div>
       </div>
-      <Tabs description={product.description}/>
+      <Tabs description={product.description} />
     </Wrapper>
   );
 };
