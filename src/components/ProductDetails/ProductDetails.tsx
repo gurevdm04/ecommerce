@@ -132,8 +132,7 @@ export const ProductDetails: React.FC = () => {
           <ProductSpecifications />
         </div>
       </div>
-      <Tabs />
-
+      <Tabs description={product.description}/>
     </Wrapper>
   );
 };
