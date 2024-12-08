@@ -15,6 +15,7 @@ import { Counter } from "./Counter/Counter";
 import { ImageGallery } from "./ImageGallery/ImageGallery";
 import { SizeOptionSelector } from "./SizeOptionSelector/SizeOptionSelector";
 import { ColorOptionSelector } from "./ColorOptionSelector/ColorOptionSelector";
+import { Tabs } from "../Tabs/Tabs";
 
 // [x] Сделать карусель для вывода картинок
 // [x] Сделать выбор размера и цвета
@@ -131,6 +132,8 @@ export const ProductDetails: React.FC = () => {
           <ProductSpecifications />
         </div>
       </div>
+      <Tabs />
+
     </Wrapper>
   );
 };
