@@ -15,6 +15,7 @@ import { ProductProps } from "../components/Product/Product";
 import { Button } from "../components/Button/Button";
 import { Grid } from "react-loader-spinner";
 import { useSearchParams } from "react-router-dom";
+import { LoadingSpinner } from "../components/LoadingSpinner/LoadingSpinner";
 
 export const ShopProductsContainer = () => {
   const [products, setProducts] = useState<ProductProps[]>([]);
@@ -94,18 +95,7 @@ export const ShopProductsContainer = () => {
           label="Show More"
         />
       )}
-      {loading && (
-        <Grid
-          visible={true}
-          height="80"
-          width="80"
-          color="#b88e2f"
-          ariaLabel="grid-loading"
-          radius="12.5"
-          wrapperStyle={{ justifyContent: "center", margin: "20px" }}
-          wrapperClass="grid-wrapper"
-        />
-      )}
+      {loading && <LoadingSpinner />}
       <br />
     </>
   );

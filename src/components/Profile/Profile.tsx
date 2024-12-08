@@ -18,6 +18,7 @@ import { useEffect, useState } from "react";
 import { isAdmin } from "../../utils";
 import { AddProductForm } from "../AddProduct/AddProduct";
 import { IoIosAddCircleOutline } from "react-icons/io";
+import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 
 export const Profile = () => {
   const { user, isLoading } = useAppSelector((state: RootState) => state.auth);
@@ -31,7 +32,7 @@ export const Profile = () => {
   }, [user]);
 
   if (isLoading) {
-    return "loading";
+    return <LoadingSpinner />;
   }
 
   if (!user) {

@@ -6,6 +6,7 @@ import { auth, db } from "../config/firebaseConfig";
 import { useEffect, useState } from "react";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { createOrder } from "../utils";
+import { LoadingSpinner } from "../components/LoadingSpinner/LoadingSpinner";
 
 interface CartItem {
   productId: string;
@@ -58,7 +59,7 @@ export const CartContainers = () => {
   };
 
   if (!user) return <p>войдите...</p>;
-  if (loading) return <p>Загрузка...</p>;
+  if (loading) return <LoadingSpinner />;
 
   return (
     <Wrapper>
