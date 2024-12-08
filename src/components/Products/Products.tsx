@@ -1,16 +1,16 @@
 import style from "./Products.module.scss";
-import { Product, ProductProps } from "../Product/Product";
+import { Product, ProductCardProps } from "../Product/Product";
 import { Wrapper } from "../Wrapper/Wrapper";
 
 interface ProductsProps {
-  products: ProductProps[];
+  products: ProductCardProps[];
 }
 
 export const Products: React.FC<ProductsProps> = ({ products }) => {
   return (
     <Wrapper>
       <div className={style.wrap}>
-        {products.map((productData: ProductProps) => (
+        {products.map((productData: ProductCardProps) => (
           <Product key={productData.id} {...productData} />
         ))}
       </div>

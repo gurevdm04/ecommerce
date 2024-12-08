@@ -2,17 +2,11 @@ import style from "./Product.module.scss";
 import product from "./../../assets/images/product.png";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../constants/routes";
+import { ProductCardProps } from "../../types";
 
-export interface ProductProps {
-  id: string;
-  title: string;
-  shortDesc: string;
-  currentPrice: number;
-  oldPrice: number;
-  images: string[];
-}
 
-export const Product: React.FC<ProductProps> = ({
+
+export const Product: React.FC<ProductCardProps> = ({
   title,
   images,
   currentPrice,

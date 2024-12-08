@@ -1,0 +1,54 @@
+.gallery {
+  display: flex;
+  gap: 20px;
+  height: 500px;
+  img {
+    border-radius: 10px;
+  }
+}
+
+.thumbnail {
+  width: 100px;
+  height: 100%;
+  overflow: auto;
+  margin-right: 20px;
+  img {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    display: block;
+    cursor: pointer;
+    + img {
+      margin-top: 20px;
+    }
+  }
+}
+
+.image {
+  img {
+    display: block;
+    width: 500px;
+    height: 100%;
+    max-width: 430px;
+    object-fit: cover;
+  }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modalImg {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}

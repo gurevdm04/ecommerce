@@ -1,6 +1,5 @@
 import style from "./ProductDetails.module.scss";
 
-import img from "./../../assets/images/detail.jpg";
 import { Wrapper } from "../Wrapper/Wrapper";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -10,22 +9,17 @@ import { addToCart, addToFavorites } from "../../utils";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ProductSpecifications } from "./ProductSpecifications/ProductSpecifications";
 import { CiHeart } from "react-icons/ci";
+import { Product } from "../../types";
+import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
+import { Counter } from "./Counter/Counter";
+import { ImageGallery } from "./ImageGallery/ImageGallery";
 
-interface ProductDetail {
-  title: string;
-  shortDesc: string;
-  description: string;
-  currentPrice: number;
-  oldPrice: number;
-  images: string[];
-  size: string;
-  color: string;
-  specs: Record<string, string>;
-}
+// [ ] Сделать карусель для вывода картинок
+// [ ] Сделать выбор размера и цвета
 
 export const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [product, setProduct] = useState<ProductDetail | null>(null);
+  const [product, setProduct] = useState<Product | null>(null);
   const [user] = useAuthState(auth);
 
   useEffect(() => {
@@ -34,7 +28,7 @@ export const ProductDetails: React.FC = () => {
       const docRef = doc(db, "products", id);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        setProduct(docSnap.data() as ProductDetail);
+        setProduct(docSnap.data() as Product);
       }
     };
 
@@ -42,8 +36,10 @@ export const ProductDetails: React.FC = () => {
   }, [id]);
 
   if (!product) {
-    return <p>Загрузка данных...</p>;
+    return <LoadingSpinner />;
   }
+
+  console.log(product);
 
   const handleAddToCart = () => {
     if (user) {
@@ -80,18 +76,7 @@ export const ProductDetails: React.FC = () => {
   return (
     <Wrapper>
       <div className={style.wrap}>
-        <div className={style.gallery}>
-          <div className={style.thumbnail}>
-            <img src={img} alt="" />
-            <img src={img} alt="" />
-            <img src={img} alt="" />
-            <img src={img} alt="" />
-          </div>
-          <div className={style.image}>
-            {/* <img src={product.images[0]} alt="" /> */}
-            <img src={img} alt="" />
-          </div>
-        </div>
+        <ImageGallery images={product.images} />
         <div className={style.details}>
           <h2 className={style.title}>{product.title}</h2>
           <h3 className={style.price}>
@@ -139,11 +124,3 @@ export const ProductDetails: React.FC = () => {
     </Wrapper>
   );
 };
-
-const Counter = () => (
-  <div className={style.counter}>
-    <button>-</button>
-    <p>1</p>
-    <button>+</button>
-  </div>
-);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Products } from "../components/Products/Products";
 import { Button } from "../components/Button/Button";
-import { ProductProps } from "../components/Product/Product";
+import { ProductCardProps } from "../components/Product/Product";
 import {
   collection,
   DocumentData,
@@ -16,7 +16,7 @@ import { Grid } from "react-loader-spinner";
 import { LoadingSpinner } from "../components/LoadingSpinner/LoadingSpinner";
 
 export const OurProductsContainers = () => {
-  const [products, setProducts] = useState<ProductProps[]>([]);
+  const [products, setProducts] = useState<ProductCardProps[]>([]);
   const [lastDoc, setLastDoc] = useState<DocumentData | null>(null);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
@@ -33,7 +33,7 @@ export const OurProductsContainers = () => {
       const newProducts = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
-      })) as ProductProps[];
+      })) as ProductCardProps[];
 
       setProducts((prev) =>
         loadMore ? [...prev, ...newProducts] : newProducts

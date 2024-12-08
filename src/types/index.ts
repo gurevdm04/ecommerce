@@ -13,3 +13,11 @@ export interface Product {
     tags?: string;
   };
 }
+export interface ProductCardProps {
+  id: string;
+  title: string;
+  shortDesc: string;
+  currentPrice: number;
+  oldPrice: number;
+  images: string[];
+}

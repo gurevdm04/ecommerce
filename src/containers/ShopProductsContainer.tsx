@@ -11,14 +11,13 @@ import {
   startAfter,
 } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
-import { ProductProps } from "../components/Product/Product";
 import { Button } from "../components/Button/Button";
-import { Grid } from "react-loader-spinner";
 import { useSearchParams } from "react-router-dom";
 import { LoadingSpinner } from "../components/LoadingSpinner/LoadingSpinner";
+import { ProductCardProps } from "../types";
 
 export const ShopProductsContainer = () => {
-  const [products, setProducts] = useState<ProductProps[]>([]);
+  const [products, setProducts] = useState<ProductCardProps[]>([]);
   const [lastDoc, setLastDoc] = useState<QueryDocumentSnapshot | null>(null);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -63,7 +62,7 @@ export const ShopProductsContainer = () => {
         const newProducts = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
-        })) as ProductProps[];
+        })) as ProductCardProps[];
 
         setProducts((prev) =>
           isLoadMore ? [...prev, ...newProducts] : newProducts
