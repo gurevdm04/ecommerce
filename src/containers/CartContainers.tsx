@@ -59,28 +59,9 @@ export const CartContainers = () => {
       <div style={styles}>
         <CartList item={cartItems} removeItem={removeItem} />
         <CartTotalPrice item={cartItems} />
-        <CheckoutButton items={cartItems} totalAmount={1000} />
       </div>
     </Wrapper>
   );
 };
 
-const CheckoutButton: React.FC<{ items: any[]; totalAmount: number }> = ({
-  items,
-  totalAmount,
-}) => {
-  const [user] = useAuthState(auth);
 
-  const handleCheckout = () => {
-    if (user) {
-      createOrder(user.uid, items, totalAmount);
-      alert("Заказ создан");
-    } else {
-      alert("Пожалуйста, войдите в аккаунт, чтобы оформить заказ.");
-    }
-  };
-
-  return <button onClick={handleCheckout}>Оформить заказ</button>;
-};
-
-export default CheckoutButton;

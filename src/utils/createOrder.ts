@@ -1,17 +1,12 @@
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
-
-interface OrderItem {
-  productId: string;
-  title: string;
-  quantity: number;
-  price: number;
-}
+import { CartUserData, ItemCartData } from "../types";
 
 export const createOrder = async (
   userId: string,
-  items: OrderItem[],
-  totalAmount: number
+  items: ItemCartData[],
+  totalAmount: number,
+  userData: CartUserData
 ) => {
   const ordersRef = collection(db, "orders");
 
@@ -22,6 +17,7 @@ export const createOrder = async (
       status: "pending",
       items,
       totalAmount,
+      userData,
     });
 
     console.log("Заказ успешно создан!");

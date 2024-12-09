@@ -1,7 +1,50 @@
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Wrapper } from "../Wrapper/Wrapper";
 import style from "./Checkout.module.scss";
+import { auth, db } from "../../config/firebaseConfig";
+import { useEffect, useState } from "react";
+import { CartUserData, ItemCartData } from "../../types";
+import { doc, getDoc } from "firebase/firestore";
+import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
+import { createOrder } from "../../utils";
+
+// TODO сделать нормальную форму
 
 export const Checkout = () => {
+  const [user] = useAuthState(auth);
+  const [cartItems, setCartItems] = useState<ItemCartData[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState<CartUserData>({
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    address: "",
+  });
+
+  let price = 0;
+
+  useEffect(() => {
+    if (user) {
+      const fetchCart = async () => {
+        const cartRef = doc(db, "carts", user.uid);
+        const cartSnap = await getDoc(cartRef);
+        if (cartSnap.exists()) {
+          setCartItems(cartSnap.data().items || []);
+        }
+        setLoading(false);
+      };
+
+      fetchCart();
+    }
+  }, [user]);
+
+  cartItems.forEach((item) => {
+    if (item.currentPrice) {
+      price += item.count * item.currentPrice;
+    }
+  });
+  if (loading) return <LoadingSpinner />;
+
   return (
     <Wrapper>
       <div className={style.wrap}>
@@ -10,42 +53,106 @@ export const Checkout = () => {
           <div className={style.row}>
             <div>
               <h4>First Name</h4>
-              <input type="text" />
+              <input
+                value={userData.firstName}
+                onChange={(e) =>
+                  setUserData((prev) => ({ ...prev, firstName: e.target.value }))
+                }
+                type="text"
+                required
+              />
             </div>
             <div>
               <h4>Last Name</h4>
-              <input type="text" />
+              <input
+                value={userData.lastName}
+                onChange={(e) =>
+                  setUserData((prev) => ({ ...prev, lastName: e.target.value }))
+                }
+                type="text"
+                required
+              />
             </div>
           </div>
-          <h4>Company Name (Optional)</h4>
-          <input type="text" />
-          <h4>Country / Region</h4>
-          <select>
-            <option>Пункт 1</option>
-            <option>Пункт 2</option>
-          </select>
+          <h4>Phone Number</h4>
+          <input
+            value={userData.phoneNumber}
+            onChange={(e) =>
+              setUserData((prev) => ({ ...prev, phoneNumber: e.target.value }))
+            }
+            type="tel"
+            required
+          />
+          <h4>Address</h4>
+          <input
+            value={userData.address}
+            onChange={(e) =>
+              setUserData((prev) => ({ ...prev, address: e.target.value }))
+            }
+            type="text"
+            required
+          />
         </div>
         <div className={style.confirm}>
           <div className={style.row}>
             <h3>Product</h3>
             <h3>Subtotal</h3>
           </div>
-          <div className={style.row}>
-            <p className={style.itemText}>Asgaard sofa</p>
-            <p>Rs. 250,000.00</p>
-          </div>
-          <div className={style.row}>
-            <p>Subtotal</p>
-            <p>Rs. 250,000.00</p>
-          </div>
+          {cartItems.map((item) => (
+            <div className={style.row} key={item.productId}>
+              <p className={style.itemText}>
+                {item.title} x{item.count}
+              </p>
+              <p>Rs. {item.currentPrice && item.currentPrice * item.count}</p>
+            </div>
+          ))}
+
           <div className={style.row}>
             <p>Total</p>
-            <p className={style.totalPrice}>Rs. 250,000.00</p>
+            <p className={style.totalPrice}>Rs. {price}</p>
           </div>
           <hr />
-          <button className={style.btn}>Place order</button>
+          <CheckoutButton
+            className={style.btn}
+            items={cartItems}
+            totalAmount={price}
+            userData={userData}
+          />
         </div>
       </div>
     </Wrapper>
   );
 };
+
+interface CheckoutButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  items: any[];
+  totalAmount: number;
+  userData: CartUserData;
+}
+
+const CheckoutButton: React.FC<CheckoutButtonProps> = ({
+  items,
+  totalAmount,
+  userData,
+  ...props
+}) => {
+  const [user] = useAuthState(auth);
+
+  const handleCheckout = () => {
+    if (user) {
+      createOrder(user.uid, items, totalAmount, userData);
+      alert("Заказ создан");
+    } else {
+      alert("Пожалуйста, войдите в аккаунт, чтобы оформить заказ.");
+    }
+  };
+
+  return (
+    <button onClick={handleCheckout} {...props}>
+      Оформить заказ
+    </button>
+  );
+};
+
+export default CheckoutButton;

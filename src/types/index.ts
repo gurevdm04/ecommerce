@@ -34,3 +34,10 @@ export interface ItemCartData {
     sku: string;
   };
 }
+
+export interface CartUserData {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  address: string;
+}
