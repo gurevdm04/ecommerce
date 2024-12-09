@@ -1,6 +1,7 @@
 import style from "./Products.module.scss";
-import { Product, ProductCardProps } from "../Product/Product";
+import { Product } from "../Product/Product";
 import { Wrapper } from "../Wrapper/Wrapper";
+import { ProductCardProps } from "../../types";
 
 interface ProductsProps {
   products: ProductCardProps[];
