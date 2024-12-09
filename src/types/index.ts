@@ -22,7 +22,7 @@ export interface ProductCardProps {
   images: string[];
 }
 
-export interface addToCartData {
+export interface ItemCartData {
   productId: string;
   title: string;
   currentPrice: number | null;

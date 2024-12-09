@@ -16,14 +16,14 @@ interface CartItem {
   quantity: number;
 }
 
-export const CartContainers = () => {
-  const styles: React.CSSProperties | undefined = {
-    display: "flex",
-    gap: "30px",
-    justifyContent: "space-between",
-    margin: "72px 0",
-  };
+const styles: React.CSSProperties | undefined = {
+  display: "flex",
+  gap: "30px",
+  justifyContent: "space-between",
+  margin: "72px 0",
+};
 
+export const CartContainers = () => {
   const [user] = useAuthState(auth);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [loading, setLoading] = useState(true);

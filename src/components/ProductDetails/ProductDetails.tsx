@@ -9,7 +9,7 @@ import { addToCart, addToFavorites } from "../../utils";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ProductSpecifications } from "./ProductSpecifications/ProductSpecifications";
 import { CiHeart } from "react-icons/ci";
-import { addToCartData, Product } from "../../types";
+import { ItemCartData, Product } from "../../types";
 import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 import { Counter } from "./Counter/Counter";
 import { ImageGallery } from "./ImageGallery/ImageGallery";
@@ -25,7 +25,7 @@ export const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [user] = useAuthState(auth);
-  const [data, setData] = useState<addToCartData>({
+  const [data, setData] = useState<ItemCartData>({
     productId: id || "",
     title: "",
     currentPrice: null,
