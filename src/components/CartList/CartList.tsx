@@ -1,8 +1,9 @@
 import style from "./CartList.module.scss";
 import { CartListItem } from "../CartListItem/CartListItem";
+import { ItemCartData } from "../../types";
 
 interface CartListProps {
-  item: any[];
+  item: ItemCartData[];
   removeItem: (productId: string) => Promise<void>;
 }
 

@@ -7,14 +7,7 @@ import { useEffect, useState } from "react";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { createOrder } from "../utils";
 import { LoadingSpinner } from "../components/LoadingSpinner/LoadingSpinner";
-
-interface CartItem {
-  productId: string;
-  title: string;
-  image: string;
-  price: number;
-  quantity: number;
-}
+import { ItemCartData } from "../types";
 
 const styles: React.CSSProperties | undefined = {
   display: "flex",
@@ -25,7 +18,7 @@ const styles: React.CSSProperties | undefined = {
 
 export const CartContainers = () => {
   const [user] = useAuthState(auth);
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<ItemCartData[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
