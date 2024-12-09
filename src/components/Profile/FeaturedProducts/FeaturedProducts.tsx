@@ -3,17 +3,13 @@ import { auth, db } from "../../../config/firebaseConfig";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { Loader } from "../Loader/Loader";
-
-interface FavoriteItem {
-  productId: string;
-  title: string;
-  image: string;
-  price: number;
-}
+import { Product } from "../../Product/Product";
+import { ProductCardProps } from "../../../types";
+import style from "./FeaturedProducts.module.scss";
 
 export const FeaturedProducts = () => {
   const [user] = useAuthState(auth);
-  const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
+  const [favorites, setFavorites] = useState<ProductCardProps[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -40,13 +36,21 @@ export const FeaturedProducts = () => {
       {favorites.length === 0 ? (
         <p>Список избранного пуст</p>
       ) : (
-        favorites.map((item) => (
-          <div key={item.productId}>
-            <img src={item.image} alt={item.title} width={100} />
-            <h3>{item.title}</h3>
-            <p>Цена: {item.price} руб.</p>
-          </div>
-        ))
+        <div className={style.wrap}>
+          {favorites.map(
+            ({ id, currentPrice, images, oldPrice, shortDesc, title }) => (
+              <Product
+                id={id}
+                key={id}
+                currentPrice={currentPrice}
+                images={images}
+                oldPrice={oldPrice}
+                shortDesc={shortDesc}
+                title={title}
+              />
+            )
+          )}
+        </div>
       )}
     </div>
   );
