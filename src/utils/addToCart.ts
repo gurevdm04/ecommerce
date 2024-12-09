@@ -1,10 +1,8 @@
 import { doc, getDoc, setDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
+import { addToCartData } from "../types";
 
-export const addToCart = async (
-  userId: string,
-  product: { productId: string; title: string; image: string; price: number }
-) => {
+export const addToCart = async (userId: string, product: addToCartData) => {
   const cartRef = doc(db, "carts", userId);
 
   try {

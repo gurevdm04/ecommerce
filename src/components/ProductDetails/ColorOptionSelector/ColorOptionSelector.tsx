@@ -1,8 +1,8 @@
 import style from "./ColorOptionSelector.module.scss";
 
 interface ColorOptionSelectorProps {
-  options: string[];
-  selectedValue: string;
+  options: string[] | undefined;
+  selectedValue: string | undefined;
   onSelect: (value: string) => void;
 }
 
@@ -13,7 +13,7 @@ export const ColorOptionSelector: React.FC<ColorOptionSelectorProps> = ({
 }) => {
   return (
     <div>
-      {options.map((color) => (
+      {options?.map((color) => (
         <button
           key={color}
           onClick={() => onSelect(color)}

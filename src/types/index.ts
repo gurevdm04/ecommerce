@@ -1,7 +1,7 @@
 export interface Product {
   title: string;
-  oldPrice: number | null;
-  currentPrice?: number | null;
+  oldPrice?: number | null;
+  currentPrice: number | null;
   description: string;
   shortDesc: string;
   images: string[];
@@ -20,4 +20,17 @@ export interface ProductCardProps {
   currentPrice: number;
   oldPrice: number;
   images: string[];
+}
+
+export interface addToCartData {
+  productId: string;
+  title: string;
+  currentPrice: number | null;
+  image: string;
+  count: number;
+  size?: string;
+  color?: string;
+  specs: {
+    sku: string;
+  };
 }

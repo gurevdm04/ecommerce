@@ -9,7 +9,7 @@ import { addToCart, addToFavorites } from "../../utils";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ProductSpecifications } from "./ProductSpecifications/ProductSpecifications";
 import { CiHeart } from "react-icons/ci";
-import { Product } from "../../types";
+import { addToCartData, Product } from "../../types";
 import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 import { Counter } from "./Counter/Counter";
 import { ImageGallery } from "./ImageGallery/ImageGallery";
@@ -25,45 +25,57 @@ export const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [user] = useAuthState(auth);
-
-  const [selectedSize, setSelectedSize] = useState<string>("L");
-  const [selectedColor, setSelectedColor] = useState<string>("#816DFA");
-  const [count, setCount] = useState<number>(1);
-
-  const sizes = [
-    { label: "L", value: "L" },
-    { label: "XL", value: "XL" },
-    { label: "XS", value: "XS" },
-  ];
-  const colors = ["#816DFA", "#000000", "#B88E2F"];
+  const [data, setData] = useState<addToCartData>({
+    productId: id || "",
+    title: "",
+    currentPrice: null,
+    image: "",
+    count: 1,
+    size: "",
+    color: "",
+    specs: {
+      sku: "",
+    },
+  });
 
   useEffect(() => {
     const fetchProduct = async () => {
       if (!id) return;
       const docRef = doc(db, "products", id);
       const docSnap = await getDoc(docRef);
+      const data = docSnap.data() as Product;
       if (docSnap.exists()) {
-        setProduct(docSnap.data() as Product);
+        setProduct(data);
+        setData((prev) => ({
+          ...prev,
+          currentPrice: data.currentPrice,
+          title: data.title,
+          image: data.images[0],
+          size: data.size ? data.size[0] : "",
+          color: data.color ? data.color[0] : "",
+          specs: {
+            sku: data.specs.sku,
+          },
+        }));
       }
     };
 
     fetchProduct();
   }, [id]);
 
+  useEffect(() => {
+    console.log("data", data);
+  }, [data]);
+
   if (!product) {
     return <LoadingSpinner />;
   }
 
-  console.log(product);
-
   const handleAddToCart = () => {
     if (user) {
-      addToCart(user.uid, {
-        productId: id || "",
-        title: product.title,
-        image: "image",
-        price: 1,
-      });
+      console.log('addtocart',data);
+      
+      addToCart(user.uid, data);
       alert("Товар добавлен в корзину");
     } else {
       alert("Пожалуйста, войдите в аккаунт, чтобы добавить товар в корзину.");
@@ -104,25 +116,29 @@ export const ProductDetails: React.FC = () => {
           <div className={style.options}>
             <h4>Size</h4>
             <SizeOptionSelector
-              options={sizes}
-              selectedValue={selectedColor}
-              onSelect={(value) => setSelectedColor(value)}
+              options={product.size}
+              selectedValue={data.size}
+              onSelect={(value) => setData((prev) => ({ ...prev, size: value }))}
             />
           </div>
           <div className={style.options}>
             <h4>Color</h4>
             <ColorOptionSelector
-              options={colors}
-              selectedValue={selectedSize}
-              onSelect={(value) => setSelectedSize(value)}
+              options={product.color}
+              selectedValue={data.color}
+              onSelect={(value) =>
+                setData((prev) => ({ ...prev, color: value }))
+              }
             />
           </div>
           <div className={style.add}>
             <Counter
-              value={count}
+              value={data.count}
               min={1}
               max={20}
-              onChange={(newValue) => setCount(newValue)}
+              onChange={(newValue) =>
+                setData((prev) => ({ ...prev, count: newValue }))
+              }
             />
             <button onClick={handleAddToCart} className={style.addToCart}>
               Add To Cart

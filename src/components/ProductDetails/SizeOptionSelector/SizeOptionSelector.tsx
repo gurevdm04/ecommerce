@@ -1,13 +1,8 @@
 import style from "./SizeOptionSelector.module.scss";
 
-interface SizeOption {
-  label: string;
-  value: string;
-}
-
 interface SizeOptionSelectorProps {
-  options: SizeOption[];
-  selectedValue: string;
+  options: string[] | undefined;
+  selectedValue: string | undefined;
   onSelect: (value: string) => void;
 }
 
@@ -18,15 +13,15 @@ export const SizeOptionSelector: React.FC<SizeOptionSelectorProps> = ({
 }) => {
   return (
     <div>
-      {options.map((option) => (
+      {options?.map((option) => (
         <button
-          key={option.value}
-          onClick={() => onSelect(option.value)}
+          key={option}
+          onClick={() => onSelect(option)}
           className={`${style.size} ${
-            selectedValue === option.value ? style.active : ""
+            selectedValue === option ? style.active : ""
           }`}
         >
-          {option.label}
+          {option}
         </button>
       ))}
     </div>
