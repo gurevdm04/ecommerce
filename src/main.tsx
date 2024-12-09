@@ -28,3 +28,4 @@ createRoot(document.getElementById("root")!).render(
 //  [x] Сделать предзагрузки:
 //    [x] Корзины
 //    [x] Профиля
+//  [ ] Сделать растояние между ценами

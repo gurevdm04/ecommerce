@@ -58,7 +58,7 @@ export const CartContainers = () => {
     <Wrapper>
       <div style={styles}>
         <CartList item={cartItems} removeItem={removeItem} />
-        <CartTotalPrice />
+        <CartTotalPrice item={cartItems} />
         <CheckoutButton items={cartItems} totalAmount={1000} />
       </div>
     </Wrapper>
