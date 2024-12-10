@@ -1,16 +1,12 @@
 import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
-interface OrderItem {
-  productId: string;
-  title: string;
-  quantity: number;
-  price: number;
-}
+import { ItemCartData } from "../types";
+
 interface Order {
   id: string;
   orderDate: any; // Timestamp
   status: string;
-  items: OrderItem[];
+  items: ItemCartData[];
   totalAmount: number;
 }
 

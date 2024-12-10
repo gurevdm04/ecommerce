@@ -41,3 +41,11 @@ export interface CartUserData {
   phoneNumber: string;
   address: string;
 }
+
+export interface Order {
+  id: string;
+  orderDate: any;
+  status: string;
+  items: ItemCartData[];
+  totalAmount: number;
+}

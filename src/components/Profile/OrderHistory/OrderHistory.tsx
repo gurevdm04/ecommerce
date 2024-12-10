@@ -3,21 +3,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../../config/firebaseConfig";
 import { getUserOrders } from "../../../utils";
 import { Loader } from "../Loader/Loader";
-
-interface OrderItem {
-  productId: string;
-  title: string;
-  quantity: number;
-  price: number;
-}
-
-interface Order {
-  id: string;
-  orderDate: any; // Timestamp
-  status: string;
-  items: OrderItem[];
-  totalAmount: number;
-}
+import { ItemCartData, Order } from "../../../types";
+import style from "./OrderHistory.module.scss";
 
 export const OrderHistory = () => {
   const [user] = useAuthState(auth);
@@ -46,21 +33,28 @@ export const OrderHistory = () => {
       ) : (
         orders.map((order) => (
           <div key={order.id} style={{ marginBottom: "20px" }}>
+            <hr />
             <p>
               <strong>Дата заказа:</strong>{" "}
               {new Date(order.orderDate.seconds * 1000).toLocaleString()}
-            </p>
-            <p>
+              {" | "}
               <strong>Статус:</strong> {order.status}
-            </p>
-            <p>
+              {" | "}
               <strong>Сумма заказа:</strong> {order.totalAmount} руб.
             </p>
             <h3>Товары:</h3>
-            <ul>
+            <ul className={style.list}>
               {order.items.map((item) => (
-                <li key={item.productId}>
-                  {item.title} - {item.quantity} шт. x {item.price} руб.
+                <li className={style.item} key={item.productId}>
+                  <img className={style.img} src={item.image} alt="" />
+                  {item.color && (
+                    <div
+                      className={style.color}
+                      style={{ backgroundColor: item.color }}
+                    ></div>
+                  )}
+                  {item.size && <span>{item.size}</span>}
+                  {item.title} - {item.count} шт. x {item.currentPrice} руб.
                 </li>
               ))}
             </ul>
