@@ -4,61 +4,68 @@ import { Wrapper } from "../Wrapper/Wrapper";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-// TODO оптимизировать код
-// TODO сделать так чтоб параметры удалялист при пустых значениях
+// TODO сделать так чтоб категории брались их БД
 
 export const ProductFilterBar = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const [priceMax, setPriceMax] = useState<string>("");
-  const [priceMin, setPriceMin] = useState<string>("");
+  const [filters, setFilters] = useState({
+    priceMax: "",
+    priceMin: "",
+    sort: searchParams.get("sort") || "default",
+    category: searchParams.get("category") || "",
+  });
+  const [debouncedFilters, setDebouncedFilters] = useState({
+    priceMax: "",
+    priceMin: "",
+  });
 
-  useEffect(() => {
-    const delayDebounce = setTimeout(() => {
-      updateSearchParams("priceMax", priceMax);
-    }, 1000);
+  // Обновление URL-параметров
+  const updateSearchParams = (newFilters: Partial<typeof filters>) => {
+    const updatedFilters = { ...filters, ...newFilters };
+    setFilters(updatedFilters);
 
-    return () => clearTimeout(delayDebounce);
-  }, [priceMax]);
+    const newSearchParams = new URLSearchParams();
+    Object.entries(updatedFilters).forEach(([key, value]) => {
+      if (value) newSearchParams.set(key, value);
+    });
 
-  useEffect(() => {
-    const delayDebounce = setTimeout(() => {
-      updateSearchParams("priceMin", priceMin);
-    }, 1000);
-
-    return () => clearTimeout(delayDebounce);
-  }, [priceMin]);
-
-  const updateSearchParams = (paramName: string, paramValue: string) => {
-    const newSearchParams = new URLSearchParams(searchParams);
-    newSearchParams.set(paramName, paramValue);
     navigate(`?${newSearchParams.toString()}`);
   };
 
+  // Дебаунс для priceMin и priceMax
+  useEffect(() => {
+    const debounce = setTimeout(() => {
+      updateSearchParams(debouncedFilters);
+    }, 500);
+
+    return () => clearTimeout(debounce);
+  }, [debouncedFilters]);
+
+  const handleInputChange =
+    (key: string) =>
+    (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+      const value = event.target.value;
+
+      if (key === "priceMin" || key === "priceMax") {
+        setDebouncedFilters((prev) => ({ ...prev, [key]: value }));
+      } else {
+        updateSearchParams({ [key]: value });
+      }
+    };
+
   const sortOptions = [
     { value: "default", label: "По умолчанию" },
-    { value: "alphabetical_asc", label: "alphabetical_asc" },
-    { value: "alphabetical_desc", label: "alphabetical_desc" },
-    { value: "price_asc", label: "price_asc" },
-    { value: "price_desc", label: "price_desc" },
+    { value: "alphabetical_asc", label: "По алфавиту (А-Я)" },
+    { value: "alphabetical_desc", label: "По алфавиту (Я-А)" },
+    { value: "price_asc", label: "Сначала дешевле" },
+    { value: "price_desc", label: "Сначала дороже" },
   ];
-
-  const currentSort = searchParams.get("sort") || "default";
-  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedSort = event.target.value;
-    updateSearchParams("sort", selectedSort);
-  };
 
   const categoryOptions = [
     { value: "", label: "По умолчанию" },
     { value: "Sofas", label: "Sofas" },
   ];
-
-  const currentCategory = searchParams.get("category") || "";
-  const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedCategory = event.target.value;
-    updateSearchParams("category", selectedCategory);
-  };
 
   return (
     <div className={style.wrap}>
@@ -69,8 +76,8 @@ export const ProductFilterBar = () => {
             <p>Category</p>
             <select
               name="category"
-              value={currentCategory}
-              onChange={handleCategoryChange}
+              value={filters.category}
+              onChange={handleInputChange("category")}
             >
               {categoryOptions.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -82,16 +89,16 @@ export const ProductFilterBar = () => {
           <div className={style.filter}>
             <p>Price Min</p>
             <input
-              value={priceMin}
-              onChange={(e) => setPriceMin(e.target.value)}
+              value={debouncedFilters.priceMin}
+              onChange={handleInputChange("priceMin")}
               type="number"
             />
           </div>
           <div className={style.filter}>
             <p>Price Max</p>
             <input
-              value={priceMax}
-              onChange={(e) => setPriceMax(e.target.value)}
+              value={debouncedFilters.priceMax}
+              onChange={handleInputChange("priceMax")}
               type="number"
             />
           </div>
@@ -99,8 +106,8 @@ export const ProductFilterBar = () => {
             <p>Sort by</p>
             <select
               name="sortby"
-              value={currentSort}
-              onChange={handleSortChange}
+              value={filters.sort}
+              onChange={handleInputChange("sort")}
             >
               {sortOptions.map((option) => (
                 <option key={option.value} value={option.value}>
