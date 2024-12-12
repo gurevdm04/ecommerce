@@ -4,97 +4,117 @@ import { Products } from "../components/Products/Products";
 import {
   collection,
   getDocs,
+  getFirestore,
   limit,
   orderBy,
   query,
   QueryDocumentSnapshot,
   startAfter,
+  where,
 } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
 import { Button } from "../components/Button/Button";
 import { useSearchParams } from "react-router-dom";
 import { LoadingSpinner } from "../components/LoadingSpinner/LoadingSpinner";
-import { ProductCardProps } from "../types";
+import { Product, ProductCardProps } from "../types";
+
+const ITEMS_PER_PAGE = 8;
 
 export const ShopProductsContainer = () => {
   const [products, setProducts] = useState<ProductCardProps[]>([]);
-  const [lastDoc, setLastDoc] = useState<QueryDocumentSnapshot | null>(null);
+  const [lastVisible, setLastVisible] = useState<any>(null); // Для отслеживания последнего документа.
+  const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const [loading, setLoading] = useState(false);
-
   const [searchParams] = useSearchParams();
-  const sort = searchParams.get("sort") || "default";
 
-  const fetchProducts = async (isLoadMore = false) => {
-    if (loading) return;
+  const db = getFirestore();
+  const productsCollection = collection(db, "products");
 
-    setLoading(true);
+  const fetchProducts = async (loadMore = false) => {
+    setIsLoading(true);
+    const filters = Object.fromEntries([...searchParams]);
 
     try {
-      let productsQuery;
-      const productsRef = collection(db, "products");
+      let q = query(productsCollection);
+      console.log(filters);
 
-      if (sort === "price-asc") {
-        productsQuery = query(
-          productsRef,
-          orderBy("currentPrice", "asc"),
-          limit(6),
-          ...(isLoadMore && lastDoc ? [startAfter(lastDoc)] : [])
-        );
-      } else if (sort === "price-desc") {
-        productsQuery = query(
-          productsRef,
-          orderBy("currentPrice", "desc"),
-          limit(6),
-          ...(isLoadMore && lastDoc ? [startAfter(lastDoc)] : [])
-        );
-      } else {
-        productsQuery = query(
-          productsRef,
-          limit(6),
-          ...(isLoadMore && lastDoc ? [startAfter(lastDoc)] : [])
-        );
+      // Применение фильтров.
+      if (filters.category) {
+        q = query(q, where("specs.category", "==", filters.category));
+      }
+      if (filters.priceMin) {
+        q = query(q, where("currentPrice", ">=", Number(filters.priceMin)));
+      }
+      if (filters.priceMax) {
+        q = query(q, where("currentPrice", "<=", Number(filters.priceMax)));
       }
 
-      const snapshot = await getDocs(productsQuery);
-
-      if (!snapshot.empty) {
-        const newProducts = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        })) as ProductCardProps[];
-
-        setProducts((prev) =>
-          isLoadMore ? [...prev, ...newProducts] : newProducts
-        );
-        setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
-        setHasMore(snapshot.docs.length === 6); // Если меньше 6, значит больше данных нет
+      // Применение сортировки.
+      if (filters.sort) {
+        switch (filters.sort) {
+          case "alphabetical_asc":
+            q = query(q, orderBy("title", "asc"));
+            break;
+          case "alphabetical_desc":
+            q = query(q, orderBy("title", "desc"));
+            break;
+          case "price_asc":
+            q = query(q, orderBy("currentPrice", "asc"));
+            break;
+          case "price_desc":
+            q = query(q, orderBy("currentPrice", "desc"));
+            break;
+          default:
+            q = query(q, orderBy("createdAt", "desc")); // Default: по дате добавления.
+        }
       } else {
-        setHasMore(false);
+        q = query(q, orderBy("createdAt", "desc")); // Default: по дате добавления.
       }
+
+      // Пагинация.
+      if (loadMore && lastVisible) {
+        q = query(q, startAfter(lastVisible), limit(ITEMS_PER_PAGE));
+      } else {
+        q = query(q, limit(ITEMS_PER_PAGE));
+      }
+
+      const snapshot = await getDocs(q);
+      const newProducts = snapshot.docs.map(
+        (doc) => ({ id: doc.id, ...doc.data() } as unknown as Product)
+      );
+
+      setProducts(loadMore ? [...products, ...newProducts] : newProducts);
+      setLastVisible(snapshot.docs[snapshot.docs.length - 1]);
+      setHasMore(snapshot.docs.length === ITEMS_PER_PAGE);
     } catch (error) {
-      console.error("Ошибка загрузки товаров:", error);
+      console.error("Ошибка при загрузке товаров:", error);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     fetchProducts();
-  }, [sort]);
+  }, [searchParams]);
+
+  const loadMoreProducts = () => {
+    if (!isLoading && hasMore) {
+      fetchProducts(true);
+    }
+  };
 
   return (
     <>
       <Products products={products} />
 
-      {hasMore && !loading && (
+      {hasMore && !isLoading && (
         <Button
           style={{ display: "block", margin: "10px auto" }}
-          onClick={() => fetchProducts(true)}
+          onClick={loadMoreProducts}
           label="Show More"
         />
       )}
-      {loading && <LoadingSpinner />}
+      {isLoading && <LoadingSpinner />}
       <br />
     </>
   );
