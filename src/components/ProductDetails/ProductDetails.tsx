@@ -17,10 +17,6 @@ import { SizeOptionSelector } from "./SizeOptionSelector/SizeOptionSelector";
 import { ColorOptionSelector } from "./ColorOptionSelector/ColorOptionSelector";
 import { Tabs } from "../Tabs/Tabs";
 
-// [x] Сделать карусель для вывода картинок
-// [x] Сделать выбор размера и цвета
-// [x] Сделать cчётчик
-
 export const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
@@ -73,8 +69,8 @@ export const ProductDetails: React.FC = () => {
 
   const handleAddToCart = () => {
     if (user) {
-      console.log('addtocart',data);
-      
+      console.log("addtocart", data);
+
       addToCart(user.uid, data);
       alert("Товар добавлен в корзину");
     } else {
