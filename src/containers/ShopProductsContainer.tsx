@@ -8,15 +8,13 @@ import {
   limit,
   orderBy,
   query,
-  QueryDocumentSnapshot,
   startAfter,
   where,
 } from "firebase/firestore";
-import { db } from "../config/firebaseConfig";
 import { Button } from "../components/Button/Button";
 import { useSearchParams } from "react-router-dom";
 import { LoadingSpinner } from "../components/LoadingSpinner/LoadingSpinner";
-import { Product, ProductCardProps } from "../types";
+import { ProductCardProps } from "../types";
 
 const ITEMS_PER_PAGE = 8;
 
@@ -80,7 +78,7 @@ export const ShopProductsContainer = () => {
 
       const snapshot = await getDocs(q);
       const newProducts = snapshot.docs.map(
-        (doc) => ({ id: doc.id, ...doc.data() } as unknown as Product)
+        (doc) => ({ id: doc.id, ...doc.data() } as unknown as ProductCardProps)
       );
 
       setProducts(loadMore ? [...products, ...newProducts] : newProducts);
