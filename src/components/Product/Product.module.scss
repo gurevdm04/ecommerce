@@ -3,7 +3,11 @@
   position: relative;
 }
 .img {
+  width: 100%;
   display: block;
+  @media (max-width: 768px) {
+    height: 200px;
+  }
 }
 .block {
   padding: 16px;

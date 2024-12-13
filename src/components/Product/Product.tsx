@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import { ROUTES } from "../../constants/routes";
 import { ProductCardProps } from "../../types";
 
-
-
 export const Product: React.FC<ProductCardProps> = ({
   title,
   images,
