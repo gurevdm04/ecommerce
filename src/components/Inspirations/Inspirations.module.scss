@@ -1,8 +1,19 @@
 .wrap {
   display: flex;
-  max-height: 580px;
   gap: 30px;
-  margin: 113px 0 0 0;
+  margin: 113px 0 10px 0;
+  @media (max-width: 1130px) {
+    gap: 10px;
+    margin: 50px 0;
+  }
+  @media (max-width: 960px) {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+  @media (max-width: 700px) {
+    // display: block;
+  }
 }
 .title {
   font-weight: 700;
@@ -21,4 +32,7 @@
 .descr {
   align-self: center;
   width: 34%;
+  @media (max-width: 960px) {
+    width: 100%;
+  }
 }

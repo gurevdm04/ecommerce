@@ -26,7 +26,7 @@ export const Carousel = () => {
         <Swiper
           modules={[Controller]}
           onSwiper={setControlledSwiper}
-          style={{ width: "400px", padding: "0 0 100px 0" }}
+          className={style.infoSwiper}
           spaceBetween={50}
           slidesPerView={1}
           allowSlideNext={false}
