@@ -17,6 +17,11 @@
     list-style-type: none;
     display: flex;
     gap: 75px;
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 30px;
+      padding: 30px 0 30px 30px;
+    }
     a {
       font-weight: 500;
       font-size: 16px;
@@ -32,4 +37,46 @@
   display: flex;
   gap: 45px;
   font-size: 20px;
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
+}
+.wrapItem {
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+.asideMenu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #00000044;
+  z-index: 99;
+  min-height: max-content;
+  padding: 10px;
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+.hamburger {
+  display: none;
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+.asideMenuWrap {
+  background: #fff3e3;
+  width: 50%;
+  min-width: 300px;
+  height: 100%;
+  min-height: max-content;
+  position: relative;
+}
+.asideMenuClose {
+  position: absolute;
+  right: 10px;
+  top: 10px;
 }
