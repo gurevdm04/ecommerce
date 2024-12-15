@@ -23,6 +23,10 @@
   li {
     cursor: pointer;
   }
+  @media (max-width: 768px) {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
 }
 .active {
   font-weight: 500;

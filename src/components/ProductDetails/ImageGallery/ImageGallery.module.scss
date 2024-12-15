@@ -5,6 +5,9 @@
   img {
     border-radius: 10px;
   }
+  @media (max-width: 768px) {
+    margin: 0 auto;
+  }
 }
 
 .thumbnail {
@@ -31,6 +34,12 @@
     height: 100%;
     max-width: 430px;
     object-fit: cover;
+    @media (max-width: 1024px) {
+      width: 300px;
+    }
+    @media (max-width: 768px) {
+      width: 100%;
+    }
   }
 }
 
