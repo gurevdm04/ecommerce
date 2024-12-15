@@ -6,6 +6,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  @media (max-width: 768px) {
+    display: block;
+    max-width: 300px;
+    margin: 0 auto;
+  padding: 50px 0;
+  }
 }
 .item {
   align-items: center;
