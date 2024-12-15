@@ -6,7 +6,7 @@ import { capitalizeFirstLetter, extractPathSegments } from "../../utils";
 export const Breadcrumbs = () => {
   const { pathname } = useLocation();
 
-  const [page, id] = extractPathSegments(pathname);
+  const [page] = extractPathSegments(pathname);
 
   return (
     <div className={style.wrap}>
@@ -15,9 +15,6 @@ export const Breadcrumbs = () => {
           <a href="#">Home</a>
           <span>{">"}</span>
           <a href="#">{capitalizeFirstLetter(page)}</a>
-          <span>{">"}</span>
-          <p>|</p>
-          <span>{id}</span>
         </div>
       </Wrapper>
     </div>
