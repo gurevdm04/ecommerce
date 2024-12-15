@@ -1,0 +1,12 @@
+.CartContainers {
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
+  margin: 72px 0;
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
+  @media (max-width: 768px) {
+    margin: 30px 0;
+  }
+}

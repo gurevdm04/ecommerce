@@ -5,6 +5,9 @@
   p {
     margin: 0px;
   }
+  @media (max-width: 768px) {
+    padding: 20px 30px 30px 30px;
+  }
 }
 .title {
   font-weight: 600;
@@ -13,14 +16,13 @@
   margin: 0;
 }
 .subtotal {
-  width: 250px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 60px 0 0 0;
   font-weight: 500;
   font-size: 16px;
   color: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px 0 0 0;
   span {
     font-weight: 400;
     font-size: 16px;

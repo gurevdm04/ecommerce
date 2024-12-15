@@ -10,18 +10,21 @@ interface CartListProps {
 export const CartList: React.FC<CartListProps> = ({ item, removeItem }) => {
   return (
     <div className={style.cart}>
-      <div className={style.header}>
-        <div>Product</div>
-        <div>Price</div>
-        <div>Quantity</div>
-        <div>Subtotal</div>
+      <div className={style.wrap}>
+        <div className={style.header}>
+          <div>Product</div>
+          <div>Price</div>
+          <div>Quantity</div>
+          <div>Subtotal</div>
+        </div>
+        {item.length === 0 ? (
+          <p>Корзина пуста</p>
+        ) : (
+          item.map((data) => (
+            <CartListItem item={data} removeItem={removeItem} />
+          ))
+        )}
       </div>
-      {item.length === 0 ? (
-        <p>Корзина пуста</p>
-      ) : (
-        item.map((data) => <CartListItem item={data} removeItem={removeItem} />)
-      )}
-      {}
     </div>
   );
 };

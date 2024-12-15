@@ -3,6 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  min-width: 768px;
   + .items {
     margin-top: 30px;
   }

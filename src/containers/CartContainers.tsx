@@ -5,16 +5,10 @@ import { Wrapper } from "../components/Wrapper/Wrapper";
 import { auth, db } from "../config/firebaseConfig";
 import { useEffect, useState } from "react";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { createOrder } from "../utils";
 import { LoadingSpinner } from "../components/LoadingSpinner/LoadingSpinner";
 import { ItemCartData } from "../types";
 
-const styles: React.CSSProperties | undefined = {
-  display: "flex",
-  gap: "30px",
-  justifyContent: "space-between",
-  margin: "72px 0",
-};
+import style from "./index.module.scss";
 
 export const CartContainers = () => {
   const [user] = useAuthState(auth);
@@ -56,12 +50,10 @@ export const CartContainers = () => {
 
   return (
     <Wrapper>
-      <div style={styles}>
+      <div className={style.CartContainers}>
         <CartList item={cartItems} removeItem={removeItem} />
         <CartTotalPrice item={cartItems} />
       </div>
     </Wrapper>
   );
 };
-
-
