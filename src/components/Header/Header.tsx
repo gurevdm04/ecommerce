@@ -34,7 +34,7 @@ export const Header = () => {
   }, [location]);
 
   useEffect(() => {
-    if (isMenuOpen) {
+    if (isMenuOpen || isModalOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -44,7 +44,7 @@ export const Header = () => {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [isMenuOpen]);
+  }, [isMenuOpen, isModalOpen]);
 
   return (
     <>
