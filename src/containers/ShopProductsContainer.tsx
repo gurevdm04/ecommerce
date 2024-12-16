@@ -30,6 +30,7 @@ export const ShopProductsContainer = () => {
 
   const fetchProducts = async (loadMore = false) => {
     setIsLoading(true);
+    setProducts([]);
     const filters = Object.fromEntries([...searchParams]);
 
     try {
