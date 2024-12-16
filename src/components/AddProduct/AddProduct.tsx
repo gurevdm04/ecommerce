@@ -72,7 +72,7 @@ export const AddProductForm = () => {
       case "number":
         setData((prevData) => ({
           ...prevData,
-          [name]: value === "0" || value === "" ? null : value,
+          [name]: value === "0" || value === "" ? null : +value,
         }));
         break;
       case "textarea":
