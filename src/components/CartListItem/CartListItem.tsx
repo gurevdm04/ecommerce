@@ -16,7 +16,7 @@ export const CartListItem: React.FC<CartListItemProps> = ({
   return (
     <div className={style.items}>
       <div className={style.img}>
-        <img src={item.image} alt="" />
+        <img src={item.images[0]} alt="" />
       </div>
       <div className={style.name}>{item.title}</div>
       <div className={style.price}>Rs. {item.currentPrice}</div>
