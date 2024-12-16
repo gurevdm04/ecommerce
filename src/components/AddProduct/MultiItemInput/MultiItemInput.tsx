@@ -1,6 +1,7 @@
 import style from "./MultiItemInput.module.scss";
 import React, { useState } from "react";
 import { InputProps } from "../AddProduct";
+import { truncateText } from "../../../utils/truncateText";
 
 export const MultiItemInput: React.FC<InputProps> = ({
   handle,
@@ -45,8 +46,12 @@ export const MultiItemInput: React.FC<InputProps> = ({
       <ul className={style.list}>
         {typeof value === "object" &&
           value.map((item, index) => (
-            <li className={style.item} key={index}>
-              {item}{" "}
+            <li
+              title={item}
+              className={style.item}
+              key={index}
+            >
+              {truncateText(item, 20)}{" "}
               <p
                 className={style.remove}
                 onClick={() => handleRemoveItem(index)}
