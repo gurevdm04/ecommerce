@@ -26,7 +26,8 @@ export interface ItemCartData {
   productId: string;
   title: string;
   currentPrice: number | null;
-  image: string;
+  oldPrice: number | null;
+  images: string[];
   count: number;
   size?: string;
   color?: string;

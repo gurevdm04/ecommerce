@@ -25,7 +25,8 @@ export const ProductDetails: React.FC = () => {
     productId: id || "",
     title: "",
     currentPrice: null,
-    image: "",
+    oldPrice: null,
+    images: [],
     count: 1,
     size: "",
     color: "",
@@ -45,8 +46,9 @@ export const ProductDetails: React.FC = () => {
         setData((prev) => ({
           ...prev,
           currentPrice: data.currentPrice,
+          oldPrice: data.oldPrice || 0,
           title: data.title,
-          image: data.images[0],
+          images: data.images,
           size: data.size ? data.size[0] : "",
           color: data.color ? data.color[0] : "",
           specs: {
@@ -87,8 +89,9 @@ export const ProductDetails: React.FC = () => {
         addToFavorites(user.uid, {
           id: id || "",
           title: product.title,
-          image: "",
-          price: 1,
+          images: data.images,
+          currentPrice: data.currentPrice || 0,
+          oldPrice: data.oldPrice || 0,
         });
       }
     } else {

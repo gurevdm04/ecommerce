@@ -7,7 +7,7 @@ export const SingleProductPage = () => {
     <>
       <Breadcrumbs />
       <ProductDetails />
-      <RelatedProductsContainers />
+      {/* <RelatedProductsContainers /> */}
     </>
   );
 };

@@ -1,10 +1,15 @@
 import { doc, getDoc, setDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
 
-export const addToFavorites = async (
-  userId: string,
-  product: { id: string; title: string; image: string; price: number }
-) => {
+interface Favorites {
+  id: string;
+  title: string;
+  images: string[];
+  currentPrice: number;
+  oldPrice: number;
+}
+
+export const addToFavorites = async (userId: string, product: Favorites) => {
   const favRef = doc(db, "favorites", userId);
 
   try {

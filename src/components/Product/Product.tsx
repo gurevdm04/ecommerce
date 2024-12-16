@@ -12,11 +12,9 @@ export const Product: React.FC<ProductCardProps> = ({
   shortDesc,
   id,
 }) => {
-  console.log(images);
-
   return (
     <Link to={ROUTES.SHOP_ITEM(id)} className={style.wrap}>
-      <img className={style.img} src={product} alt="" />
+      <img className={style.img} src={images[0]} alt="" />
       <div className={style.block}>
         <h3 className={style.title}>{title}</h3>
         <p className={style.subtitle}>{shortDesc}</p>
