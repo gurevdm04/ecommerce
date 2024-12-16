@@ -8,8 +8,6 @@ import { doc, getDoc } from "firebase/firestore";
 import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 import { createOrder } from "../../utils";
 
-// TODO сделать нормальную форму
-
 export const Checkout = () => {
   const [user] = useAuthState(auth);
   const [cartItems, setCartItems] = useState<ItemCartData[]>([]);

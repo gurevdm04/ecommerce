@@ -6,7 +6,7 @@ interface CartListItemProps {
   item: ItemCartData;
   removeItem: (productId: string) => Promise<void>;
 }
-// TODO сделать так чтоб при клике на товар открывался он
+
 export const CartListItem: React.FC<CartListItemProps> = ({
   item,
   removeItem,

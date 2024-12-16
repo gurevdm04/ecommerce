@@ -4,8 +4,6 @@ import { Wrapper } from "../Wrapper/Wrapper";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-// TODO сделать так чтоб категории брались их БД
-
 export const ProductFilterBar = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
