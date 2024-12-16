@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../../config/firebaseConfig";
-import { addToCart, addToFavorites } from "../../utils";
+import { addToCart, addToFavorites, removeFromFavorites } from "../../utils";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ProductSpecifications } from "./ProductSpecifications/ProductSpecifications";
 import { CiHeart } from "react-icons/ci";
@@ -35,6 +35,31 @@ export const ProductDetails: React.FC = () => {
     },
   });
 
+  const [isFavorites, setIsFavorites] = useState(false);
+  const [isFavoritesLoaded, setIsFavoritesLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsFavoritesLoaded(false);
+    if (user) {
+      const fetchFavorites = async () => {
+        const favRef = doc(db, "favorites", user.uid);
+        const favSnap = await getDoc(favRef);
+
+        if (favSnap.exists()) {
+          setIsFavorites(
+            favSnap
+              .data()
+              .favorites.some((obj: { id: string | undefined }) => obj.id === id)
+          );
+        }
+
+        setIsFavoritesLoaded(true);
+      };
+
+      fetchFavorites();
+    }
+  }, [user, isFavorites]);
+
   useEffect(() => {
     const fetchProduct = async () => {
       if (!id) return;
@@ -61,18 +86,12 @@ export const ProductDetails: React.FC = () => {
     fetchProduct();
   }, [id]);
 
-  useEffect(() => {
-    console.log("data", data);
-  }, [data]);
-
   if (!product) {
     return <LoadingSpinner />;
   }
 
   const handleAddToCart = () => {
     if (user) {
-      console.log("addtocart", data);
-
       addToCart(user.uid, data);
       alert("Товар добавлен в корзину");
     } else {
@@ -82,10 +101,10 @@ export const ProductDetails: React.FC = () => {
 
   const handleFavoriteToggle = () => {
     if (user) {
-      if (false) {
-        // removeFromFavorites(user.uid, id || "");
+      if (isFavorites) {
+        removeFromFavorites(user.uid, id || "");
+        setIsFavorites(false);
       } else {
-        alert("add fov");
         addToFavorites(user.uid, {
           id: id || "",
           title: product.title,
@@ -93,6 +112,7 @@ export const ProductDetails: React.FC = () => {
           currentPrice: data.currentPrice || 0,
           oldPrice: data.oldPrice || 0,
         });
+        setIsFavorites(true);
       }
     } else {
       alert("Пожалуйста, войдите в аккаунт, чтобы управлять избранным.");
@@ -109,7 +129,12 @@ export const ProductDetails: React.FC = () => {
             Rs. {product.currentPrice} <span>Rs. {product.oldPrice}</span>
           </h3>
           <div className={style.reviews} onClick={handleFavoriteToggle}>
-            <CiHeart />| add to favorites
+            <CiHeart />|{" "}
+            {isFavoritesLoaded
+              ? isFavorites
+                ? "remove from favorites"
+                : "add to favorites"
+              : "loading"}
           </div>
           <p className={style.descr}>{product.description}</p>
           <div className={style.options}>

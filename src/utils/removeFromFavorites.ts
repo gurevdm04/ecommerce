@@ -10,7 +10,7 @@ export const removeFromFavorites = async (userId: string, productId: string) => 
     if (favSnap.exists()) {
       const favData = favSnap.data();
       const updatedFavorites = favData.favorites.filter(
-        (item: any) => item.productId !== productId
+        (item: any) => item.id !== productId
       );
 
       await updateDoc(favRef, { favorites: updatedFavorites });
