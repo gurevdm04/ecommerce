@@ -1,5 +1,4 @@
 import style from "./Product.module.scss";
-import product from "./../../assets/images/product.png";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../constants/routes";
 import { ProductCardProps } from "../../types";

@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../../config/firebaseConfig";
 import { getUserOrders } from "../../../utils";
 import { Loader } from "../Loader/Loader";
-import { ItemCartData, Order } from "../../../types";
+import { Order } from "../../../types";
 import style from "./OrderHistory.module.scss";
 
 export const OrderHistory = () => {
