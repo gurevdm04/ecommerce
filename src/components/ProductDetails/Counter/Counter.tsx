@@ -39,8 +39,7 @@ export const Counter: React.FC<CounterProps> = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = parseInt(e.target.value, 10);
-    console.log(e.target.value, newValue);
-
+    
     if (e.target.value === "") {
       onChange(0);
       return;

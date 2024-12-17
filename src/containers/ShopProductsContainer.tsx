@@ -35,7 +35,6 @@ export const ShopProductsContainer = () => {
 
     try {
       let q = query(productsCollection);
-      console.log(filters);
 
       // Применение фильтров.
       if (filters.category) {
