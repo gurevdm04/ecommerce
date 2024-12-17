@@ -5,6 +5,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { Loader } from "../Loader/Loader";
 import { Product } from "../../Product/Product";
 import { ProductCardProps } from "../../../types";
+import style from "./FeaturedProducts.module.scss";
 
 export const FeaturedProducts = () => {
   const [user] = useAuthState(auth);
