@@ -16,7 +16,12 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
     <div className={style.gallery}>
       <div className={style.thumbnail}>
         {images.map((url) => (
-          <img src={url} alt="" onClick={() => setSelectedImage(url)} />
+          <img
+            key={url}
+            src={url}
+            alt=""
+            onClick={() => setSelectedImage(url)}
+          />
         ))}
       </div>
       <div className={style.image}>
