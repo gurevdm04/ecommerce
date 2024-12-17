@@ -97,7 +97,7 @@ export const Checkout = () => {
             <h3>Subtotal</h3>
           </div>
           {cartItems.map((item) => (
-            <div className={style.row} key={item.productId}>
+            <div className={style.row} key={item.productId+item.color+item.size}>
               <p className={style.itemText}>
                 {item.title} x{item.count}
               </p>
