@@ -45,8 +45,11 @@ export const OrderHistory = () => {
             <h3>Товары:</h3>
             <ul className={style.list}>
               {order.items.map((item) => (
-                <li className={style.item} key={item.productId}>
-                  <img className={style.img} src={item.image} alt="" />
+                <li
+                  className={style.item}
+                  key={item.productId + item.color + item.size}
+                >
+                  <img className={style.img} src={item.images[0]} alt="" />
                   {item.color && (
                     <div
                       className={style.color}
