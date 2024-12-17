@@ -11,9 +11,7 @@ export const CartListItem: React.FC<CartListItemProps> = ({
   item,
   removeItem,
 }) => {
-  console.log("item", item);
-
-  return (
+    return (
     <div className={style.items}>
       <div className={style.img}>
         <img src={item.images[0]} alt="" />

@@ -21,7 +21,11 @@ export const CartList: React.FC<CartListProps> = ({ item, removeItem }) => {
           <p>Корзина пуста</p>
         ) : (
           item.map((data) => (
-            <CartListItem item={data} removeItem={removeItem} />
+            <CartListItem
+              key={data.title + data.size + data.color}
+              item={data}
+              removeItem={removeItem}
+            />
           ))
         )}
       </div>

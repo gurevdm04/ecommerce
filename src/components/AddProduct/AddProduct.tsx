@@ -247,7 +247,7 @@ export const AddProductForm = () => {
           <form className={style.form} onSubmit={handleSubmit}>
             {list.map(
               ({ type, name, handle, placeholder, title, value }, index) => (
-                <>
+                <React.Fragment key={title}>
                   <Input
                     key={index}
                     type={type}
@@ -262,7 +262,7 @@ export const AddProductForm = () => {
                       Поле выше обязательно для заполнения
                     </p>
                   )}
-                </>
+                </React.Fragment>
               )
             )}
             <button type="submit">Add Product</button>

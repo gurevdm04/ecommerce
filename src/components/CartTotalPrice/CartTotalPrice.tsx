@@ -10,7 +10,6 @@ export const CartTotalPrice: React.FC<CartTotalPriceProps> = ({ item }) => {
   let price = 0;
 
   item.forEach((item) => {
-    console.log(item);
     if (item.currentPrice) {
       price += item.currentPrice * item.count;
     }
