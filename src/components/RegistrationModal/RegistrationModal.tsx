@@ -13,6 +13,9 @@ import {
 import { auth } from "../../config/firebaseConfig";
 import { useAppSelector } from "../../store/hooks";
 import { RootState } from "../../store/store";
+import { FaEye } from "react-icons/fa6";
+import { FaEyeSlash } from "react-icons/fa6";
+import { IconContext } from "react-icons";
 
 interface RegistrationModalProps {
   closeModal: () => void;
@@ -78,6 +81,8 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -112,19 +117,17 @@ const SignUp = () => {
         type="text"
         required
       />
-      <input
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-        type="text"
-        required
+      <InputPassword
+        password={password}
+        setPassword={setPassword}
+        showPassword={showPassword}
+        setShowPassword={setShowPassword}
       />
-      <input
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
-        placeholder="Confirm Password"
-        type="text"
-        required
+      <InputPassword
+        password={confirmPassword}
+        setPassword={setConfirmPassword}
+        showPassword={showConfirmPassword}
+        setShowPassword={setShowConfirmPassword}
       />
       <button className={style.btn}>Sign up</button>
     </form>
@@ -134,6 +137,7 @@ const SignUp = () => {
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -162,14 +166,47 @@ const SignIn = () => {
         type="text"
         required
       />
+      <InputPassword
+        password={password}
+        setPassword={setPassword}
+        showPassword={showPassword}
+        setShowPassword={setShowPassword}
+      />
+      <button className={style.btn}>Sign in</button>
+    </form>
+  );
+};
+
+interface InputPasswordProps {
+  password: string;
+  setPassword: (value: React.SetStateAction<string>) => void;
+  showPassword: boolean;
+  setShowPassword: (value: React.SetStateAction<boolean>) => void;
+}
+
+const InputPassword: React.FC<InputPasswordProps> = ({
+  password,
+  setPassword,
+  showPassword,
+  setShowPassword,
+}) => {
+  return (
+    <span className={style.password}>
       <input
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
-        type="text"
+        type={`${showPassword ? "string" : "password"}`}
         required
       />
-      <button className={style.btn}>Sign in</button>
-    </form>
+      <div
+        className={style.showPassword}
+        onClick={() => setShowPassword((prev) => !prev)}
+      >
+        <IconContext.Provider value={{ className: `${style.passwordIcon}` }}>
+          {showPassword ? <FaEyeSlash /> : <FaEye />}
+        </IconContext.Provider>
+      </div>
+    </span>
   );
 };
