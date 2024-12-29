@@ -19,6 +19,8 @@ import { isAdmin } from "../../utils";
 import { AddProductForm } from "../AddProduct/AddProduct";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
+import { AddCategory } from "./AddCategory/AddCategory";
+import { BiCategory } from "react-icons/bi";
 
 export const Profile = () => {
   const { user, isLoading } = useAppSelector((state: RootState) => state.auth);
@@ -57,9 +59,14 @@ export const Profile = () => {
             <Item Icon={CiUser} label="Личные данные" />
           </Tab>
           {isAdminUser && (
-            <Tab className={style.item}>
-              <Item Icon={IoIosAddCircleOutline} label="Добавление товара" />
-            </Tab>
+            <>
+              <Tab className={style.item}>
+                <Item Icon={IoIosAddCircleOutline} label="Добавление товара" />
+              </Tab>
+              <Tab className={style.item}>
+                <Item Icon={BiCategory} label="Добавление категории" />
+              </Tab>
+            </>
           )}
           <Tab className={style.item}>
             <Item Icon={IoMdExit} label="Выйти" />
@@ -75,9 +82,14 @@ export const Profile = () => {
           <PersonalInformation />
         </TabPanel>
         {isAdminUser && (
-          <TabPanel>
-            <AddProductForm />
-          </TabPanel>
+          <>
+            <TabPanel>
+              <AddProductForm />
+            </TabPanel>
+            <TabPanel>
+              <AddCategory />
+            </TabPanel>
+          </>
         )}
         <TabPanel>
           <LogOut />
