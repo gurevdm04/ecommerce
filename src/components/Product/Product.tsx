@@ -11,6 +11,8 @@ export const Product: React.FC<ProductCardProps> = ({
   shortDesc,
   id,
 }) => {
+  console.log(oldPrice, typeof oldPrice);
+
   return (
     <Link to={ROUTES.SHOP_ITEM(id)} className={style.wrap}>
       <img className={style.img} src={images[0]} alt="" />
@@ -19,9 +21,7 @@ export const Product: React.FC<ProductCardProps> = ({
         <p className={style.subtitle}>{shortDesc}</p>
         <div className={style.price}>
           <p className={style.currentPrice}>Rp {currentPrice}</p>
-          {oldPrice != 0 ? (
-            <p className={style.oldPrice}>Rp {oldPrice}</p>
-          ) : null}
+          {!!oldPrice && <p className={style.oldPrice}>Rp {oldPrice}</p>}
         </div>
       </div>
     </Link>
