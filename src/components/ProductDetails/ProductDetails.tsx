@@ -129,14 +129,16 @@ export const ProductDetails: React.FC = () => {
             Rs. {product.currentPrice}{" "}
             {product.oldPrice && <span>Rs. {product.oldPrice}</span>}
           </h3>
-          <div className={style.reviews} onClick={handleFavoriteToggle}>
-            <CiHeart />|{" "}
-            {isFavoritesLoaded
-              ? isFavorites
-                ? "remove from favorites"
-                : "add to favorites"
-              : "loading"}
-          </div>
+          {user && (
+            <div className={style.reviews} onClick={handleFavoriteToggle}>
+              <CiHeart />|{" "}
+              {isFavoritesLoaded
+                ? isFavorites
+                  ? "remove from favorites"
+                  : "add to favorites"
+                : "loading"}
+            </div>
+          )}
           <p className={style.descr}>{product.description}</p>
           {product.size?.length !== 0 && (
             <div className={style.options}>

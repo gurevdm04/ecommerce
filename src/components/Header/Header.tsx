@@ -100,18 +100,20 @@ interface IconsProps {
 const Icons: React.FC<IconsProps> = ({ isAuthenticated, openModal }) => (
   <div className={style.icons}>
     {isAuthenticated ? (
-      <Link to={ROUTES.PROFILE}>
-        <FaRegUser />
-      </Link>
+      <>
+        <Link to={ROUTES.PROFILE}>
+          <FaRegUser />
+        </Link>
+        <Link to={ROUTES.CART}>
+          <MdOutlineShoppingCart />
+        </Link>
+      </>
     ) : (
-      <span onClick={openModal}>
-        <FaRegUser />
-      </span>
+      <>
+        <FaRegUser onClick={openModal} />
+        <MdOutlineShoppingCart onClick={openModal} />
+      </>
     )}
-
-    <Link to={ROUTES.CART}>
-      <MdOutlineShoppingCart />
-    </Link>
   </div>
 );
 

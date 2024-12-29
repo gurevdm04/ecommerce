@@ -9,6 +9,7 @@ import { LoadingSpinner } from "../components/LoadingSpinner/LoadingSpinner";
 import { ItemCartData } from "../types";
 
 import style from "./index.module.scss";
+import { Navigate } from "react-router-dom";
 
 export const CartContainers = () => {
   const [user] = useAuthState(auth);
@@ -45,7 +46,10 @@ export const CartContainers = () => {
     }
   };
 
-  if (!user) return <p>войдите...</p>;
+  if (!user) {
+    return <Navigate to="/" />;
+  }
+
   if (loading) return <LoadingSpinner />;
 
   return (

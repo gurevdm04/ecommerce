@@ -37,6 +37,13 @@
   display: flex;
   gap: 45px;
   font-size: 20px;
+  > * {
+    transition: all 0.1s linear;
+    cursor: pointer;
+    &:hover {
+      color: #b88e2f;
+    }
+  }
   @media (max-width: 768px) {
     justify-content: center;
   }

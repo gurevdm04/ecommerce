@@ -7,6 +7,7 @@ import { CartUserData, ItemCartData } from "../../types";
 import { doc, getDoc } from "firebase/firestore";
 import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 import { createOrder } from "../../utils";
+import { Navigate } from "react-router-dom";
 
 export const Checkout = () => {
   const [user] = useAuthState(auth);
@@ -41,6 +42,10 @@ export const Checkout = () => {
       price += item.count * item.currentPrice;
     }
   });
+
+  if (!user) {
+    return <Navigate to="/" />;
+  }
   if (loading) return <LoadingSpinner />;
 
   return (
@@ -97,7 +102,10 @@ export const Checkout = () => {
             <h3>Subtotal</h3>
           </div>
           {cartItems.map((item) => (
-            <div className={style.row} key={item.productId+item.color+item.size}>
+            <div
+              className={style.row}
+              key={item.productId + item.color + item.size}
+            >
               <p className={style.itemText}>
                 {item.title} x{item.count}
               </p>
