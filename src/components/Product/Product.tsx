@@ -19,7 +19,9 @@ export const Product: React.FC<ProductCardProps> = ({
         <p className={style.subtitle}>{shortDesc}</p>
         <div className={style.price}>
           <p className={style.currentPrice}>Rp {currentPrice}</p>
-          <p className={style.oldPrice}>Rp {oldPrice}</p>
+          {oldPrice != 0 ? (
+            <p className={style.oldPrice}>Rp {oldPrice}</p>
+          ) : null}
         </div>
       </div>
     </Link>
