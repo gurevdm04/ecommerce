@@ -50,3 +50,18 @@ export interface Order {
   items: ItemCartData[];
   totalAmount: number;
 }
+export type Types =
+  | "text"
+  | "number"
+  | "textarea"
+  | "multi"
+  | "spec"
+  | "checkboxes";
+export type HandleType = (
+  type: Types,
+  e:
+    | React.ChangeEvent<
+        HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      >
+    | { name: string; value: string[] }
+) => void;

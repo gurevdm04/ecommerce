@@ -1,6 +1,7 @@
 import React from "react";
 import { InputProps } from "../AddProduct";
 import { MultiItemInput } from "../MultiItemInput/MultiItemInput";
+import { CategorySelector } from "../CategorySelector/CategorySelector";
 
 export const Input: React.FC<InputProps> = ({
   type,
@@ -72,6 +73,17 @@ export const Input: React.FC<InputProps> = ({
             placeholder={placeholder}
           />
         </label>
+      );
+    case "checkboxes":
+      return (
+        <CategorySelector
+          handle={handle}
+          name={name}
+          placeholder={placeholder}
+          title={title}
+          type={type}
+          value={value}
+        />
       );
   }
 };

@@ -14,14 +14,8 @@ import {
 } from "firebase/firestore";
 import { db } from "../../../config/firebaseConfig";
 import { Loader } from "../Loader/Loader";
+import { HandleType, Types } from "../../../types";
 
-type Types = "text" | "number" | "textarea" | "multi" | "spec";
-type HandleType = (
-  type: Types,
-  e:
-    | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    | { name: string; value: string[] }
-) => void;
 
 export const AddCategory = () => {
   const [category, setCategory] = useState<string[]>([]);
@@ -96,7 +90,7 @@ export const AddCategory = () => {
         type="text"
         value={category}
       />
-      <button onClick={handleSave} disabled={loading}>
+      <button className={style.btn} onClick={handleSave} disabled={loading}>
         {loading ? "Сохранение..." : "Сохранить категории"}
       </button>
       {error && <p className={style.error}>{error}</p>}

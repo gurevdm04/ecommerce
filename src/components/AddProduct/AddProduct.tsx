@@ -8,17 +8,9 @@ import { RootState } from "../../store/store";
 
 import style from "./AddProduct.module.scss";
 import { Wrapper } from "../Wrapper/Wrapper";
-import { Product } from "../../types";
+import { HandleType, Product, Types } from "../../types";
 import { Input } from "./Input/Input";
 import { Loader } from "../Profile/Loader/Loader";
-
-type Types = "text" | "number" | "textarea" | "multi" | "spec";
-type HandleType = (
-  type: Types,
-  e:
-    | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    | { name: string; value: string[] }
-) => void;
 
 export interface InputProps {
   type: Types;
@@ -88,6 +80,15 @@ export const AddProductForm = () => {
         }));
         break;
       case "spec":
+        setData((prevData) => ({
+          ...prevData,
+          specs: {
+            ...prevData.specs,
+            [name]: value,
+          },
+        }));
+        break;
+      case "checkboxes":
         setData((prevData) => ({
           ...prevData,
           specs: {
@@ -214,7 +215,7 @@ export const AddProductForm = () => {
       placeholder: "Цвета товара",
     },
     {
-      type: "spec",
+      type: "checkboxes",
       title: "Категория  товара",
       name: "category",
       value: data.specs.category || "",
