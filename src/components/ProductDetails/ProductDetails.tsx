@@ -126,7 +126,8 @@ export const ProductDetails: React.FC = () => {
         <div className={style.details}>
           <h2 className={style.title}>{product.title}</h2>
           <h3 className={style.price}>
-            Rs. {product.currentPrice} <span>Rs. {product.oldPrice}</span>
+            Rs. {product.currentPrice}{" "}
+            {product.oldPrice && <span>Rs. {product.oldPrice}</span>}
           </h3>
           <div className={style.reviews} onClick={handleFavoriteToggle}>
             <CiHeart />|{" "}
@@ -137,24 +138,30 @@ export const ProductDetails: React.FC = () => {
               : "loading"}
           </div>
           <p className={style.descr}>{product.description}</p>
-          <div className={style.options}>
-            <h4>Size</h4>
-            <SizeOptionSelector
-              options={product.size}
-              selectedValue={data.size}
-              onSelect={(value) => setData((prev) => ({ ...prev, size: value }))}
-            />
-          </div>
-          <div className={style.options}>
-            <h4>Color</h4>
-            <ColorOptionSelector
-              options={product.color}
-              selectedValue={data.color}
-              onSelect={(value) =>
-                setData((prev) => ({ ...prev, color: value }))
-              }
-            />
-          </div>
+          {product.size?.length !== 0 && (
+            <div className={style.options}>
+              <h4>Size</h4>
+              <SizeOptionSelector
+                options={product.size}
+                selectedValue={data.size}
+                onSelect={(value) =>
+                  setData((prev) => ({ ...prev, size: value }))
+                }
+              />
+            </div>
+          )}
+          {product.color?.length !== 0 && (
+            <div className={style.options}>
+              <h4>Color</h4>
+              <ColorOptionSelector
+                options={product.color}
+                selectedValue={data.color}
+                onSelect={(value) =>
+                  setData((prev) => ({ ...prev, color: value }))
+                }
+              />
+            </div>
+          )}
           <div className={style.add}>
             <Counter
               value={data.count}
