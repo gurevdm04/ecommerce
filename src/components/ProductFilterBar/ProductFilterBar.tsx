@@ -3,6 +3,7 @@ import style from "./ProductFilterBar.module.scss";
 import { Wrapper } from "../Wrapper/Wrapper";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { fetchCategoryOptions } from "../../utils";
 
 export const ProductFilterBar = () => {
   const navigate = useNavigate();
@@ -60,10 +61,23 @@ export const ProductFilterBar = () => {
     { value: "price_desc", label: "Сначала дороже" },
   ];
 
-  const categoryOptions = [
-    { value: "", label: "По умолчанию" },
-    { value: "Sofas", label: "Sofas" },
-  ];
+  const [categoryOptions, setCategoryOptions] = useState<
+    { value: string; label: string }[]
+  >([{ value: "Загрузка...", label: "Загрузка..." }]);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadCategoryOptions = async () => {
+      try {
+        const options = await fetchCategoryOptions();
+        setCategoryOptions(options);
+      } catch (err) {
+        setError("Не удалось загрузить категории.");
+      }
+    };
+
+    loadCategoryOptions();
+  }, []);
 
   return (
     <div className={style.wrap}>
@@ -72,6 +86,7 @@ export const ProductFilterBar = () => {
           <div className={style.setting}>| Showing 1–16 of 32 results</div>
           <div className={style.filter}>
             <p>Category</p>
+            {error && <p>{error}</p>}
             <select
               name="category"
               value={filters.category}

@@ -9,3 +9,4 @@ export * from "./getUserOrders";
 export * from "./createOrder";
 export * from "./validateRequiredFields";
 export * from "./fetchCategories";
+export * from "./fetchCategoryOptions";
