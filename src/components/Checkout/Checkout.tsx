@@ -50,7 +50,7 @@ export const Checkout = () => {
 
   return (
     <Wrapper>
-      <div className={style.wrap}>
+      <form className={style.wrap}>
         <div className={style.detail}>
           <h2 className={style.detailTitle}>Billing details</h2>
           <div className={style.row}>
@@ -125,7 +125,7 @@ export const Checkout = () => {
             userData={userData}
           />
         </div>
-      </div>
+      </form>
     </Wrapper>
   );
 };
@@ -145,7 +145,19 @@ const CheckoutButton: React.FC<CheckoutButtonProps> = ({
 }) => {
   const [user] = useAuthState(auth);
 
-  const handleCheckout = () => {
+  const handleCheckout = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    if (
+      userData.firstName === "" ||
+      userData.lastName === "" ||
+      userData.phoneNumber === "" ||
+      userData.address === ""
+    ) {
+      alert("Заполните все поля");
+      return;
+    }
     if (user) {
       createOrder(user.uid, items, totalAmount, userData);
       alert("Заказ создан");
