@@ -18,7 +18,9 @@ export const addToCart = async (userId: string, product: ItemCartData) => {
         items: [{ ...product }],
       });
     }
+    alert("Товар добавлен в корзину");
   } catch (error) {
+    alert("Ошибка добавления товара в корзину:");
     console.error("Ошибка добавления товара в корзину:", error);
   }
 };

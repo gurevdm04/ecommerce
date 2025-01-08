@@ -100,9 +100,7 @@ export const ProductDetails: React.FC = () => {
   const handleAddToCart = () => {
     if (user) {
       console.log(data);
-
       addToCart(user.uid, data);
-      alert("Товар добавлен в корзину");
     } else {
       alert("Пожалуйста, войдите в аккаунт, чтобы добавить товар в корзину.");
     }
