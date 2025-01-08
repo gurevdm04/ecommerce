@@ -16,6 +16,15 @@ import { RootState } from "../../store/store";
 import { FaEye } from "react-icons/fa6";
 import { FaEyeSlash } from "react-icons/fa6";
 import { IconContext } from "react-icons";
+import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
+
+const Loader = () => {
+  return (
+    <div className={style.loader}>
+      <LoadingSpinner />
+    </div>
+  );
+};
 
 interface RegistrationModalProps {
   closeModal: () => void;
@@ -83,6 +92,7 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -93,6 +103,7 @@ const SignUp = () => {
     }
 
     try {
+      setIsLoading(true);
       await createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
@@ -105,11 +116,16 @@ const SignUp = () => {
           const errorMessage = error.message;
           console.error(errorCode, errorMessage);
         });
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(true);
+    }
   };
 
   return (
     <form onSubmit={handleSignUp}>
+      {isLoading && <Loader />}
       <input
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -138,11 +154,13 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
+      setIsLoading(true);
       await signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
@@ -154,11 +172,17 @@ const SignIn = () => {
           const errorMessage = error.message;
           console.error(errorCode, errorMessage);
         });
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <form onSubmit={handleSignIn}>
+      {isLoading && <Loader />}
+
       <input
         value={email}
         onChange={(e) => setEmail(e.target.value)}
