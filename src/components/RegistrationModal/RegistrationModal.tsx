@@ -8,9 +8,11 @@ import { FaApple } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
 import {
   createUserWithEmailAndPassword,
+  GoogleAuthProvider,
   signInWithEmailAndPassword,
+  signInWithPopup,
 } from "firebase/auth";
-import { auth } from "../../config/firebaseConfig";
+import { auth, provider } from "../../config/firebaseConfig";
 import { useAppSelector } from "../../store/hooks";
 import { RootState } from "../../store/store";
 import { FaEye } from "react-icons/fa6";
@@ -49,6 +51,25 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
     }
   }, [isAuthenticated]);
 
+  const signInWithGoogle = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        console.error(errorCode, errorMessage, email, credential);
+      });
+  };
+
   return (
     <div className={style.wrap}>
       <div className={style.modal}>
@@ -71,15 +92,9 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
         </button>
         <p className={style.text}>or continue wuth</p>
         <div className={style.another}>
-          <a href="#">
+          <span onClick={signInWithGoogle}>
             <FaGoogle />
-          </a>
-          <a href="#">
-            <FaFacebook />
-          </a>
-          <a href="#">
-            <FaApple />
-          </a>
+          </span>
         </div>
       </div>
     </div>
