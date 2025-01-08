@@ -39,6 +39,10 @@ export const ProductDetails: React.FC = () => {
   const [isFavoritesLoaded, setIsFavoritesLoaded] = useState(false);
 
   useEffect(() => {
+    console.log("Значение data", data);
+  }, [data]);
+
+  useEffect(() => {
     setIsFavoritesLoaded(false);
     if (user) {
       const fetchFavorites = async () => {
@@ -74,12 +78,15 @@ export const ProductDetails: React.FC = () => {
           oldPrice: data.oldPrice || 0,
           title: data.title,
           images: data.images,
-          size: data.size ? data.size[0] : "",
-          color: data.color ? data.color[0] : "",
+          size: data.size?.length ? data.size[0] : "",
+          color: data.color?.length ? data.color[0] : "",
           specs: {
             sku: data.specs.sku,
           },
         }));
+        console.log(data.color);
+
+        console.log(data.color ? data.color[0] : "");
       }
     };
 
@@ -92,6 +99,8 @@ export const ProductDetails: React.FC = () => {
 
   const handleAddToCart = () => {
     if (user) {
+      console.log(data);
+
       addToCart(user.uid, data);
       alert("Товар добавлен в корзину");
     } else {
