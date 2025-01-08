@@ -7,7 +7,7 @@ import { CartUserData, ItemCartData } from "../../types";
 import { doc, getDoc } from "firebase/firestore";
 import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 import { createOrder } from "../../utils";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export const Checkout = () => {
   const [user] = useAuthState(auth);
@@ -19,7 +19,7 @@ export const Checkout = () => {
     phoneNumber: "",
     address: "",
   });
-
+  const navigate = useNavigate();
   let price = 0;
 
   useEffect(() => {
@@ -28,7 +28,12 @@ export const Checkout = () => {
         const cartRef = doc(db, "carts", user.uid);
         const cartSnap = await getDoc(cartRef);
         if (cartSnap.exists()) {
-          setCartItems(cartSnap.data().items || []);
+          const items = cartSnap.data().items || [];
+          setCartItems(items);
+
+          if (items.length === 0) {
+            navigate("/cart");
+          }
         }
         setLoading(false);
       };
@@ -46,6 +51,7 @@ export const Checkout = () => {
   if (!user) {
     return <Navigate to="/" />;
   }
+
   if (loading) return <LoadingSpinner />;
 
   return (

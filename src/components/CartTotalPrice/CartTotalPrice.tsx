@@ -26,9 +26,15 @@ export const CartTotalPrice: React.FC<CartTotalPriceProps> = ({ item }) => {
         <p>Total</p>
         <span>Rs. {price}</span>
       </div>
-      <Link to="/checkout" className={style.btn}>
-        Check Out
-      </Link>
+      {item.length === 0 ? (
+        <button className={style.btn} disabled>
+          Check Out
+        </button>
+      ) : (
+        <Link to="/checkout" className={style.btn}>
+          Check Out
+        </Link>
+      )}
     </div>
   );
 };
