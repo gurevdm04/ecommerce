@@ -2,6 +2,7 @@ import style from "./Product.module.scss";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../constants/routes";
 import { ProductCardProps } from "../../types";
+import { ImageWithPlaceholder } from "../ImageWithPlaceholder/ImageWithPlaceholder";
 
 export const Product: React.FC<ProductCardProps> = ({
   title,
@@ -15,7 +16,8 @@ export const Product: React.FC<ProductCardProps> = ({
 
   return (
     <Link to={ROUTES.SHOP_ITEM(id)} className={style.wrap}>
-      <img className={style.img} src={images[0]} alt="" />
+      {/* <img className={style.img} src={images[0]} alt="" /> */}
+      <ImageWithPlaceholder className={style.img} alt="" src={images[0]} />
       <div className={style.block}>
         <h3 className={style.title}>{title}</h3>
         <p className={style.subtitle}>{shortDesc}</p>
