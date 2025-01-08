@@ -6,4 +6,5 @@ export const ROUTES = {
   CHECKOUT: "/checkout",
   CONTACT: "/contact",
   PROFILE: "/profile",
+  THANKYOU: "/thankyou",
 };

@@ -14,6 +14,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./config/firebaseConfig";
 import { useAppDispatch } from "./store/hooks";
 import { clearUser, setUser } from "./store/slices/authSlice";
+import { ThankYouPage } from "./pages/ThankYouPage";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -41,6 +42,7 @@ function App() {
         <Route path={ROUTES.CHECKOUT} element={<CheckoutPage />} />
         <Route path={ROUTES.CONTACT} element={<ContactPage />} />
         <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
+        <Route path={ROUTES.THANKYOU} element={<ThankYouPage />} />
       </Routes>
       <Footer />
     </>

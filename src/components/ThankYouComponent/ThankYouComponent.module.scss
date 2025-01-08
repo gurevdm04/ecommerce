@@ -1,0 +1,56 @@
+.wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  padding: 150px 0;
+  overflow-y: clip;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.title,
+.subtitle,
+.text {
+  z-index: 2;
+  text-align: center;
+}
+.title {
+  margin: 0;
+}
+.subtitle {
+  margin: 0;
+}
+.text {
+  margin: 10px 0 0 0;
+  a {
+    font-weight: bold;
+  }
+}
+.decor1,
+.decor2,
+.decor3,
+.decor4 {
+  position: absolute;
+  z-index: 1;
+}
+.decor1 {
+  transform: translate(-50%, -50%);
+  left: 0;
+  top: 0;
+}
+.decor2 {
+  transform: translate(50%, -50%);
+  right: 0;
+  top: 0;
+}
+.decor3 {
+  transform: translate(50%, -0%);
+  right: 0;
+  bottom: 0;
+}
+.decor4 {
+  transform: translate(-50%, 50%);
+  left: 0;
+  bottom: 0;
+}

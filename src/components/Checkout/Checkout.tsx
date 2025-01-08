@@ -8,6 +8,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 import { createOrder } from "../../utils";
 import { Navigate, useNavigate } from "react-router-dom";
+import { ROUTES } from "../../constants/routes";
 
 export const Checkout = () => {
   const [user] = useAuthState(auth);
@@ -32,7 +33,7 @@ export const Checkout = () => {
           setCartItems(items);
 
           if (items.length === 0) {
-            navigate("/cart");
+            navigate(ROUTES.CART);
           }
         }
         setLoading(false);
@@ -150,6 +151,7 @@ const CheckoutButton: React.FC<CheckoutButtonProps> = ({
   ...props
 }) => {
   const [user] = useAuthState(auth);
+  const navigate = useNavigate();
 
   const handleCheckout = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -167,6 +169,7 @@ const CheckoutButton: React.FC<CheckoutButtonProps> = ({
     if (user) {
       createOrder(user.uid, items, totalAmount, userData);
       alert("Заказ создан");
+      navigate(ROUTES.THANKYOU);
     } else {
       alert("Пожалуйста, войдите в аккаунт, чтобы оформить заказ.");
     }
