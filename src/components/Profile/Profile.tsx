@@ -21,6 +21,10 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 import { AddCategory } from "./AddCategory/AddCategory";
 import { BiCategory } from "react-icons/bi";
+import { FaFolderClosed } from "react-icons/fa6";
+import { AllProducts } from "./AllProducts/AllProducts";
+import { FaListCheck } from "react-icons/fa6";
+import { Orders } from "./Orders/Orders";
 
 export const Profile = () => {
   const { user, isLoading } = useAppSelector((state: RootState) => state.auth);
@@ -66,6 +70,12 @@ export const Profile = () => {
               <Tab className={style.item}>
                 <Item Icon={BiCategory} label="Добавление категории" />
               </Tab>
+              <Tab className={style.item}>
+                <Item Icon={FaFolderClosed} label="Все товары" />
+              </Tab>
+              <Tab className={style.item}>
+                <Item Icon={FaListCheck} label="Заказы" />
+              </Tab>
             </>
           )}
           <Tab className={style.item}>
@@ -88,6 +98,12 @@ export const Profile = () => {
             </TabPanel>
             <TabPanel>
               <AddCategory />
+            </TabPanel>
+            <TabPanel>
+              <AllProducts />
+            </TabPanel>
+            <TabPanel>
+              <Orders />
             </TabPanel>
           </>
         )}
