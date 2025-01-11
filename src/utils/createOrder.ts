@@ -19,7 +19,6 @@ export const createOrder = async (
       totalAmount,
       userData,
     });
-
     console.log("Заказ успешно создан!");
   } catch (error) {
     console.error("Ошибка создания заказа:", error);

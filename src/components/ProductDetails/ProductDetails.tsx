@@ -39,10 +39,6 @@ export const ProductDetails: React.FC = () => {
   const [isFavoritesLoaded, setIsFavoritesLoaded] = useState(false);
 
   useEffect(() => {
-    console.log("Значение data", data);
-  }, [data]);
-
-  useEffect(() => {
     setIsFavoritesLoaded(false);
     if (user) {
       const fetchFavorites = async () => {
@@ -84,9 +80,6 @@ export const ProductDetails: React.FC = () => {
             sku: data.specs.sku,
           },
         }));
-        console.log(data.color);
-
-        console.log(data.color ? data.color[0] : "");
       }
     };
 
@@ -99,7 +92,6 @@ export const ProductDetails: React.FC = () => {
 
   const handleAddToCart = () => {
     if (user) {
-      console.log(data);
       addToCart(user.uid, data);
     } else {
       alert("Пожалуйста, войдите в аккаунт, чтобы добавить товар в корзину.");

@@ -48,8 +48,6 @@ export const AllProducts: React.FC = () => {
     return <p>Загрузка товаров...</p>;
   }
 
-  console.log(products);
-
   return (
     <div>
       <h2>Все товары</h2>

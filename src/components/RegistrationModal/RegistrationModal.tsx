@@ -52,22 +52,13 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
   }, [isAuthenticated]);
 
   const signInWithGoogle = () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const user = result.user;
-        console.log(user);
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        console.error(errorCode, errorMessage, email, credential);
-      });
+    signInWithPopup(auth, provider).catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      const email = error.customData.email;
+      const credential = GoogleAuthProvider.credentialFromError(error);
+      console.error(errorCode, errorMessage, email, credential);
+    });
   };
 
   return (
@@ -120,10 +111,7 @@ const SignUp = () => {
     try {
       setIsLoading(true);
       await createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          console.log(user);
-
+        .then(() => {
           alert("Регистрация прошла успешно");
         })
         .catch((error) => {
@@ -177,9 +165,7 @@ const SignIn = () => {
     try {
       setIsLoading(true);
       await signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          console.log(user);
+        .then(() => {
           alert("Вы вошли");
         })
         .catch((error) => {
