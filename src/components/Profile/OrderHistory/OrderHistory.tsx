@@ -38,6 +38,8 @@ export const OrderHistory = () => {
               <strong>Дата заказа:</strong>{" "}
               {new Date(order.orderDate.seconds * 1000).toLocaleString()}
               {" | "}
+              <strong>Номер заказа:</strong> {order.id}
+              {" | "}
               <strong>Статус:</strong> {order.status}
               {" | "}
               <strong>Сумма заказа:</strong> {order.totalAmount} руб.
