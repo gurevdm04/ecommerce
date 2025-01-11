@@ -4,6 +4,7 @@ import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
 import { db } from "../../../config/firebaseConfig";
 import { Order } from "../../../types";
 import { toastError } from "../../../toastify/Toastify";
+import { Loader } from "../Loader/Loader";
 
 const orders = [
   {
@@ -88,7 +89,7 @@ export const Orders: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <p>Загрузка заказов...</p>;
+    return <Loader />;
   }
 
   return (

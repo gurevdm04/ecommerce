@@ -7,6 +7,7 @@ import { Product } from "../../Product/Product";
 import { Product as ProductType } from "../../../types";
 import { AddProductForm } from "../../AddProduct/AddProduct";
 import { toastError } from "../../../toastify/Toastify";
+import { Loader } from "../Loader/Loader";
 
 export const AllProducts: React.FC = () => {
   const [products, setProducts] = useState<ProductType[]>([]);
@@ -49,7 +50,7 @@ export const AllProducts: React.FC = () => {
         prevProducts.filter((product) => product.id !== productId)
       );
     } catch (error) {
-      toastError('Ошибка при удалении товара')
+      toastError("Ошибка при удалении товара");
       console.error("Ошибка при удалении товара:", error);
     }
   };
@@ -59,7 +60,7 @@ export const AllProducts: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <p>Загрузка товаров...</p>;
+    return <Loader />;
   }
 
   return (
