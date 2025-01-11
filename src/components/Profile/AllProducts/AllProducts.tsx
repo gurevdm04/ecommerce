@@ -5,10 +5,21 @@ import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { db } from "../../../config/firebaseConfig";
 import { Product } from "../../Product/Product";
 import { Product as ProductType } from "../../../types";
+import { AddProductForm } from "../../AddProduct/AddProduct";
 
 export const AllProducts: React.FC = () => {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [idEdit, setIdEdit] = useState<string>("");
+
+  const enableEditMode = (id: string) => {
+    setIdEdit(id);
+    setIsEditing(true);
+  };
+  const disableEditMode = () => {
+    setIsEditing(false);
+  };
 
   // Получение списка товаров
   const fetchProducts = async () => {
@@ -50,26 +61,36 @@ export const AllProducts: React.FC = () => {
 
   return (
     <div>
-      <h2>Все товары</h2>
-      {products.length === 0 ? (
-        <p>Список избранного пуст</p>
+      {isEditing ? (
+        <>
+          <button onClick={disableEditMode}>вернуться назад</button>
+          <AddProductForm isEdit={true} idEdit={idEdit} />
+        </>
       ) : (
-        <div className={style.wrap}>
-          {products.map(
-            ({ id, currentPrice, images, oldPrice, shortDesc, title }) => (
-              <Product
-                id={id || ""}
-                key={id}
-                currentPrice={currentPrice || 0}
-                images={images}
-                oldPrice={oldPrice || 0}
-                shortDesc={shortDesc}
-                title={title}
-                deleteProduct={() => deleteProduct(id || "")}
-              />
-            )
+        <>
+          <h2>Все товары</h2>
+          {products.length === 0 ? (
+            <p>Список избранного пуст</p>
+          ) : (
+            <div className={style.wrap}>
+              {products.map(
+                ({ id, currentPrice, images, oldPrice, shortDesc, title }) => (
+                  <Product
+                    id={id || ""}
+                    key={id}
+                    currentPrice={currentPrice || 0}
+                    images={images}
+                    oldPrice={oldPrice || 0}
+                    shortDesc={shortDesc}
+                    title={title}
+                    deleteProduct={() => deleteProduct(id || "")}
+                    enableEditMode={enableEditMode}
+                  />
+                )
+              )}
+            </div>
           )}
-        </div>
+        </>
       )}
     </div>
   );

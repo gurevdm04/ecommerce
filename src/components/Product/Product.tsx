@@ -14,6 +14,7 @@ export const Product: React.FC<ProductCardProps> = ({
   shortDesc,
   id,
   deleteProduct,
+  enableEditMode,
 }) => {
   return (
     <>
@@ -27,6 +28,7 @@ export const Product: React.FC<ProductCardProps> = ({
             title={title}
             deleteProduct={deleteProduct}
             id={id}
+            enableEditMode={enableEditMode}
           />
         </div>
       ) : (
@@ -53,16 +55,25 @@ const Content: React.FC<ProductCardProps> = ({
   shortDesc,
   title,
   deleteProduct,
+  enableEditMode,
+  id,
 }) => (
   <>
     <span className={style.imageBox}>
       <div className={style.productConrol}>
-        <span>
-          <FaPen className={style.productRe} />
-        </span>
-        <span onClick={deleteProduct}>
-          <MdDeleteForever className={style.productDelete} />
-        </span>
+        {enableEditMode && (
+          <>
+            <span>
+              <FaPen
+                onClick={() => enableEditMode(id)}
+                className={style.productRe}
+              />
+            </span>
+            <span onClick={deleteProduct}>
+              <MdDeleteForever className={style.productDelete} />
+            </span>
+          </>
+        )}
       </div>
       <ImageWithPlaceholder className={style.img} alt="" src={images[0]} />
     </span>

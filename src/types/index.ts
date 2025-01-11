@@ -22,6 +22,7 @@ export interface ProductCardProps {
   oldPrice: number;
   images: string[];
   deleteProduct?: () => void;
+  enableEditMode?: (e: string) => void;
 }
 
 export interface ItemCartData {

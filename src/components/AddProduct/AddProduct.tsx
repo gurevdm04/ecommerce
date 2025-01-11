@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { auth } from "../../config/firebaseConfig";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+  doc,
+  getDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../../config/firebaseConfig";
 import { isAdmin, validateRequiredFields } from "../../utils";
 import { useAppSelector } from "../../store/hooks";
@@ -21,7 +28,15 @@ export interface InputProps {
   placeholder: string;
 }
 
-export const AddProductForm = () => {
+interface AddProductFormProps {
+  isEdit?: boolean;
+  idEdit?: string;
+}
+
+export const AddProductForm: React.FC<AddProductFormProps> = ({
+  isEdit,
+  idEdit,
+}) => {
   const { user } = useAppSelector((state: RootState) => state.auth);
   const [isAdminUser, setIsAdminUser] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -105,8 +120,43 @@ export const AddProductForm = () => {
     if (user) {
       isAdmin(user.uid).then((data) => {
         setIsAdminUser(data);
-        setLoading(false);
+        if (!isEdit) {
+          setLoading(false);
+        }
       });
+      if (isEdit) {
+        const getProductById = async (
+          productId: string
+        ): Promise<Product | null> => {
+          try {
+            // Ссылка на документ в коллекции "products"
+            const productRef = doc(db, "products", productId);
+
+            // Получение документа
+            const productSnapshot = await getDoc(productRef);
+
+            if (productSnapshot.exists()) {
+              // Возвращаем данные товара, добавляя его ID
+              return {
+                id: productSnapshot.id,
+                ...productSnapshot.data(),
+              } as Product;
+            } else {
+              console.log("Товар с таким ID не найден.");
+              return null;
+            }
+          } catch (error) {
+            console.error("Ошибка при получении товара:", error);
+            return null;
+          }
+        };
+
+        getProductById(idEdit || "")
+          .then((res) => setData({ ...(res as Product) }))
+          .finally(() => {
+            setLoading(false);
+          });
+      }
     }
   }, [user]);
 
@@ -130,14 +180,35 @@ export const AddProductForm = () => {
     }
 
     if (isAdminUser) {
-      try {
-        await addDoc(collection(db, "products"), {
-          ...data,
-          createdAt: serverTimestamp(),
-        });
-        alert("Product added!");
-      } catch (error) {
-        alert("Error adding product");
+      if (isEdit) {
+        const updateProduct = async (
+          productId: string,
+          updatedData: Partial<Product>
+        ): Promise<void> => {
+          try {
+            // Ссылка на документ
+            const productRef = doc(db, "products", productId);
+
+            // Обновление документа
+            await updateDoc(productRef, updatedData);
+
+            console.log("Товар успешно обновлен!");
+          } catch (error) {
+            console.error("Ошибка при обновлении товара:", error);
+          }
+        };
+
+        updateProduct(idEdit || "", data);
+      } else {
+        try {
+          await addDoc(collection(db, "products"), {
+            ...data,
+            createdAt: serverTimestamp(),
+          });
+          alert("Product added!");
+        } catch (error) {
+          alert("Error adding product");
+        }
       }
     } else {
       alert("You are not authorized to add products");
@@ -145,6 +216,7 @@ export const AddProductForm = () => {
   };
 
   if (loading) return <Loader />;
+
   if (!isAdminUser) {
     return <div>You are not authorized to add products</div>;
   }
@@ -244,7 +316,7 @@ export const AddProductForm = () => {
     <>
       <div className={style.wrap}>
         <Wrapper>
-          <h2>Добавление товаров</h2>
+          <h2>{isEdit ? "Обновлене товара" : "Добавление товаров"}</h2>
           <form className={style.form} onSubmit={handleSubmit}>
             {list.map(
               ({ type, name, handle, placeholder, title, value }, index) => (
@@ -266,7 +338,9 @@ export const AddProductForm = () => {
                 </React.Fragment>
               )
             )}
-            <button type="submit">Add Product</button>
+            <button type="submit">
+              {isEdit ? "Update Product" : "Add Product"}
+            </button>
           </form>
         </Wrapper>
       </div>
