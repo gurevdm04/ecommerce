@@ -18,6 +18,7 @@ import { Wrapper } from "../Wrapper/Wrapper";
 import { HandleType, Product, Types } from "../../types";
 import { Input } from "./Input/Input";
 import { Loader } from "../Profile/Loader/Loader";
+import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 
 export interface InputProps {
   type: Types;
@@ -40,6 +41,7 @@ export const AddProductForm: React.FC<AddProductFormProps> = ({
   const { user } = useAppSelector((state: RootState) => state.auth);
   const [isAdminUser, setIsAdminUser] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [pending, setPending] = useState<boolean>(false);
   const [data, setData] = useState<Product>({
     title: "",
     oldPrice: null,
@@ -169,6 +171,7 @@ export const AddProductForm: React.FC<AddProductFormProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setPending(true);
 
     if (requiredChecks) {
       const errors = validateRequiredFields(data);
@@ -195,6 +198,8 @@ export const AddProductForm: React.FC<AddProductFormProps> = ({
             console.log("Товар успешно обновлен!");
           } catch (error) {
             console.error("Ошибка при обновлении товара:", error);
+          } finally {
+            setPending(false);
           }
         };
 
@@ -208,6 +213,8 @@ export const AddProductForm: React.FC<AddProductFormProps> = ({
           alert("Product added!");
         } catch (error) {
           alert("Error adding product");
+        } finally {
+          setPending(false);
         }
       }
     } else {
@@ -317,7 +324,11 @@ export const AddProductForm: React.FC<AddProductFormProps> = ({
       <div className={style.wrap}>
         <Wrapper>
           <h2>{isEdit ? "Обновлене товара" : "Добавление товаров"}</h2>
-          <form className={style.form} onSubmit={handleSubmit}>
+          <form
+            style={pending ? { pointerEvents: "none", opacity: 0.5 } : {}}
+            className={style.form}
+            onSubmit={handleSubmit}
+          >
             {list.map(
               ({ type, name, handle, placeholder, title, value }, index) => (
                 <React.Fragment key={title}>
@@ -338,6 +349,7 @@ export const AddProductForm: React.FC<AddProductFormProps> = ({
                 </React.Fragment>
               )
             )}
+            {pending && <LoadingSpinner />}
             <button type="submit">
               {isEdit ? "Update Product" : "Add Product"}
             </button>
