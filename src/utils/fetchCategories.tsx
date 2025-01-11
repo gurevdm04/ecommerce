@@ -1,5 +1,6 @@
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
+import { toastError, toastWarning } from "../toastify/Toastify";
 
 /**
  * Функция для получения категорий из Firestore.
@@ -16,10 +17,12 @@ export const fetchCategories = async (): Promise<string[]> => {
       const data = docSnap.data();
       return data.categories || [];
     } else {
+      toastWarning("Документ с категориями не найден");
       console.warn("Документ с категориями не найден.");
       return [];
     }
   } catch (err) {
+    toastError("Ошибка при получении категорий");
     console.error("Ошибка при получении категорий:", err);
     throw new Error("Не удалось загрузить категории.");
   }

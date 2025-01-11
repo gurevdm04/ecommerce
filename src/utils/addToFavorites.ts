@@ -1,5 +1,6 @@
 import { doc, getDoc, setDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
+import { toastError } from "../toastify/Toastify";
 
 interface Favorites {
   id: string;
@@ -34,6 +35,7 @@ export const addToFavorites = async (userId: string, product: Favorites) => {
       });
     }
   } catch (error) {
+    toastError("Ошибка добавления в избранное")
     console.error("Ошибка добавления в избранное:", error);
   }
 };

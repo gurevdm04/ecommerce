@@ -10,6 +10,7 @@ import { ItemCartData } from "../types";
 
 import style from "./index.module.scss";
 import { Navigate } from "react-router-dom";
+import { toastError } from "../toastify/Toastify";
 
 export const CartContainers = () => {
   const [user] = useAuthState(auth);
@@ -42,6 +43,7 @@ export const CartContainers = () => {
       setCartItems(updatedItems);
       await updateDoc(cartRef, { items: updatedItems });
     } catch (error) {
+      toastError('Ошибка удаления товара из корзины')
       console.error("Ошибка удаления товара из корзины:", error);
     }
   };

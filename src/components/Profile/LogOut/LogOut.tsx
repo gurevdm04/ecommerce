@@ -2,6 +2,7 @@ import { signOut } from "firebase/auth";
 import { useAppDispatch } from "../../../store/hooks";
 import { clearUser } from "../../../store/slices/authSlice";
 import { auth } from "../../../config/firebaseConfig";
+import { toastError } from "../../../toastify/Toastify";
 
 export const LogOut = () => {
   const dispatch = useAppDispatch();
@@ -11,6 +12,7 @@ export const LogOut = () => {
       await signOut(auth);
       dispatch(clearUser());
     } catch (error) {
+      toastError('Ошибка при выходе')
       console.error("Ошибка при выходе:", error);
     }
   };

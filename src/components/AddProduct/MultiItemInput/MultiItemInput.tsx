@@ -2,6 +2,7 @@ import style from "./MultiItemInput.module.scss";
 import React, { useState } from "react";
 import { InputProps } from "../AddProduct";
 import { truncateText } from "../../../utils/truncateText";
+import { toastError } from "../../../toastify/Toastify";
 
 export const MultiItemInput: React.FC<InputProps> = ({
   handle,
@@ -25,7 +26,7 @@ export const MultiItemInput: React.FC<InputProps> = ({
     if (typeof value === "object") {
       handle(type, { name, value: value.filter((_, i) => i !== index) });
     } else {
-      alert("error");
+      toastError("error");
     }
   };
 
@@ -46,11 +47,7 @@ export const MultiItemInput: React.FC<InputProps> = ({
       <ul className={style.list}>
         {typeof value === "object" &&
           value.map((item, index) => (
-            <li
-              title={item}
-              className={style.item}
-              key={index}
-            >
+            <li title={item} className={style.item} key={index}>
               {truncateText(item, 20)}{" "}
               <p
                 className={style.remove}

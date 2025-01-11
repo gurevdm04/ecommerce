@@ -16,6 +16,7 @@ import { ImageGallery } from "./ImageGallery/ImageGallery";
 import { SizeOptionSelector } from "./SizeOptionSelector/SizeOptionSelector";
 import { ColorOptionSelector } from "./ColorOptionSelector/ColorOptionSelector";
 import { Tabs } from "../Tabs/Tabs";
+import { toastInfo } from "../../toastify/Toastify";
 
 export const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -94,7 +95,9 @@ export const ProductDetails: React.FC = () => {
     if (user) {
       addToCart(user.uid, data);
     } else {
-      alert("Пожалуйста, войдите в аккаунт, чтобы добавить товар в корзину.");
+      toastInfo(
+        "Пожалуйста, войдите в аккаунт, чтобы добавить товар в корзину."
+      );
     }
   };
 
@@ -114,7 +117,7 @@ export const ProductDetails: React.FC = () => {
         setIsFavorites(true);
       }
     } else {
-      alert("Пожалуйста, войдите в аккаунт, чтобы управлять избранным.");
+      toastInfo("Пожалуйста, войдите в аккаунт, чтобы управлять избранным.");
     }
   };
 

@@ -1,6 +1,7 @@
 import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
 import { ItemCartData } from "../types";
+import { toastError } from "../toastify/Toastify";
 
 interface Order {
   id: string;
@@ -28,6 +29,7 @@ export const getUserOrders = async (userId: string): Promise<Order[]> => {
 
     return orders;
   } catch (error) {
+    toastError("Ошибка получения заказов")
     console.error("Ошибка получения заказов:", error);
     return [];
   }

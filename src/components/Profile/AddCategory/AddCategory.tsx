@@ -15,7 +15,7 @@ import {
 import { db } from "../../../config/firebaseConfig";
 import { Loader } from "../Loader/Loader";
 import { HandleType, Types } from "../../../types";
-
+import { toastError, toastInfo, toastSuccess } from "../../../toastify/Toastify";
 
 export const AddCategory = () => {
   const [category, setCategory] = useState<string[]>([]);
@@ -37,14 +37,16 @@ export const AddCategory = () => {
         const data = docSnap.data();
         setCategory(data.categories || []);
       } else {
-        console.log("Документ не найден, создайте его.");
+        toastInfo("Документ не найден, создайте его.");
         setCategory([]);
       }
     } catch (err) {
       setError("Не удалось загрузить категории.");
+      toastError("Не удалось загрузить категории.");
       console.error(err);
     } finally {
-      setLoading(false);setIsLoaded(true)
+      setLoading(false);
+      setIsLoaded(true);
     }
   };
 
@@ -68,9 +70,10 @@ export const AddCategory = () => {
         categories: category,
         updatedAt: new Date(),
       });
-      console.log("Категории успешно обновлены.");
+      toastSuccess("Категории успешно обновлены.");
     } catch (err) {
       setError("Не удалось сохранить категории.");
+      toastError("Не удалось сохранить категории.");
       console.error(err);
     } finally {
       setLoading(false);

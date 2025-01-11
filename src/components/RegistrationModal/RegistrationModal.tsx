@@ -19,6 +19,12 @@ import { FaEye } from "react-icons/fa6";
 import { FaEyeSlash } from "react-icons/fa6";
 import { IconContext } from "react-icons";
 import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
+import {
+  toastError,
+  toastInfo,
+  toastSuccess,
+  toastWarning,
+} from "../../toastify/Toastify";
 
 const Loader = () => {
   return (
@@ -57,6 +63,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
       const errorMessage = error.message;
       const email = error.customData.email;
       const credential = GoogleAuthProvider.credentialFromError(error);
+      toastError("Ошибка при вхоже в google аккаунт");
       console.error(errorCode, errorMessage, email, credential);
     });
   };
@@ -104,7 +111,7 @@ const SignUp = () => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("Пароли не совпадают");
+      toastWarning("Пароли не совпадают");
       return;
     }
 
@@ -112,14 +119,16 @@ const SignUp = () => {
       setIsLoading(true);
       await createUserWithEmailAndPassword(auth, email, password)
         .then(() => {
-          alert("Регистрация прошла успешно");
+          toastSuccess("Регистрация прошла успешно");
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
+          toastError("Ошибка при регистрации");
           console.error(errorCode, errorMessage);
         });
     } catch (error) {
+      toastError("Ошибка при регистрации");
       console.error(error);
     } finally {
       setIsLoading(true);
@@ -166,14 +175,16 @@ const SignIn = () => {
       setIsLoading(true);
       await signInWithEmailAndPassword(auth, email, password)
         .then(() => {
-          alert("Вы вошли");
+          toastInfo("Вы вошли");
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
+          toastError("Ошибка прм входе");
           console.error(errorCode, errorMessage);
         });
     } catch (error) {
+      toastError("Ошибка прм входе");
       console.error(error);
     } finally {
       setIsLoading(false);

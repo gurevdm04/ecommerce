@@ -1,6 +1,7 @@
 import { doc, getDoc, setDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
 import { ItemCartData } from "../types";
+import { toastError, toastSuccess } from "../toastify/Toastify";
 
 export const addToCart = async (userId: string, product: ItemCartData) => {
   const cartRef = doc(db, "carts", userId);
@@ -18,9 +19,9 @@ export const addToCart = async (userId: string, product: ItemCartData) => {
         items: [{ ...product }],
       });
     }
-    alert("Товар добавлен в корзину");
+    toastSuccess("Товар добавлен в корзину");
   } catch (error) {
-    alert("Ошибка добавления товара в корзину:");
+    toastError("Ошибка добавления товара в корзину:");
     console.error("Ошибка добавления товара в корзину:", error);
   }
 };

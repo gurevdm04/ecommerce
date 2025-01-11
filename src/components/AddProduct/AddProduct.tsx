@@ -19,6 +19,12 @@ import { HandleType, Product, Types } from "../../types";
 import { Input } from "./Input/Input";
 import { Loader } from "../Profile/Loader/Loader";
 import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
+import {
+  toastError,
+  toastInfo,
+  toastSuccess,
+  toastWarning,
+} from "../../toastify/Toastify";
 
 export interface InputProps {
   type: Types;
@@ -144,10 +150,11 @@ export const AddProductForm: React.FC<AddProductFormProps> = ({
                 ...productSnapshot.data(),
               } as Product;
             } else {
-              console.log("Товар с таким ID не найден.");
+              toastWarning("Товар с таким ID не найден.");
               return null;
             }
           } catch (error) {
+            toastError("Ошибка при получении товара:");
             console.error("Ошибка при получении товара:", error);
             return null;
           }
@@ -178,7 +185,7 @@ export const AddProductForm: React.FC<AddProductFormProps> = ({
 
       setErrors(errors);
       setShowErrors(true);
-      alert("Заполните все обязательные поля!");
+      toastWarning("Заполните все обязательные поля!");
       return;
     }
 
@@ -194,9 +201,9 @@ export const AddProductForm: React.FC<AddProductFormProps> = ({
 
             // Обновление документа
             await updateDoc(productRef, updatedData);
-
-            console.log("Товар успешно обновлен!");
+            toastSuccess("Товар успешно обновлен!");
           } catch (error) {
+            toastError("Ошибка при обновлении товара!")
             console.error("Ошибка при обновлении товара:", error);
           } finally {
             setPending(false);
@@ -210,15 +217,15 @@ export const AddProductForm: React.FC<AddProductFormProps> = ({
             ...data,
             createdAt: serverTimestamp(),
           });
-          alert("Product added!");
+          toastSuccess("Product added!");
         } catch (error) {
-          alert("Error adding product");
+          toastError("Error adding product");
         } finally {
           setPending(false);
         }
       }
     } else {
-      alert("You are not authorized to add products");
+      toastInfo('"You are not authorized to add products"');
     }
   };
 

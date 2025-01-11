@@ -1,5 +1,6 @@
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
+import { toastError } from "../toastify/Toastify";
 
 export const removeFromFavorites = async (userId: string, productId: string) => {
   const favRef = doc(db, "favorites", userId);
@@ -16,6 +17,7 @@ export const removeFromFavorites = async (userId: string, productId: string) => 
       await updateDoc(favRef, { favorites: updatedFavorites });
     }
   } catch (error) {
+    toastError("Ошибка удаления из избранного");
     console.error("Ошибка удаления из избранного:", error);
   }
 };

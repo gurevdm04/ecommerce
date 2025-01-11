@@ -1,5 +1,6 @@
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
+import { toastError, toastWarning } from "../toastify/Toastify";
 
 /**
  * Получает категории из Firestore и форматирует их.
@@ -27,10 +28,12 @@ export const fetchCategoryOptions = async (): Promise<
       // Добавляем опцию "По умолчанию" в начало списка
       return [{ value: "", label: "По умолчанию" }, ...formattedCategories];
     } else {
+      toastWarning("Документ с категориями не найден");
       console.warn("Документ с категориями не найден.");
       return [{ value: "", label: "По умолчанию" }];
     }
   } catch (err) {
+    toastError("Ошибка при получении категорий");
     console.error("Ошибка при получении категорий:", err);
     throw new Error("Не удалось загрузить категории.");
   }

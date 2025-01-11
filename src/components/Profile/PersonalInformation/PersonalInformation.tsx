@@ -6,6 +6,7 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import style from "./PersonalInformation.module.scss";
 import { BallTriangle } from "react-loader-spinner";
 import { Loader } from "../Loader/Loader";
+import { toastError, toastSuccess } from "../../../toastify/Toastify";
 
 interface UserProfile {
   name: string;
@@ -69,10 +70,10 @@ export const PersonalInformation = () => {
     try {
       const docRef = doc(db, "usersData", user.uid);
       await setDoc(docRef, profile);
-      alert("Данные успешно сохранены");
+      toastSuccess("Данные успешно сохранены");
     } catch (error) {
+      toastError("Ошибка при сохранении данных");
       console.error("Ошибка сохранения данных:", error);
-      alert("Ошибка при сохранении данных");
     } finally {
       setUpdatingData(false);
     }

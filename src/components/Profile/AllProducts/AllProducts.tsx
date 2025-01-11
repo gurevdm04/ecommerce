@@ -6,6 +6,7 @@ import { db } from "../../../config/firebaseConfig";
 import { Product } from "../../Product/Product";
 import { Product as ProductType } from "../../../types";
 import { AddProductForm } from "../../AddProduct/AddProduct";
+import { toastError } from "../../../toastify/Toastify";
 
 export const AllProducts: React.FC = () => {
   const [products, setProducts] = useState<ProductType[]>([]);
@@ -34,6 +35,7 @@ export const AllProducts: React.FC = () => {
       ) as ProductType[];
       setProducts(productsData);
     } catch (error) {
+      toastError("Ошибка при получении товаров");
       console.error("Ошибка при получении товаров:", error);
     }
     setLoading(false);
@@ -47,6 +49,7 @@ export const AllProducts: React.FC = () => {
         prevProducts.filter((product) => product.id !== productId)
       );
     } catch (error) {
+      toastError('Ошибка при удалении товара')
       console.error("Ошибка при удалении товара:", error);
     }
   };

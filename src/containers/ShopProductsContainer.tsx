@@ -15,6 +15,7 @@ import { Button } from "../components/Button/Button";
 import { useSearchParams } from "react-router-dom";
 import { LoadingSpinner } from "../components/LoadingSpinner/LoadingSpinner";
 import { ProductCardProps } from "../types";
+import { toastError } from "../toastify/Toastify";
 
 const ITEMS_PER_PAGE = 8;
 
@@ -84,6 +85,7 @@ export const ShopProductsContainer = () => {
       setLastVisible(snapshot.docs[snapshot.docs.length - 1]);
       setHasMore(snapshot.docs.length === ITEMS_PER_PAGE);
     } catch (error) {
+      toastError("Ошибка при загрузке товаров");
       console.error("Ошибка при загрузке товаров:", error);
     } finally {
       setIsLoading(false);

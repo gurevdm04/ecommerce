@@ -3,6 +3,7 @@ import style from "./Orders.module.scss";
 import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
 import { db } from "../../../config/firebaseConfig";
 import { Order } from "../../../types";
+import { toastError } from "../../../toastify/Toastify";
 
 const orders = [
   {
@@ -60,6 +61,7 @@ export const Orders: React.FC = () => {
       })) as Order[];
       setOrders(ordersData);
     } catch (error) {
+      toastError("Ошибка при получении заказов");
       console.error("Ошибка при получении заказов:", error);
     }
     setLoading(false);
@@ -76,6 +78,7 @@ export const Orders: React.FC = () => {
         )
       );
     } catch (error) {
+      toastError("Ошибка при обновлении статуса");
       console.error("Ошибка при обновлении статуса:", error);
     }
   };
