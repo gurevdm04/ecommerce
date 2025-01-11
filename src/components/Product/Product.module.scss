@@ -91,3 +91,25 @@
   color: #b88e2f;
   cursor: pointer;
 }
+.imageBox {
+  position: relative;
+}
+.productConrol {
+  position: absolute;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  gap: 10px;
+  border-radius: 3px;
+  top: 3px;
+  right: 3px;
+}
+.productRe,
+.productDelete {
+  cursor: pointer;
+  :hover {
+    color: #b88e2f;
+  }
+}

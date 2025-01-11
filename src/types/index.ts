@@ -1,4 +1,5 @@
 export interface Product {
+  id?: string;
   title: string;
   oldPrice?: number | null;
   currentPrice: number | null;
@@ -20,6 +21,7 @@ export interface ProductCardProps {
   currentPrice: number;
   oldPrice: number;
   images: string[];
+  deleteProduct?: () => void;
 }
 
 export interface ItemCartData {

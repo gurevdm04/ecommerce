@@ -22,9 +22,9 @@ import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 import { AddCategory } from "./AddCategory/AddCategory";
 import { BiCategory } from "react-icons/bi";
 import { FaFolderClosed } from "react-icons/fa6";
-import { AllProducts } from "./AllProducts/AllProducts";
 import { FaListCheck } from "react-icons/fa6";
 import { Orders } from "./Orders/Orders";
+import { AllProducts } from "./AllProducts/AllProducts";
 
 export const Profile = () => {
   const { user, isLoading } = useAppSelector((state: RootState) => state.auth);
