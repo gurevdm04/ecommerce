@@ -16,7 +16,7 @@ import { ImageGallery } from "./ImageGallery/ImageGallery";
 import { SizeOptionSelector } from "./SizeOptionSelector/SizeOptionSelector";
 import { ColorOptionSelector } from "./ColorOptionSelector/ColorOptionSelector";
 import { Tabs } from "../Tabs/Tabs";
-import { toastInfo } from "../../toastify/Toastify";
+import { toastError, toastInfo } from "../../toastify/Toastify";
 
 export const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -35,7 +35,9 @@ export const ProductDetails: React.FC = () => {
       sku: "",
     },
   });
-
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
   const [isFavorites, setIsFavorites] = useState(false);
   const [isFavoritesLoaded, setIsFavoritesLoaded] = useState(false);
 
@@ -63,24 +65,32 @@ export const ProductDetails: React.FC = () => {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      if (!id) return;
-      const docRef = doc(db, "products", id);
-      const docSnap = await getDoc(docRef);
-      const data = docSnap.data() as Product;
-      if (docSnap.exists()) {
-        setProduct(data);
-        setData((prev) => ({
-          ...prev,
-          currentPrice: data.currentPrice,
-          oldPrice: data.oldPrice || 0,
-          title: data.title,
-          images: data.images,
-          size: data.size?.length ? data.size[0] : "",
-          color: data.color?.length ? data.color[0] : "",
-          specs: {
-            sku: data.specs.sku,
-          },
-        }));
+      try {
+        if (!id) return;
+        const docRef = doc(db, "products", id);
+        const docSnap = await getDoc(docRef);
+        const data = docSnap.data() as Product;
+        console.log("data");
+        if (docSnap.exists()) {
+          setProduct(data);
+          setData((prev) => ({
+            ...prev,
+            currentPrice: data.currentPrice,
+            oldPrice: data.oldPrice || 0,
+            title: data.title,
+            images: data.images,
+            size: data.size?.length ? data.size[0] : "",
+            color: data.color?.length ? data.color[0] : "",
+            specs: {
+              sku: data.specs.sku,
+            },
+          }));
+        } else {
+          throw new Error("не удалось загрузить товар");
+        }
+      } catch (error) {
+        toastError("Произошла ошибка при загрузкт товара");
+        console.error("Произошла ошибка при загрузкт товара", error);
       }
     };
 
