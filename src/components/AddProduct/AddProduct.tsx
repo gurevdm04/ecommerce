@@ -102,6 +102,12 @@ export const AddProductForm: React.FC<AddProductFormProps> = ({
           [name]: value,
         }));
         break;
+      case "upload":
+        setData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+        break;
       case "spec":
         setData((prevData) => ({
           ...prevData,
@@ -203,7 +209,7 @@ export const AddProductForm: React.FC<AddProductFormProps> = ({
             await updateDoc(productRef, updatedData);
             toastSuccess("Товар успешно обновлен!");
           } catch (error) {
-            toastError("Ошибка при обновлении товара!")
+            toastError("Ошибка при обновлении товара!");
             console.error("Ошибка при обновлении товара:", error);
           } finally {
             setPending(false);
@@ -277,7 +283,7 @@ export const AddProductForm: React.FC<AddProductFormProps> = ({
       placeholder: "Введите текст",
     },
     {
-      type: "multi",
+      type: "upload",
       title: "Введите ссылки на изображения*",
       name: "images",
       value: data.images,

@@ -1,0 +1,48 @@
+.wrap {
+  position: relative;
+  .btn {
+    max-width: 130px;
+    padding: 10px;
+    // margin-left: 15px;
+  }
+}
+.loadWrap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #00000049;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.list {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  padding: 15px 0;
+}
+.item {
+  border: 1px solid #000;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+.remove {
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  display: inline;
+}

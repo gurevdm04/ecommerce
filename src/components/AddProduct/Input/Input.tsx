@@ -2,6 +2,7 @@ import React from "react";
 import { InputProps } from "../AddProduct";
 import { MultiItemInput } from "../MultiItemInput/MultiItemInput";
 import { CategorySelector } from "../CategorySelector/CategorySelector";
+import { MultiItemInputUpload } from "../MultiItemInputUpload/MultiItemInputUpload";
 
 export const Input: React.FC<InputProps> = ({
   type,
@@ -53,6 +54,17 @@ export const Input: React.FC<InputProps> = ({
     case "multi":
       return (
         <MultiItemInput
+          handle={handle}
+          name={name}
+          placeholder={placeholder}
+          title={title}
+          type={type}
+          value={value}
+        />
+      );
+    case "upload":
+      return (
+        <MultiItemInputUpload
           handle={handle}
           name={name}
           placeholder={placeholder}

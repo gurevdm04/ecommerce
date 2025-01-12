@@ -59,6 +59,7 @@ export type Types =
   | "textarea"
   | "multi"
   | "spec"
+  | "upload"
   | "checkboxes";
 export type HandleType = (
   type: Types,
