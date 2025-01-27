@@ -15,10 +15,11 @@ export const MultiItemInputUpload: React.FC<InputProps> = ({
   value,
 }) => {
   const [inputValue, setInputValue] = useState("");
-  const [isValid, setIsValid] = useState<boolean | null>(null);
+  const [isValid, setIsValid] = useState<boolean>(true);
   const [image, setImage] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string>("");
   const [loading, setLoading] = useState(false);
+  const [fileInputKey, setFileInputKey] = useState<string>(""); // Новый ключ для сброса
 
   const imageRegex =
     /^(https?:\/\/)?([\w-]+(\.[\w-]+)+)([\/\w.-]*)*\.(jpg|jpeg|png|gif|bmp|webp)$/i;
@@ -38,6 +39,10 @@ export const MultiItemInputUpload: React.FC<InputProps> = ({
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
+    if (!image) {
+      toastError("Выберите изображение");
+      return;
+    }
     setLoading(true);
     if (!image) return;
     clearInput();
@@ -73,6 +78,7 @@ export const MultiItemInputUpload: React.FC<InputProps> = ({
     }
     setImage(null); // Очистка состояния
     setImageUrl(""); // Сброс ссылки на изображение
+    setFileInputKey(Date.now().toString());
   };
 
   const handleAddItem = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -122,7 +128,7 @@ export const MultiItemInputUpload: React.FC<InputProps> = ({
           type="file"
           accept="image/*"
           onChange={(e) => setImage(e.target.files ? e.target.files[0] : null)}
-          key={imageUrl}
+          key={fileInputKey}
         />
         {imageUrl && (
           <>
@@ -141,7 +147,11 @@ export const MultiItemInputUpload: React.FC<InputProps> = ({
             </div>
           </>
         )}
-        <button className={style.btn} onClick={(e) => handleImageUpload(e)}>
+        <button
+          className={style.btn}
+          onClick={(e) => handleImageUpload(e)}
+          disabled={!image}
+        >
           Загрузить изображение
         </button>
         {
