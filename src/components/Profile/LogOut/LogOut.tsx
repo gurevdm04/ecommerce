@@ -3,6 +3,7 @@ import { useAppDispatch } from "../../../store/hooks";
 import { clearUser } from "../../../store/slices/authSlice";
 import { auth } from "../../../config/firebaseConfig";
 import { toastError } from "../../../toastify/Toastify";
+import style from "./LogOut.module.scss";
 
 export const LogOut = () => {
   const dispatch = useAppDispatch();
@@ -12,14 +13,16 @@ export const LogOut = () => {
       await signOut(auth);
       dispatch(clearUser());
     } catch (error) {
-      toastError('Ошибка при выходе')
+      toastError("Ошибка при выходе");
       console.error("Ошибка при выходе:", error);
     }
   };
   return (
     <div>
       <h2>Вы уверенны что хотите выйти?</h2>
-      <button onClick={handleLogout}>Выйти</button>
+      <button onClick={handleLogout} className={style.btn}>
+        Выйти
+      </button>
     </div>
   );
 };
