@@ -22,14 +22,14 @@ export const listLinks: items = [
 export const listHelp: items = [
   {
     text: "Payment Options",
-    path: "#Payment Options",
+    path: "https://github.com/gurevdm04",
   },
   {
     text: "Returns",
-    path: "#Returns",
+    path: "https://github.com/gurevdm04",
   },
   {
     text: "Privacy Policies",
-    path: "#Privacy Policies",
+    path: "https://github.com/gurevdm04",
   },
 ];

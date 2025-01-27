@@ -17,7 +17,7 @@ export const Footer = () => {
             </p>
           </div>
           <FooterList title="Links" items={listLinks} />
-          <FooterList title="Help" items={listHelp} />
+          <FooterList title="Help" items={listHelp} isA={true} />
           <div className={style.newsletter}>
             <h2 className={style.title}>Newsletter</h2>
             <div>

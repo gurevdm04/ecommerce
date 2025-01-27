@@ -9,15 +9,16 @@ type items = {
 interface FooterListProps {
   title: string;
   items: items;
+  isA?: boolean;
 }
 
-export const FooterList: React.FC<FooterListProps> = ({ title, items }) => {
+export const FooterList: React.FC<FooterListProps> = ({ title, items, isA }) => {
   return (
     <div className={style.wrap}>
       <h2 className={style.title}>{title}</h2>
       <ul className={style.list}>
         {items.map(({ text, path }) => (
-          <Item key={path} text={text} path={path} />
+          <Item key={path} text={text} path={path} isA={isA} />
         ))}
       </ul>
     </div>
@@ -27,14 +28,21 @@ export const FooterList: React.FC<FooterListProps> = ({ title, items }) => {
 interface ItemProps {
   text: string;
   path: string;
+  isA?: boolean;
 }
 
-const Item: React.FC<ItemProps> = ({ text, path }) => {
+const Item: React.FC<ItemProps> = ({ text, path, isA }) => {
   return (
     <li className={style.item}>
-      <Link to={path} className={style.link}>
-        {text}
-      </Link>
+      {isA ? (
+        <a href={path} className={style.link}>
+          {text}
+        </a>
+      ) : (
+        <Link to={path} className={style.link}>
+          {text}
+        </Link>
+      )}
     </li>
   );
 };
