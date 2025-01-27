@@ -15,9 +15,24 @@ export const MultiItemInputUpload: React.FC<InputProps> = ({
   value,
 }) => {
   const [inputValue, setInputValue] = useState("");
+  const [isValid, setIsValid] = useState<boolean | null>(null);
   const [image, setImage] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string>("");
   const [loading, setLoading] = useState(false);
+
+  const imageRegex =
+    /^(https?:\/\/)?([\w-]+(\.[\w-]+)+)([\/\w.-]*)*\.(jpg|jpeg|png|gif|bmp|webp)$/i;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setInputValue(value);
+
+    if (value === "") {
+      setIsValid(true);
+    } else {
+      setIsValid(imageRegex.test(value));
+    }
+  };
 
   const handleImageUpload = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -62,6 +77,10 @@ export const MultiItemInputUpload: React.FC<InputProps> = ({
 
   const handleAddItem = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
+    if (!isValid) {
+      toastError("Введите корректный адрес изображения");
+      return;
+    }
     if (inputValue.trim() && typeof value === "object") {
       setInputValue("");
       handle(type, { name, value: [...value, inputValue] });
@@ -88,12 +107,17 @@ export const MultiItemInputUpload: React.FC<InputProps> = ({
         <input
           type="text"
           value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          onChange={handleChange}
           placeholder={placeholder}
         />
-        <button className={style.btn} onClick={handleAddItem}>
+        <button
+          className={style.btn}
+          onClick={handleAddItem}
+          disabled={inputValue === ""}
+        >
           Добавить upload
         </button>
+        {!isValid && <p className={style.error}>Некорректный URL изображения</p>}
         <input
           type="file"
           accept="image/*"
