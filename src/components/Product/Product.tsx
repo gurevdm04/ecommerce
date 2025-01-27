@@ -60,21 +60,19 @@ const Content: React.FC<ProductCardProps> = ({
 }) => (
   <>
     <span className={style.imageBox}>
-      <div className={style.productConrol}>
-        {enableEditMode && (
-          <>
-            <span>
-              <FaPen
-                onClick={() => enableEditMode(id)}
-                className={style.productRe}
-              />
-            </span>
-            <span onClick={deleteProduct}>
-              <MdDeleteForever className={style.productDelete} />
-            </span>
-          </>
-        )}
-      </div>
+      {enableEditMode && (
+        <div className={style.productConrol}>
+          <span>
+            <FaPen
+              onClick={() => enableEditMode(id)}
+              className={style.productRe}
+            />
+          </span>
+          <span onClick={deleteProduct}>
+            <MdDeleteForever className={style.productDelete} />
+          </span>
+        </div>
+      )}
       <ImageWithPlaceholder className={style.img} alt="" src={images[0]} />
     </span>
     <div className={style.block}>
