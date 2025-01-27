@@ -35,7 +35,7 @@ export const CategorySelector: React.FC<InputProps> = ({
   };
 
   return (
-    <div>
+    <label>
       <p>{title}</p>
       {error && <p>{error}</p>}
       <select className={style.select} onChange={handleSelectChange} name={name}>
@@ -45,6 +45,6 @@ export const CategorySelector: React.FC<InputProps> = ({
           </option>
         ))}
       </select>
-    </div>
+    </label>
   );
 };
