@@ -130,23 +130,6 @@ export const MultiItemInputUpload: React.FC<InputProps> = ({
           onChange={(e) => setImage(e.target.files ? e.target.files[0] : null)}
           key={fileInputKey}
         />
-        {imageUrl && (
-          <>
-            <div style={{ width: "100%" }}>
-              <p style={{ margin: 0 }}>Предпросмотр изображения:</p>
-              <img
-                src={imageUrl}
-                alt="Uploaded"
-                style={{
-                  maxWidth: "300px",
-                  maxHeight: "500px",
-                  objectFit: "cover",
-                  marginTop: "10px",
-                }}
-              />
-            </div>
-          </>
-        )}
         <button
           className={style.btn}
           onClick={(e) => handleImageUpload(e)}
@@ -164,13 +147,27 @@ export const MultiItemInputUpload: React.FC<InputProps> = ({
         {typeof value === "object" &&
           value.map((item, index) => (
             <li title={item} className={style.item} key={index}>
-              {truncateText(item, 20)}{" "}
-              <p
-                className={style.remove}
-                onClick={() => handleRemoveItem(index)}
-              >
-                x
-              </p>
+              <div style={{ width: "140px", height: "50%" }}>
+                <img
+                  src={item}
+                  alt=""
+                  style={{
+                    display: "block",
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                />
+              </div>
+              <div>
+                {truncateText(item, 20)}{" "}
+                <p
+                  className={style.remove}
+                  onClick={() => handleRemoveItem(index)}
+                >
+                  x
+                </p>
+              </div>
             </li>
           ))}
       </ul>
