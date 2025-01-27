@@ -67,7 +67,9 @@ export const AllProducts: React.FC = () => {
     <div>
       {isEditing ? (
         <>
-          <button onClick={disableEditMode}>вернуться назад</button>
+          <button className={style.btnEdit} onClick={disableEditMode}>
+            Вернуться Назад
+          </button>
           <AddProductForm isEdit={true} idEdit={idEdit} />
         </>
       ) : (
