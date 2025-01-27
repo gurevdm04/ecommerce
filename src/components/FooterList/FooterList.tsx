@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import style from "./FooterList.module.scss";
 
 type items = {
@@ -31,9 +32,9 @@ interface ItemProps {
 const Item: React.FC<ItemProps> = ({ text, path }) => {
   return (
     <li className={style.item}>
-      <a href={path} className={style.link}>
+      <Link to={path} className={style.link}>
         {text}
-      </a>
+      </Link>
     </li>
   );
 };
