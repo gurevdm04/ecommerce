@@ -9,7 +9,7 @@ import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 import { createOrder } from "../../utils";
 import { Navigate, useNavigate } from "react-router-dom";
 import { ROUTES } from "../../constants/routes";
-import { toastInfo, toastSuccess, toastWarning } from "../../toastify/Toastify";
+import { toastInfo, toastWarning } from "../../toastify/Toastify";
 
 export const Checkout = () => {
   const [user] = useAuthState(auth);
@@ -168,9 +168,7 @@ const CheckoutButton: React.FC<CheckoutButtonProps> = ({
       return;
     }
     if (user) {
-      createOrder(user.uid, items, totalAmount, userData);
-      toastSuccess("Заказ создан");
-      navigate(ROUTES.THANKYOU);
+      createOrder(user.uid, items, totalAmount, userData, navigate);
     } else {
       toastInfo("Пожалуйста, войдите в аккаунт, чтобы оформить заказ.");
     }
