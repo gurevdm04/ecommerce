@@ -19,8 +19,9 @@ export const MultiItemInputColor: React.FC<InputProps> = ({
   type,
   value,
 }) => {
-  const [inputValue, setInputValue] = useState("");
+  const [color, setColor] = useState<string>("#000000"); // Инициализируем с черным цветом
 
+  const [inputValue, setInputValue] = useState("");
   const handleAddItem = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     if (inputValue.trim() && typeof value === "object") {
@@ -32,6 +33,16 @@ export const MultiItemInputColor: React.FC<InputProps> = ({
       handle(type, { name, value: [...value, inputValue] });
     }
   };
+  const handleAddItemColor = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+
+    if (color.trim() && typeof value === "object") {
+      setInputValue("");
+      handle(type, { name, value: [...value, color] });
+    }
+  };
 
   const handleRemoveItem = (index: number) => {
     if (typeof value === "object") {
@@ -39,6 +50,10 @@ export const MultiItemInputColor: React.FC<InputProps> = ({
     } else {
       toastError("error");
     }
+  };
+
+  const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setColor(e.target.value); // Обновляем состояние с выбранным цветом
   };
 
   return (
@@ -52,6 +67,16 @@ export const MultiItemInputColor: React.FC<InputProps> = ({
           placeholder={placeholder}
         />
         <button className={style.btn} onClick={handleAddItem}>
+          Добавить
+        </button>
+      </div>
+      <div className={style.header}>
+        <input className={style.inputColor} type="color" value={color} onChange={handleColorChange} />
+        <p className={style.text}>Цвет: {color}</p>
+        <div
+          style={{ width: "30px", height: "30px", backgroundColor: color }}
+        ></div>
+        <button className={style.btn} onClick={handleAddItemColor}>
           Добавить
         </button>
       </div>

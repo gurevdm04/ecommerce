@@ -8,6 +8,7 @@
 
 .header {
   display: flex;
+  align-items: center;
 }
 .list {
   display: flex;
@@ -36,4 +37,10 @@
 .color {
   width: 15px;
   height: 15px;
+}
+.inputColor {
+  max-width: 300px;
+}
+.text {
+  margin: 0 5px;
 }
