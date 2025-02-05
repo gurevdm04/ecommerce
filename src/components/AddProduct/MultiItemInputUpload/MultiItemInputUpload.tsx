@@ -22,7 +22,7 @@ export const MultiItemInputUpload: React.FC<InputProps> = ({
   const [fileInputKey, setFileInputKey] = useState<string>(""); // Новый ключ для сброса
 
   const imageRegex =
-    /^(https?:\/\/)?([\w-]+(\.[\w-]+)+)([\/\w.-]*)*\.(jpg|jpeg|png|gif|bmp|webp)$/i;
+    /^(https?:\/\/)?([^\s@]+(\.[^\s@]+)+)([\/\w.@-]*)*\.(jpg|jpeg|png|gif|bmp|webp)$/i;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
