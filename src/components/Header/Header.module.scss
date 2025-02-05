@@ -36,6 +36,12 @@
     }
   }
 }
+.active {
+  color: #b88e2f;
+  svg {
+    fill: #b88e2f;
+  }
+}
 .icons {
   display: flex;
   gap: 45px;

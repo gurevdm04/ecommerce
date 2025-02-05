@@ -101,12 +101,18 @@ const Icons: React.FC<IconsProps> = ({ isAuthenticated, openModal }) => (
   <div className={style.icons}>
     {isAuthenticated ? (
       <>
-        <Link to={ROUTES.PROFILE}>
+        <NavLink
+          className={({ isActive }) => (isActive ? style.active : "")}
+          to={ROUTES.PROFILE}
+        >
           <FaRegUser />
-        </Link>
-        <Link to={ROUTES.CART}>
+        </NavLink>
+        <NavLink
+          className={({ isActive }) => (isActive ? style.active : "")}
+          to={ROUTES.CART}
+        >
           <MdOutlineShoppingCart />
-        </Link>
+        </NavLink>
       </>
     ) : (
       <>
