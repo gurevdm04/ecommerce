@@ -235,6 +235,21 @@ export const AddProductForm: React.FC<AddProductFormProps> = ({
           toastError("Error adding product");
         } finally {
           setPending(false);
+          setData({
+            title: "",
+            oldPrice: null,
+            currentPrice: null,
+            description: "",
+            shortDesc: "",
+            images: [],
+            size: [],
+            color: [],
+            specs: {
+              category: "",
+              sku: "",
+              tags: "",
+            },
+          });
         }
       }
     } else {
