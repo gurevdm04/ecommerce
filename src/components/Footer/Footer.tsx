@@ -18,17 +18,6 @@ export const Footer = () => {
           </div>
           <FooterList title="Links" items={listLinks} />
           <FooterList title="Help" items={listHelp} isA={true} />
-          <div className={style.newsletter}>
-            <h2 className={style.title}>Newsletter</h2>
-            <div>
-              <input
-                className={style.input}
-                placeholder="Enter Your Email Address"
-                type="text"
-              />
-              <button className={style.btn}>SUBSCRIBE</button>
-            </div>
-          </div>
         </div>
         <div className={style.footer}>2023 furino. All rights reverved</div>
       </Wrapper>
