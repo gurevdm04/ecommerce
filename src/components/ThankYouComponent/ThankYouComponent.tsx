@@ -9,8 +9,8 @@ import decor4 from "./../../assets/images/decor4.png";
 export const ThankYouComponent = () => {
   return (
     <div className={style.wrap}>
-      <h2 className={style.title}>Thank you </h2>
-      <h3 className={style.subtitle}>for shopping with us!</h3>
+      <h2 className={style.title}>Спасибо </h2>
+      <h3 className={style.subtitle}>за покупками вместе с нами!</h3>
       <p className={style.text}>
         подробную информацию о заказе смотрите в{" "}
         <Link to={ROUTES.PROFILE}>профиле</Link>

@@ -12,10 +12,10 @@ export const CartList: React.FC<CartListProps> = ({ item, removeItem }) => {
     <div className={style.cart}>
       <div className={style.wrap}>
         <div className={style.header}>
-          <div>Product</div>
-          <div>Price</div>
-          <div>Quantity</div>
-          <div>Subtotal</div>
+          <div>Продукт</div>
+          <div>Цена</div>
+          <div>Количество</div>
+          <div>Промежуточный итог</div>
         </div>
         {item.length === 0 ? (
           <p>Корзина пуста</p>

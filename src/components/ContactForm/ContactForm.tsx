@@ -82,7 +82,7 @@ export const ContactForm = () => {
         </div>
 
         <div>
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email">Почта:</label>
           <input
             type="email"
             id="email"
@@ -117,7 +117,7 @@ export const ContactForm = () => {
 
         {isSuccess && <p>Сообщение отправлено успешно!</p>}
         {error && <p style={{ color: "red" }}>{error}</p>}
-        <Button label="Submit" />
+        <Button label="Отправить" />
       </fieldset>
     </form>
   );

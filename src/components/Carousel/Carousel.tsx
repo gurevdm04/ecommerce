@@ -35,8 +35,8 @@ export const Carousel = () => {
           <SwiperSlide>
             <img src={roomImg} className={style.infoImg} alt="" />
             <div className={style.infoBox}>
-              <p className={style.infosubtitle}>01 - Bed Room</p>
-              <h3 className={style.infotitle}>Inner Peace</h3>
+              <p className={style.infosubtitle}>01 - Спальня</p>
+              <h3 className={style.infotitle}>Внутренний покой</h3>
               <Button className={style.infobtn}>
                 <FaArrowRight />
               </Button>
@@ -45,8 +45,8 @@ export const Carousel = () => {
           <SwiperSlide>
             <img src={roomImg} className={style.infoImg} alt="" />
             <div className={style.infoBox}>
-              <p className={style.infosubtitle}>02 - Kitchen Room</p>
-              <h3 className={style.infotitle}>Inner Peace</h3>
+              <p className={style.infosubtitle}>02 - Кухня</p>
+              <h3 className={style.infotitle}>Внутренний покой</h3>
               <Button className={style.infobtn}>
                 <FaArrowRight />
               </Button>

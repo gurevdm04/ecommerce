@@ -6,7 +6,7 @@ export const PhotoGrid = () => {
   return (
     <Wrapper>
       <div className={style.wrap}>
-        <p className={style.subtitle}>Share your setup with</p>
+        <p className={style.subtitle}>Поделитесь своим сетапом с</p>
         <h2 className={style.title}>#FuniroFurniture</h2>
         <img className={style.images} src={img} alt="" />
       </div>

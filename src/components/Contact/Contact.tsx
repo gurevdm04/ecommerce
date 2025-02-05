@@ -8,11 +8,11 @@ import { ContactForm } from "../ContactForm/ContactForm";
 export const Contact = () => {
   return (
     <Wrapper>
-      <h2 className={style.title}>Get In Touch With Us</h2>
+      <h2 className={style.title}>Свяжитесь С Нами</h2>
       <p className={style.subtitle}>
-        For More Information About Our Product & Services. Please Feel Free To
-        Drop Us An Email. Our Staff Always Be There To Help You Out. Do Not
-        Hesitate!
+        Для Получения Дополнительной Информации О Наших Продуктах И Услугах.
+        Пожалуйста, Не Стесняйтесь , Пишите Нам По Электронной Почте. Наши
+        Сотрудники Всегда Готовы Помочь Вам. не Колебаться!
       </p>
       <div className={style.content}>
         <ContactInfo />

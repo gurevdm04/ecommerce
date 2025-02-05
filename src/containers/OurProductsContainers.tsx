@@ -54,14 +54,14 @@ export const OurProductsContainers = () => {
 
   return (
     <>
-      <h2 style={titleStyle}>Our Products</h2>
+      <h2 style={titleStyle}>наши продукты</h2>
       <Products products={products} />
 
       {hasMore && !loading && (
         <Button
           onClick={() => fetchProducts(true)}
           style={btnStyle}
-          label="Show More"
+          label="показать больше"
         />
       )}
       {loading && <LoadingSpinner />}

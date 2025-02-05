@@ -16,8 +16,8 @@ export const Footer = () => {
               400 University Drive Suite 200 Coral Gables, FL 33134 USA
             </p>
           </div>
-          <FooterList title="Links" items={listLinks} />
-          <FooterList title="Help" items={listHelp} isA={true} />
+          <FooterList title="Ссылки" items={listLinks} />
+          <FooterList title="Помощь" items={listHelp} isA={true} />
         </div>
         <div className={style.footer}>2023 furino. All rights reverved</div>
       </Wrapper>

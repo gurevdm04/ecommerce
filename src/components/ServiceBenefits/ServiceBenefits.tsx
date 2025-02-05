@@ -15,23 +15,23 @@ export const ServiceBenefits = () => {
         <div className={style.container}>
           <Item
             Icon={GiTrophyCup}
-            title="High Quality"
-            subtitle="crafted from top materials"
+            title="Высокое качество"
+            subtitle="Высококачественные материалы"
           />
           <Item
             Icon={AiOutlineFileProtect}
-            title="Warranty Protection"
-            subtitle="Over 2 years"
+            title="Гарантийная защита"
+            subtitle="Более 2-х лет"
           />
           <Item
             Icon={MdOutlineLocalShipping}
-            title="Free Shipping"
-            subtitle="Order over 150 $"
+            title="Бесплатная доставка"
+            subtitle="На все товары"
           />
           <Item
             Icon={BiSupport}
-            title="24 / 7 Support"
-            subtitle="Dedicated support"
+            title="Поддержка 24/7"
+            subtitle="Специальная поддержка"
           />
         </div>
       </Wrapper>

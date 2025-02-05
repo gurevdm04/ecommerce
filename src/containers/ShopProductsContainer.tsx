@@ -110,7 +110,7 @@ export const ShopProductsContainer = () => {
         <Button
           style={{ display: "block", margin: "10px auto" }}
           onClick={loadMoreProducts}
-          label="Show More"
+          label="показать больше"
         />
       )}
       {isLoading && <LoadingSpinner />}

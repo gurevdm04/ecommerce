@@ -83,9 +83,8 @@ export const ProductFilterBar = () => {
     <div className={style.wrap}>
       <Wrapper>
         <div className={style.container}>
-          <div className={style.setting}>| Showing 1–16 of 32 results</div>
           <div className={style.filter}>
-            <p>Category</p>
+            <p>Категории</p>
             {error && <p>{error}</p>}
             <select
               name="category"
@@ -100,7 +99,7 @@ export const ProductFilterBar = () => {
             </select>
           </div>
           <div className={style.filter}>
-            <p>Price Min</p>
+            <p>Минимальная цена</p>
             <input
               value={debouncedFilters.priceMin}
               onChange={handleInputChange("priceMin")}
@@ -108,7 +107,7 @@ export const ProductFilterBar = () => {
             />
           </div>
           <div className={style.filter}>
-            <p>Price Max</p>
+            <p>Максимальная цена</p>
             <input
               value={debouncedFilters.priceMax}
               onChange={handleInputChange("priceMax")}
@@ -116,7 +115,7 @@ export const ProductFilterBar = () => {
             />
           </div>
           <div className={style.filter}>
-            <p>Sort by</p>
+            <p>Сортировать</p>
             <select
               name="sortby"
               value={filters.sort}

@@ -86,9 +86,9 @@ export const Header = () => {
 const Nav = () => (
   <nav className={style.nav}>
     <ul>
-      <LinkItem label="Home" to={ROUTES.HOME} />
-      <LinkItem label="Shop" to={ROUTES.SHOP} />
-      <LinkItem label="Contact" to={ROUTES.CONTACT} />
+      <LinkItem label="Главная" to={ROUTES.HOME} />
+      <LinkItem label="Товары" to={ROUTES.SHOP} />
+      <LinkItem label="Контакты" to={ROUTES.CONTACT} />
     </ul>
   </nav>
 );

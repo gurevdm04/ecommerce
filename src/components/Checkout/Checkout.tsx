@@ -60,10 +60,10 @@ export const Checkout = () => {
     <Wrapper>
       <form className={style.wrap}>
         <div className={style.detail}>
-          <h2 className={style.detailTitle}>Billing details</h2>
+          <h2 className={style.detailTitle}>Платежные реквизиты</h2>
           <div className={style.row}>
             <div>
-              <h4>First Name</h4>
+              <h4>Имя</h4>
               <input
                 value={userData.firstName}
                 onChange={(e) =>
@@ -74,7 +74,7 @@ export const Checkout = () => {
               />
             </div>
             <div>
-              <h4>Last Name</h4>
+              <h4>Фамилия</h4>
               <input
                 value={userData.lastName}
                 onChange={(e) =>
@@ -85,7 +85,7 @@ export const Checkout = () => {
               />
             </div>
           </div>
-          <h4>Phone Number</h4>
+          <h4>Номер Телефона</h4>
           <input
             value={userData.phoneNumber}
             onChange={(e) =>
@@ -94,7 +94,7 @@ export const Checkout = () => {
             type="tel"
             required
           />
-          <h4>Address</h4>
+          <h4>Адрес</h4>
           <input
             value={userData.address}
             onChange={(e) =>
@@ -106,8 +106,8 @@ export const Checkout = () => {
         </div>
         <div className={style.confirm}>
           <div className={style.row}>
-            <h3>Product</h3>
-            <h3>Subtotal</h3>
+            <h3>Продукт</h3>
+            <h3>Промежуточный итог</h3>
           </div>
           {cartItems.map((item) => (
             <div
@@ -122,7 +122,7 @@ export const Checkout = () => {
           ))}
 
           <div className={style.row}>
-            <p>Total</p>
+            <p>Всего</p>
             <p className={style.totalPrice}>Rs. {price}</p>
           </div>
           <hr />

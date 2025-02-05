@@ -7,29 +7,29 @@ type items = {
 
 export const listLinks: items = [
   {
-    text: "Home",
+    text: "Главная",
     path: ROUTES.HOME,
   },
   {
-    text: "Shop",
+    text: "Товары",
     path: ROUTES.SHOP,
   },
   {
-    text: "Contact",
+    text: "Контанты",
     path: ROUTES.CONTACT,
   },
 ];
 export const listHelp: items = [
   {
-    text: "Payment Options",
+    text: "Способы оплаты",
     path: "https://github.com/gurevdm04",
   },
   {
-    text: "Returns",
+    text: "Возвраты",
     path: "https://github.com/gurevdm04",
   },
   {
-    text: "Privacy Policies",
+    text: "Политика конфиденциальности",
     path: "https://github.com/gurevdm04",
   },
 ];

@@ -9,12 +9,12 @@ export const Inspirations = () => {
     <Wrapper>
       <div className={style.wrap}>
         <div className={style.descr}>
-          <h2 className={style.title}>50+ Beautiful rooms inspiration</h2>
+          <h2 className={style.title}>Более 50 красивых комнат вдохновляют</h2>
           <p className={style.subtitle}>
-            Our designer already made a lot of beautiful prototipe of rooms that
-            inspire you
+            Наш дизайнер уже создал множество красивых прототипов комнат, которые
+            вдохновят вас
           </p>
-          <Button label="Explore More" />
+          <Button label="Узнать больше" />
         </div>
         <Carousel />
       </div>

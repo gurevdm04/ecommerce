@@ -12,7 +12,7 @@ export const Breadcrumbs = () => {
     <div className={style.wrap}>
       <Wrapper>
         <div className={style.container}>
-          <a href="#">Home</a>
+          <a href="#">Главная</a>
           <span>{">"}</span>
           <a href="#">{capitalizeFirstLetter(page)}</a>
         </div>

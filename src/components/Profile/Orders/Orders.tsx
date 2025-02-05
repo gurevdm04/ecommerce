@@ -113,9 +113,9 @@ export const Orders: React.FC = () => {
                   value={order.status}
                   onChange={(e) => updateOrderStatus(order.id, e.target.value)}
                 >
-                  <option value="pending">Pending</option>
-                  <option value="in_progress">In Progress</option>
-                  <option value="completed">Completed</option>
+                  <option value="pending">В процессе</option>
+                  <option value="in_progress">В процессе</option>
+                  <option value="completed">Доставленно</option>
                 </select>
                 {" | "}
                 <strong>Сумма заказа:</strong> {order.totalAmount} руб.

@@ -11,7 +11,7 @@ export const ContactInfo = () => {
           <FaLocationDot />
         </div>
         <div>
-          <h3>Address</h3>
+          <h3>Адрес</h3>
           <p>236 5th SE Avenue, New York NY10000, United States</p>
         </div>
       </div>
@@ -20,8 +20,8 @@ export const ContactInfo = () => {
           <FaPhone />
         </div>
         <div>
-          <h3>Phone</h3>
-          <p>Mobile: +(84) 546-6789 Hotline: +(84) 456-6789</p>
+          <h3>Телефон</h3>
+          <p>Мобильный: +(84) 546-6789 Горячая линия: +(84) 456-6789</p>
         </div>
       </div>
       <div className={style.item}>
@@ -29,9 +29,10 @@ export const ContactInfo = () => {
           <MdAccessTimeFilled />
         </div>
         <div>
-          <h3>Working Time</h3>
+          <h3>Рабочее время</h3>
           <p>
-            Monday-Friday: 9:00 - 22:00 <br /> Saturday-Sunday: 9:00 - 21:00
+            Понедельник-пятница: 9:00 - 22:00 <br /> Суббота-воскресенье: 9:00 -
+            21:00
           </p>
         </div>
       </div>

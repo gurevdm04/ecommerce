@@ -8,14 +8,15 @@ import { Wrapper } from "../Wrapper/Wrapper";
 export const Assortment = () => {
   return (
     <Wrapper>
-      <h2 className={style.title}>Browse The Range</h2>
+      <h2 className={style.title}>Просмотрите Ассортимент</h2>
       <p className={style.subtitle}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Благодарим вас за проявленный интерес к нашей компании и добро пожаловать
+        в нашу компанию.
       </p>
       <div className={style.row}>
-        <Item img={img} label="Dining" />
-        <Item img={img2} label="Living" />
-        <Item img={img3} label="Bedroom" />
+        <Item img={img} label="Обеденный" />
+        <Item img={img2} label="Живущий" />
+        <Item img={img3} label="Спальня" />
       </div>
     </Wrapper>
   );

@@ -17,22 +17,22 @@ export const CartTotalPrice: React.FC<CartTotalPriceProps> = ({ item }) => {
 
   return (
     <div className={style.results}>
-      <h2 className={style.title}>Cart Totals</h2>
+      <h2 className={style.title}>Содержимое корзины</h2>
       <div className={style.subtotal}>
-        <p>Subtotal</p>
+        <p>Промежуточный итог</p>
         <span>Rs. {price}</span>
       </div>
       <div className={style.total}>
-        <p>Total</p>
+        <p>Итог</p>
         <span>Rs. {price}</span>
       </div>
       {item.length === 0 ? (
         <button className={style.btn} disabled>
-          Check Out
+          Проверить
         </button>
       ) : (
         <Link to="/checkout" className={style.btn}>
-          Check Out
+          Проверить
         </Link>
       )}
     </div>
