@@ -198,6 +198,7 @@ export const AddProductForm: React.FC<AddProductFormProps> = ({
       setErrors(errors);
       setShowErrors(true);
       toastWarning("Заполните все обязательные поля!");
+      setPending(false);
       return;
     }
 
@@ -361,7 +362,13 @@ export const AddProductForm: React.FC<AddProductFormProps> = ({
                     placeholder={placeholder}
                   />
                   {errors.includes(name) && (
-                    <p style={{ color: "red", fontSize: "0.6rem", margin: "0" }}>
+                    <p
+                      style={{
+                        color: "red",
+                        fontSize: "0.6rem",
+                        margin: "10px 0",
+                      }}
+                    >
                       Поле выше обязательно для заполнения
                     </p>
                   )}
