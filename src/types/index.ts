@@ -60,7 +60,8 @@ export type Types =
   | "multi"
   | "spec"
   | "upload"
-  | "checkboxes";
+  | "checkboxes"
+  | "color";
 export type HandleType = (
   type: Types,
   e:

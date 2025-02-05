@@ -102,6 +102,12 @@ export const AddProductForm: React.FC<AddProductFormProps> = ({
           [name]: value,
         }));
         break;
+      case "color":
+        setData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+        break;
       case "upload":
         setData((prevData) => ({
           ...prevData,
@@ -299,7 +305,7 @@ export const AddProductForm: React.FC<AddProductFormProps> = ({
       placeholder: "Размеры товара",
     },
     {
-      type: "multi",
+      type: "color",
       title: "Введите цвета товара ",
       name: "color",
       value: data.color || "",

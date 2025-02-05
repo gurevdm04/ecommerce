@@ -3,6 +3,7 @@ import { InputProps } from "../AddProduct";
 import { MultiItemInput } from "../MultiItemInput/MultiItemInput";
 import { CategorySelector } from "../CategorySelector/CategorySelector";
 import { MultiItemInputUpload } from "../MultiItemInputUpload/MultiItemInputUpload";
+import { MultiItemInputColor } from "../MultiItemInputColor/MultiItemInputColor";
 
 export const Input: React.FC<InputProps> = ({
   type,
@@ -54,6 +55,17 @@ export const Input: React.FC<InputProps> = ({
     case "multi":
       return (
         <MultiItemInput
+          handle={handle}
+          name={name}
+          placeholder={placeholder}
+          title={title}
+          type={type}
+          value={value}
+        />
+      );
+    case "color":
+      return (
+        <MultiItemInputColor
           handle={handle}
           name={name}
           placeholder={placeholder}
