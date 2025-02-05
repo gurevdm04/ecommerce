@@ -27,6 +27,9 @@
       font-size: 16px;
       color: #000;
       transition: color ease 0.3s;
+      &.active {
+        color: #b88e2f;
+      }
       &:hover {
         color: #afafaf;
       }

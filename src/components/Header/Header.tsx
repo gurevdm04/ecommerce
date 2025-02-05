@@ -4,7 +4,7 @@ import logoImg from "./../../assets/images/logo.png";
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { Wrapper } from "../Wrapper/Wrapper";
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { ROUTES } from "../../constants/routes";
 import { RegistrationModal } from "../RegistrationModal/RegistrationModal";
@@ -124,6 +124,12 @@ interface LinkItem {
 
 const LinkItem: React.FC<LinkItem> = ({ label, to }) => (
   <li>
-    <Link to={to}>{label}</Link>
+    <NavLink
+      to={to}
+      end
+      className={({ isActive }) => (isActive ? style.active : "")}
+    >
+      {label}
+    </NavLink>
   </li>
 );
