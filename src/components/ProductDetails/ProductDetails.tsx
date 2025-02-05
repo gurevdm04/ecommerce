@@ -15,7 +15,6 @@ import { Counter } from "./Counter/Counter";
 import { ImageGallery } from "./ImageGallery/ImageGallery";
 import { SizeOptionSelector } from "./SizeOptionSelector/SizeOptionSelector";
 import { ColorOptionSelector } from "./ColorOptionSelector/ColorOptionSelector";
-import { Tabs } from "../Tabs/Tabs";
 import { toastError, toastInfo } from "../../toastify/Toastify";
 
 export const ProductDetails: React.FC = () => {
@@ -193,7 +192,10 @@ export const ProductDetails: React.FC = () => {
           <ProductSpecifications specs={product.specs} />
         </div>
       </div>
-      <Tabs description={product.description} />
+      <div className={style.descriptionWrap}>
+        <h2 className={style.descriptionTitle}>Description</h2>
+        <p className={style.description}>{product.description}</p>
+      </div>
     </Wrapper>
   );
 };
