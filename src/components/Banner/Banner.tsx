@@ -5,13 +5,13 @@ export const Banner = () => {
   return (
     <div className={style.wrap}>
       <div className={style.block}>
-        <h3 className={style.subtitle}>New Arrival</h3>
-        <h2 className={style.title}>Discover Our New Collection</h2>
+        <h3 className={style.subtitle}>Новое поступление</h3>
+        <h2 className={style.title}>Откройте для себя нашу новую коллекцию</h2>
         <p className={style.text}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
-          tellus, luctus nec ullamcorper mattis.
+          Lorem очень морковь, томатный бакалавриат разработчик. К фильму Земля,
+          траур или недвижимость Ullamcorper.
         </p>
-        <Button label="BUY Now" />
+        <Button label="Купить сейчас" />
       </div>
     </div>
   );
