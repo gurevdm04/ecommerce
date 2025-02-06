@@ -34,9 +34,7 @@ export const ProductDetails: React.FC = () => {
       sku: "",
     },
   });
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+
   const [isFavorites, setIsFavorites] = useState(false);
   const [isFavoritesLoaded, setIsFavoritesLoaded] = useState(false);
 
@@ -69,7 +67,7 @@ export const ProductDetails: React.FC = () => {
         const docRef = doc(db, "products", id);
         const docSnap = await getDoc(docRef);
         const data = docSnap.data() as Product;
-        console.log("data");
+
         if (docSnap.exists()) {
           setProduct(data);
           setData((prev) => ({

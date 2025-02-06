@@ -71,10 +71,19 @@ export const MultiItemInputColor: React.FC<InputProps> = ({
         </button>
       </div>
       <div className={style.header}>
-        <input className={style.inputColor} type="color" value={color} onChange={handleColorChange} />
+        <input
+          className={style.inputColor}
+          type="color"
+          value={color}
+          onChange={handleColorChange}
+        />
         <p className={style.text}>Цвет: {color}</p>
         <div
-          style={{ width: "30px", height: "30px", backgroundColor: color }}
+          style={{
+            width: "30px",
+            height: "30px",
+            backgroundColor: color,
+          }}
         ></div>
         <button className={style.btn} onClick={handleAddItemColor}>
           Добавить
