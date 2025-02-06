@@ -16,7 +16,6 @@ import { ProductCardProps } from "../types";
 
 const ITEMS_PER_PAGE = 4;
 
-
 export const OurProductsContainers = () => {
   const [products, setProducts] = useState<ProductCardProps[]>([]);
   const [lastDoc, setLastDoc] = useState<DocumentData | null>(null);
@@ -27,7 +26,12 @@ export const OurProductsContainers = () => {
     setLoading(true);
     const productsRef = collection(db, "products");
     const q = loadMore
-      ? query(productsRef, orderBy("createdAt"), startAfter(lastDoc), limit(ITEMS_PER_PAGE))
+      ? query(
+          productsRef,
+          orderBy("createdAt"),
+          startAfter(lastDoc),
+          limit(ITEMS_PER_PAGE)
+        )
       : query(productsRef, orderBy("createdAt"), limit(ITEMS_PER_PAGE));
 
     const snapshot = await getDocs(q);
@@ -54,14 +58,14 @@ export const OurProductsContainers = () => {
 
   return (
     <>
-      <h2 style={titleStyle}>наши продукты</h2>
+      <h2 style={titleStyle}>Наши продукты</h2>
       <Products products={products} />
 
       {hasMore && !loading && (
         <Button
           onClick={() => fetchProducts(true)}
           style={btnStyle}
-          label="показать больше"
+          label="Показать больше"
         />
       )}
       {loading && <LoadingSpinner />}

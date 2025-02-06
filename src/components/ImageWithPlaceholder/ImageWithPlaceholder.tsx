@@ -46,6 +46,7 @@ export const ImageWithPlaceholder: React.FC<ImageWithPlaceholderProps> = ({
         style={{
           opacity: loading ? 0 : 1,
           transition: "opacity 0.5s ease-in-out",
+          borderRadius: "10px",
         }}
       />
     </>

@@ -98,17 +98,6 @@ export const PersonalInformation = () => {
             />
           </div>
         ) : null}
-
-        {/* <label>
-          Имя:
-          <input
-            type="text"
-            name="name"
-            value={profile.name}
-            onChange={handleInputChange}
-            required
-          />
-        </label> */}
         <fieldset disabled={updatingData}>
           <legend>
             <h2>Ваши данные</h2>

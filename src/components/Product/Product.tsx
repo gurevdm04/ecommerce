@@ -19,7 +19,7 @@ export const Product: React.FC<ProductCardProps> = ({
   return (
     <>
       {deleteProduct ? (
-        <div>
+        <div className={style.wrap}>
           <Content
             currentPrice={currentPrice}
             images={images}

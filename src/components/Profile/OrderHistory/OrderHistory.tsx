@@ -32,8 +32,7 @@ export const OrderHistory = () => {
         <p>Вы еще не сделали ни одного заказа.</p>
       ) : (
         orders.map((order) => (
-          <div key={order.id} style={{ marginBottom: "20px" }}>
-            <hr />
+          <div className={style.wrap} key={order.id} style={{ marginBottom: "20px" }}>
             <p>
               <strong>Дата заказа:</strong>{" "}
               {new Date(order.orderDate.seconds * 1000).toLocaleString()}

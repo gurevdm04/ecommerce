@@ -23,13 +23,15 @@
   align-items: center;
   gap: 10px;
   input {
-    width: 55px;
+    max-width: 100px;
     height: 55px;
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    border: 1px solid #000;
+    border-radius: 15px;
   }
   select {
     padding: 10px;

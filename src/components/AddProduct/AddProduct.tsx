@@ -392,7 +392,7 @@ export const AddProductForm: React.FC<AddProductFormProps> = ({
             )}
             {pending && <LoadingSpinner />}
             <button className={style.submitBtn} type="submit">
-              {isEdit ? "Update Product" : "Add Product"}
+              {isEdit ? "Обновить товар" : "Добавить товар"}
             </button>
           </form>
         </Wrapper>

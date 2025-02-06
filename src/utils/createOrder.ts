@@ -16,7 +16,7 @@ export const createOrder = async (
     await addDoc(ordersRef, {
       userId,
       orderDate: serverTimestamp(),
-      status: "pending",
+      status: "В процессе",
       items,
       totalAmount,
       userData,

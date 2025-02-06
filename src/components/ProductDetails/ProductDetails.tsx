@@ -145,15 +145,15 @@ export const ProductDetails: React.FC = () => {
               <CiHeart />|{" "}
               {isFavoritesLoaded
                 ? isFavorites
-                  ? "remove from favorites"
-                  : "add to favorites"
-                : "loading"}
+                  ? "Удалить из фаворитов"
+                  : "Добавьте в фавориты"
+                : "Загрузка"}
             </div>
           )}
           <p className={style.descr}>{product.description}</p>
           {product.size?.length !== 0 && (
             <div className={style.options}>
-              <h4>Size</h4>
+              <h4>Размер</h4>
               <SizeOptionSelector
                 options={product.size}
                 selectedValue={data.size}
@@ -165,7 +165,7 @@ export const ProductDetails: React.FC = () => {
           )}
           {product.color?.length !== 0 && (
             <div className={style.options}>
-              <h4>Color</h4>
+              <h4>Цвет</h4>
               <ColorOptionSelector
                 options={product.color}
                 selectedValue={data.color}
