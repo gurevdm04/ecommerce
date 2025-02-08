@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import imgPlaceholder from "./../../assets/images/imageplaceholder.jpg";
 
 interface ImageWithPlaceholderProps {
   src: string;
@@ -10,7 +11,7 @@ interface ImageWithPlaceholderProps {
 export const ImageWithPlaceholder: React.FC<ImageWithPlaceholderProps> = ({
   src,
   alt,
-  placeholder = "https://via.placeholder.com/150",
+  placeholder = imgPlaceholder,
   className,
 }) => {
   const [loading, setLoading] = useState(true);
